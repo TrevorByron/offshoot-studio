@@ -19,7 +19,7 @@ function getColorForText(text: string): HoverColor {
 interface HoverTextProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode
   color?: HoverColor
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof React.JSX.IntrinsicElements
   splitWords?: boolean
 }
 
