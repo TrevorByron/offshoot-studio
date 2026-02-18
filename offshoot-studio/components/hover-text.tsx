@@ -36,19 +36,18 @@ export function HoverText({
   className,
   ...props
 }: HoverTextProps) {
-  type RestProps = Omit<HoverTextProps, 'children' | 'color' | 'as' | 'splitWords' | 'className'>
-  const restProps = props as RestProps
   // Convert children to string for processing
-  const textContent = typeof children === "string" 
-    ? children 
-    : React.Children.toArray(children).join("")
+  const textContent =
+    typeof children === "string"
+      ? children
+      : React.Children.toArray(children).join("")
 
   // If splitWords is true, split text into words and wrap each
   if (splitWords && textContent) {
     // Split by whitespace but preserve the spaces in the array
     const parts = textContent.split(/(\s+)/)
     const result: React.ReactNode[] = []
-    
+
     parts.forEach((part, index) => {
       // If it's whitespace, render it as a span to preserve it
       if (part.trim() === "") {
@@ -56,32 +55,41 @@ export function HoverText({
       } else {
         // It's a word - wrap it with hover effect
         const wordColor = color || getColorForText(part)
-        // Don't pass splitWords or as props to nested HoverText (they're already destructured out)
+        // Don't pass splitWords or as props to nested HoverText
+        const { splitWords: _omitSplit, as: _omitAs, ...restProps } =
+          props as HoverTextProps
         result.push(
-          <HoverText key={`word-${index}`} color={wordColor} className={className} {...restProps}>
+          <HoverText
+            key={`word-${index}`}
+            color={wordColor}
+            className={className}
+            {...restProps}
+          >
             {part}
           </HoverText>
         )
       }
     })
-    
+
     // Wrap in the Component (h1, h2, etc.) to preserve the semantic structure
+    const ComponentTag = Component as React.ElementType
     return (
-      <Component className={className} {...restProps}>
+      <ComponentTag className={className} {...props}>
         {result}
-      </Component>
+      </ComponentTag>
     )
   }
 
   // If color is explicitly provided, use it; otherwise assign deterministically
   const selectedColor = color || getColorForText(textContent)
+  const ComponentTag = Component as React.ElementType
 
   return (
-    <Component
+    <ComponentTag
       className={cn(`hover-text-${selectedColor}`, className)}
-      {...restProps}
+      {...props}
     >
       {children}
-    </Component>
+    </ComponentTag>
   )
 }
