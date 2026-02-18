@@ -36,6 +36,8 @@ export function HoverText({
   className,
   ...props
 }: HoverTextProps) {
+  type RestProps = Omit<HoverTextProps, 'children' | 'color' | 'as' | 'splitWords' | 'className'>
+  const restProps = props as RestProps
   // Convert children to string for processing
   const textContent = typeof children === "string" 
     ? children 
@@ -54,8 +56,7 @@ export function HoverText({
       } else {
         // It's a word - wrap it with hover effect
         const wordColor = color || getColorForText(part)
-        // Don't pass splitWords or as props to nested HoverText
-        const { splitWords: _, as: __, ...restProps } = props
+        // Don't pass splitWords or as props to nested HoverText (they're already destructured out)
         result.push(
           <HoverText key={`word-${index}`} color={wordColor} className={className} {...restProps}>
             {part}
@@ -66,7 +67,7 @@ export function HoverText({
     
     // Wrap in the Component (h1, h2, etc.) to preserve the semantic structure
     return (
-      <Component className={className} {...props}>
+      <Component className={className} {...restProps}>
         {result}
       </Component>
     )
@@ -78,7 +79,7 @@ export function HoverText({
   return (
     <Component
       className={cn(`hover-text-${selectedColor}`, className)}
-      {...props}
+      {...restProps}
     >
       {children}
     </Component>
