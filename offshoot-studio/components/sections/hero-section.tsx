@@ -5,7 +5,7 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { SectionWrapper } from "./section-wrapper"
 import { cn } from "@/lib/utils"
 
-const HERO_TEXT = "Design engineering to help you strategize, prototype, and bring your product to life."
+const HERO_TEXT = "Design engineering to help strategize, prototype, and bring products to life."
 
 export function HeroSection() {
   const wrapperRef = useRef<HTMLDivElement>(null)
