@@ -49,7 +49,7 @@ const servicesWithProcess: ServiceWithProcess[] = [
     timeline: "3-6 weeks",
     pricing: "$8k-$15k",
     description:
-      "Validate product ideas with working coded prototypes—faster than Lovable, Bolt, or v0 alone, with strategic thinking AI can't provide.",
+      "Validate product ideas with working coded prototypes—better than Lovable, Bolt, or v0 alone, with strategic thinking AI can't provide.",
     perfectFor: [
       "Testing features or new product directions with real users",
       "Building investor-ready demos that close funding rounds",

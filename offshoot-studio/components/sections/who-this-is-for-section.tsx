@@ -21,13 +21,13 @@ const weWorkWith = [
     icon: Briefcase,
     title: "Product Leaders",
     description:
-      "Running product experiments outside the core roadmap. Testing AI features, exploring adjacent markets, validating pivots.",
+      "Running product experiments outside the core roadmap. Testing big bet ideas, exploring adjacent markets, validating pivots.",
   },
   {
     icon: Lightbulb,
     title: "Innovation Teams",
     description:
-      "At Series B+ companies exploring new product lines without disrupting core engineering teams.",
+      "At established companies exploring new product lines without disrupting core engineering teams.",
   },
 ]
 
@@ -37,7 +37,7 @@ export function WhoThisIsForSection() {
       <div className="mx-auto max-w-7xl">
         <div className="text-left md:text-center mb-12">
           <h2 className="text-section-title mb-6">
-            Built for Series A+ Companies & Innovation Teams
+            Built for Product Teams & Innovation Leaders
           </h2>
         </div>
         <div className="grid md:grid-cols-2 gap-3 mb-12">

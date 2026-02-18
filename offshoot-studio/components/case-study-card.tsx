@@ -72,11 +72,11 @@ export function CaseStudyCard({
         </div>
         <div
           className={`relative p-2 md:p-6 w-full min-h-[70vh] md:h-full rounded-lg overflow-hidden bg-cover bg-center ${imageOrder}`}
-          style={{ backgroundImage: `url(${imageBackground})`, paddingRight: '-24px' }}
+          style={{ backgroundImage: `url(${imageBackground})`, paddingRight: "-24px" }}
         >
           <div
             className="absolute top-2 left-2 right-0 bottom-2 md:top-6 md:left-6 md:right-0 md:bottom-6 bg-white/90 dark:bg-card/90 rounded-lg shadow-lg flex flex-col"
-            style={{ width: 'calc(100% + 48px)', marginRight: '-48px' }}
+            style={{ width: "calc(100% + 48px)", marginRight: "-48px" }}
           >
             <div className="flex items-center p-4 pb-3 border-b border-border">
               <div className="flex items-center" style={{ gap: '8px' }}>
