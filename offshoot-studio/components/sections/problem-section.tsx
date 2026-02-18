@@ -42,13 +42,13 @@ export function ProblemSection() {
           <p className="text-lg text-muted-foreground">
             Great product ideas die on the backlog. Good MVPs stay scrappy too
             long. Your core team is shipping the roadmap, but there's critical
-            work that can't wait.
+            explorations that can't wait.
             <br />
             <br />
             AI tools like Lovable and v0 build fast but lack context—the output
             feels like a demo, not something you'd show stakeholders or
-            enterprise buyers. You need work that feels like it's been shipped
-            to production.
+            enterprise buyers. You need designs that feel like they are a part
+            of your product already.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-3 mb-10">
