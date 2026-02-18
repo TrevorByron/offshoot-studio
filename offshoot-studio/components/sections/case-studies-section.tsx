@@ -5,7 +5,7 @@ export function CaseStudiesSection() {
   return (
     <SectionWrapper id="case-studies">
       <div className="mx-auto max-w-7xl">
-        <div className="text-center mb-12">
+        <div className="text-left md:text-center mb-12">
           <h2 className="text-section-title mb-6">
             Recent Client Work
           </h2>

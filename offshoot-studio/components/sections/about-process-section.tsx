@@ -24,7 +24,7 @@ export function AboutProcessSection() {
   return (
     <SectionWrapper>
       <div className="mx-auto max-w-7xl">
-        <div className="text-center mb-12">
+        <div className="text-left md:text-center mb-12">
           <h2 className="text-section-title mb-6">
             How we work
           </h2>
@@ -34,7 +34,7 @@ export function AboutProcessSection() {
             const Icon = point.icon
             return (
               <Card key={index} className="flex flex-col bg-[#f7f7f7] dark:bg-card">
-                <CardContent className="p-6 flex flex-col flex-1">
+                <CardContent className="p-4 md:p-6 flex flex-col flex-1">
                   <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <Icon className="h-6 w-6 text-primary" />
                   </div>

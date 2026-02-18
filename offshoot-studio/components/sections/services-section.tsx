@@ -78,7 +78,7 @@ export function ServicesSection() {
   return (
     <SectionWrapper id="services">
       <div className="mx-auto max-w-7xl">
-        <div className="text-center mb-12">
+        <div className="text-left md:text-center mb-12">
           <h2 className="text-section-title mb-6">Services</h2>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
@@ -103,7 +103,7 @@ export function ServicesSection() {
                 </div>
                 <CardDescription className="mt-4">{service.description}</CardDescription>
               </CardHeader>
-              <CardContent className="flex-1 space-y-6">
+              <CardContent className="p-4 md:p-6 flex-1 space-y-6">
                 <div>
                   <h4 className="font-semibold text-sm mb-3">Perfect for:</h4>
                   <ul className="space-y-2">

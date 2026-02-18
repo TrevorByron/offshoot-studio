@@ -44,7 +44,7 @@ export function FAQSection() {
   return (
     <SectionWrapper id="faq">
       <div className="mx-auto max-w-3xl">
-        <div className="text-center mb-12">
+        <div className="text-left md:text-center mb-12">
           <h2 className="text-section-title mb-6">
             FAQ
           </h2>

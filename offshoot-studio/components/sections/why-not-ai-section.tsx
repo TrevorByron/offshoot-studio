@@ -48,7 +48,7 @@ export function WhyNotAISection() {
   return (
     <SectionWrapper>
       <div className="mx-auto max-w-7xl">
-        <div className="text-center mb-12">
+        <div className="text-left md:text-center mb-12">
           <h2 className="text-section-title mb-6">
             Why Not Just Use AI Prototyping Tools?
           </h2>
@@ -59,7 +59,7 @@ export function WhyNotAISection() {
           </p>
         </div>
         <Card className="mb-8 bg-[#f7f7f7] dark:bg-card">
-          <CardContent className="p-6">
+          <CardContent className="p-4 md:p-6">
             <div className="grid md:grid-cols-[2fr_5fr_5fr] gap-6 mb-6 pb-6 border-b">
               <div className="font-semibold text-sm"></div>
               <div className="font-semibold text-sm flex items-center gap-2">
@@ -88,7 +88,7 @@ export function WhyNotAISection() {
             </div>
           </CardContent>
         </Card>
-        <div className="bg-muted/50 rounded-lg p-8 text-center">
+        <div className="bg-muted/50 rounded-lg p-8 text-left md:text-center">
           <p className="text-lg">
             <strong>The bottom line:</strong> AI gives you what you ask for. We
             help you figure out what to ask for. Then we use AI to build 3-5x

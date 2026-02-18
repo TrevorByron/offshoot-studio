@@ -35,7 +35,7 @@ export function WhoThisIsForSection() {
   return (
     <SectionWrapper>
       <div className="mx-auto max-w-7xl">
-        <div className="text-center mb-12">
+        <div className="text-left md:text-center mb-12">
           <h2 className="text-section-title mb-6">
             Built for Series A+ Companies & Innovation Teams
           </h2>
@@ -45,7 +45,7 @@ export function WhoThisIsForSection() {
             <CardHeader>
               <h3 className="text-sm font-medium">You're a good fit if:</h3>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 md:p-6">
               <ul className="space-y-3">
                 {goodFit.map((item, index) => (
                   <li key={index} className="flex gap-3">
@@ -60,7 +60,7 @@ export function WhoThisIsForSection() {
             <CardHeader>
               <h3 className="text-sm font-medium">We work with:</h3>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 md:p-6">
               <div className="space-y-4">
                 {weWorkWith.map((item, index) => {
                   const Icon = item.icon

@@ -66,7 +66,7 @@ export function Footer() {
           </div>
         </div>
         <Separator className="mb-8" />
-        <div className="text-center text-sm text-muted-foreground">
+        <div className="text-left md:text-center text-sm text-muted-foreground">
           © 2025 Offshoot Studio
         </div>
       </div>

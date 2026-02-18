@@ -19,7 +19,7 @@ export function AboutWhoSection() {
   return (
     <SectionWrapper>
       <div className="mx-auto max-w-7xl">
-        <div className="text-center mb-12">
+        <div className="text-left md:text-center mb-12">
           <h2 className="text-section-title mb-6">
             Who this is for
           </h2>
@@ -29,7 +29,7 @@ export function AboutWhoSection() {
         </div>
         <div className="grid md:grid-cols-2 gap-3 mb-8">
           <Card className="bg-[#f7f7f7] dark:bg-card">
-            <CardContent className="p-6">
+            <CardContent className="p-4 md:p-6">
               <h3 className="text-sm font-medium mb-4">You're a good fit if:</h3>
               <ul className="space-y-3">
                 {goodFit.map((item, index) => (
@@ -42,7 +42,7 @@ export function AboutWhoSection() {
             </CardContent>
           </Card>
           <Card className="bg-[#f7f7f7] dark:bg-card">
-            <CardContent className="p-6">
+            <CardContent className="p-4 md:p-6">
               <h3 className="text-sm font-medium mb-4">Industries:</h3>
               <div className="flex flex-wrap gap-2">
                 {industries.map((industry, index) => (

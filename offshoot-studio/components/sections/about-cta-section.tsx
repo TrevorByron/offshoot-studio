@@ -16,7 +16,7 @@ export function AboutCTASection() {
   return (
     <SectionWrapper variant="spacious" id="cta">
       <div className="mx-auto max-w-5xl">
-        <div className="text-center mb-8">
+        <div className="text-left md:text-center mb-8">
           <h2 className="text-section-title mb-6">
             Let's work together
           </h2>
@@ -33,7 +33,7 @@ export function AboutCTASection() {
           />
         </div>
         <Card className="bg-[#f7f7f7] dark:bg-card">
-          <CardContent className="p-6 text-center">
+          <CardContent className="p-4 md:p-6 text-left md:text-center">
             <h3 className="text-lg font-semibold mb-2">
               Interested in joining Offshoot Studio?
             </h3>

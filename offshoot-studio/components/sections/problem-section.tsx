@@ -35,7 +35,7 @@ export function ProblemSection() {
   return (
     <SectionWrapper>
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-4xl text-center mb-10">
+        <div className="mx-auto max-w-4xl text-left md:text-center mb-10">
           <h2 className="text-section-title mb-6">
             Your team is maxed out. Your ideas aren't.
           </h2>
@@ -58,7 +58,7 @@ export function ProblemSection() {
                 key={index}
                 className="flex flex-col bg-[#f7f7f7] dark:bg-card"
               >
-                <CardContent className="px-4 flex flex-col flex-1">
+                <CardContent className="p-4 md:p-6 flex flex-col flex-1">
                   <h3 className="font-semibold text-base mb-3">
                     {card.title}
                   </h3>
@@ -102,7 +102,7 @@ export function ProblemSection() {
             )
           })}
         </div>
-        <p className="mx-auto max-w-3xl text-lg text-center font-medium">
+        <p className="mx-auto max-w-3xl text-lg text-left md:text-center font-medium">
           You need a parallel team that validates ideas, scales capacity, and
           ships quality—without disrupting what you're building.
         </p>

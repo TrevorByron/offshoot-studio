@@ -51,7 +51,7 @@ const servicesWithProcess: ServiceWithProcess[] = [
     description:
       "Validate product ideas with working coded prototypes—faster than Lovable, Bolt, or v0 alone, with strategic thinking AI can't provide.",
     perfectFor: [
-      "Testing AI features or new product directions with real users",
+      "Testing features or new product directions with real users",
       "Building investor-ready demos that close funding rounds",
       "Exploring adjacent products outside your core roadmap",
       "De-risking product bets before allocating engineering teams",
@@ -275,7 +275,7 @@ export function ServicesAndProcessSection() {
   return (
     <SectionWrapper id="services">
       <div className="mx-auto max-w-7xl">
-        <div className="text-center mb-8 md:mb-12">
+        <div className="text-left md:text-center mb-8 md:mb-12">
           <h2 className="text-section-title mb-4">Services & How We Work</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Choose a service to see scope, pricing, what it’s perfect for, and exactly how the
@@ -336,9 +336,9 @@ export function ServicesAndProcessSection() {
           />
           <div className="absolute inset-0 bg-black/25 z-[1]" aria-hidden />
           {/* Content in flow — outer container resizes for even spacing; image re-crops from center so it doesn't move */}
-          <div className="relative z-10 p-8 md:p-10 flex items-start justify-center">
+          <div className="relative z-10 p-2 md:p-10 flex items-start justify-center">
             <Card className={cn(
-              "w-full flex flex-col rounded-xl shadow-2xl backdrop-blur-sm px-8 pt-8 pb-8 gap-6 ring-0 overflow-visible",
+              "w-full flex flex-col rounded-xl shadow-2xl backdrop-blur-sm p-4 md:px-8 md:pt-8 md:pb-8 gap-6 ring-0 overflow-visible",
               isInverse 
                 ? "border border-white/10 bg-zinc-900/95" 
                 : "border border-zinc-200 bg-white"

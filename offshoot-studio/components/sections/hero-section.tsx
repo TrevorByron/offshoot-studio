@@ -29,7 +29,7 @@ export function HeroSection() {
 
   return (
     <SectionWrapper variant="spacious" className="relative overflow-hidden">
-      <div className="mx-auto max-w-4xl text-center">
+      <div className="mx-auto max-w-4xl text-left md:text-center">
         <div
           ref={wrapperRef}
           className="hero-headline-wrapper"
@@ -49,7 +49,7 @@ export function HeroSection() {
             </span>
           </h1>
         </div>
-        <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-left md:text-center">
           Offshoot Studio comes alongside your team to validate ideas, scale capacity, and ship production-ready prototypes—faster than traditional agencies, smarter than AI tools alone.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

@@ -74,7 +74,7 @@ export function HowWeWorkSection() {
   return (
     <SectionWrapper id="how-we-work">
       <div className="mx-auto max-w-7xl">
-        <div className="text-center mb-12">
+        <div className="text-left md:text-center mb-12">
           <h2 className="text-section-title mb-6">How We Work</h2>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
@@ -83,7 +83,7 @@ export function HowWeWorkSection() {
               <CardHeader>
                 <CardTitle className="text-xl">{process.title}</CardTitle>
               </CardHeader>
-              <CardContent className="flex-1 space-y-6">
+              <CardContent className="p-4 md:p-6 flex-1 space-y-6">
                 {process.steps.map((step, stepIndex) => (
                   <div key={stepIndex} className="relative pl-8">
                     <div className="absolute left-0 top-0 h-full w-0.5 bg-border" />
