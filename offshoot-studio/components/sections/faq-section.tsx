@@ -8,35 +8,35 @@ import {
 const faqs = [
   {
     question: "How is this different from a design agency?",
-    answer: "Agencies have account managers, project managers, junior designers, and bloated processes. You get one senior design engineer who can think strategically and execute fast. No bureaucracy. No handoff lag.",
+    answer: "One senior design engineer, no account managers or junior designers. No bureaucracy, no handoff lag. We use AI to move 3-5x faster.",
   },
   {
     question: "How is this different from hiring?",
-    answer: "Hiring takes 2-3 months and comes with payroll, benefits, and employment risk. We start immediately, cost a fraction of a senior hire, and work on defined scopes. Perfect for projects with clear timelines or temporary capacity needs.",
+    answer: "Hiring takes 2-3 months plus payroll and employment risk. We start in 2-3 weeks, defined scope, fraction of a senior hire.",
   },
   {
     question: "Why not just use AI tools?",
-    answer: "AI tools are great for execution if you know exactly what to build. We help you figure out what to build, then use AI to execute faster. The strategic thinking is the service. The speed is the bonus.",
+    answer: "AI executes; it doesn't advise. We help you decide what to build, then use AI to build it fast.",
   },
   {
     question: "What if I need you for longer than the initial engagement?",
-    answer: "We can extend or start new engagements as needed. Many clients work with us on multiple projects over time—prototyping one quarter, embedded work the next.",
+    answer: "We extend or start new engagements as needed. Many clients do multiple projects over time.",
   },
   {
     question: "Do you work with early-stage startups?",
-    answer: "We focus on Series A+ companies and established teams. If you're pre-seed/seed, our pricing might not fit your budget. Happy to recommend other resources.",
+    answer: "We work best with teams that have traction and capacity to invest. If you're earlier stage, our pricing may not fit—happy to point you elsewhere.",
   },
   {
     question: "What's your availability?",
-    answer: "We take on 2-3 projects per quarter. Typical lead time is 2-3 weeks to start.",
+    answer: "2-3 projects per quarter. Lead time 2-3 weeks.",
   },
   {
     question: "What industries do you work in?",
-    answer: "We're industry-agnostic but work primarily with B2B SaaS, fintech, and developer tools companies. If your product involves complex workflows, data visualization, or technical users, we're a great fit.",
+    answer: "B2B SaaS, fintech, developer tools. Complex workflows, data viz, technical users. Not consumer social, e-commerce, or marketing sites.",
   },
   {
     question: "How do we get started?",
-    answer: "Book a 30-minute strategy call. We'll discuss your needs, see if there's a fit, and scope what makes sense—rapid prototyping, embedded work, or design refinement.",
+    answer: "Book a 30-minute call. We'll scope fit—prototyping, embedded work, or refinement.",
   },
 ]
 

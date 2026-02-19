@@ -10,23 +10,20 @@ import { ArrowRight } from "lucide-react"
 const problemCards = [
   {
     title: "Test ideas before you commit resources",
-    description:
-      "Put working prototypes in front of users before you allocate resources on them. Learn fast. Fail fast or double down with confidence. Validation takes days, not months.",
-    linkText: "Learn about our Rapid Prototyping",
+    description: "Working prototypes in front of users in weeks. Validation without derailing the roadmap.",
+    linkText: "Rapid prototyping →",
     serviceId: "rapid-prototyping",
   },
   {
     title: "Scale capacity without hiring delays",
-    description:
-      "Ship critical features for enterprise deals, product launches, or funding milestones. Get senior design-engineering talent embedded with your team in weeks, not months—without the commitment or overhead of a full-time hire.",
-    linkText: "Learn about our Team Expansion",
+    description: "Senior design-eng talent embedded in weeks. No W2, no 3-month hire.",
+    linkText: "Team expansion →",
     serviceId: "team-expansion",
   },
   {
     title: "Turn your scrappy MVP into a professional product",
-    description:
-      "Stop losing enterprise deals because your product looks like founders built it. Get the polish you need to close bigger customers, raise your next round, or attract senior talent.",
-    linkText: "Learn about our Design Refinement",
+    description: "Polish that closes deals and raises rounds. From founder-built to enterprise-ready.",
+    linkText: "Design refinement →",
     serviceId: "design-refinement",
   },
 ]
@@ -40,15 +37,8 @@ export function ProblemSection() {
             Your team is maxed out. Your ideas aren't.
           </h2>
           <p className="text-lg text-muted-foreground">
-            Great product ideas die on the backlog. Good MVPs stay scrappy too
-            long. Your core team is shipping the roadmap, but there's critical
-            explorations that can't wait.
-            <br />
-            <br />
-            AI tools like Lovable and v0 build fast but lack context—the output
-            feels like a demo, not something you'd show stakeholders or
-            enterprise buyers. You need designs that feel like they are a part
-            of your product already.
+            Ideas die on the backlog. MVPs stay scrappy. You need a parallel
+            team that validates and ships without derailing the roadmap.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-3 mb-10">
@@ -102,10 +92,6 @@ export function ProblemSection() {
             )
           })}
         </div>
-        <p className="mx-auto max-w-3xl text-lg text-left md:text-center font-medium">
-          You need a parallel team that validates ideas, scales capacity, and
-          ships quality—without disrupting what you're building.
-        </p>
       </div>
     </SectionWrapper>
   )

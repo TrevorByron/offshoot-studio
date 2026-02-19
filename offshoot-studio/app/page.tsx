@@ -4,7 +4,6 @@ import { ProblemSection } from "@/components/sections/problem-section"
 import { SolutionSection } from "@/components/sections/solution-section"
 import { ServicesAndProcessSection } from "@/components/sections/services-and-process-section"
 import { WhyNotAISection } from "@/components/sections/why-not-ai-section"
-import { WhoThisIsForSection } from "@/components/sections/who-this-is-for-section"
 import { CaseStudiesSection } from "@/components/sections/case-studies-section"
 import { WhyOffshootSection } from "@/components/sections/why-offshoot-section"
 import { FAQSection } from "@/components/sections/faq-section"
@@ -18,7 +17,6 @@ export default function Page() {
       <HeroSection />
       <ProblemSection />
       <ServicesAndProcessSection />
-      <WhoThisIsForSection />
       <CaseStudiesSection />
       <SolutionSection />
       <WhyOffshootSection />

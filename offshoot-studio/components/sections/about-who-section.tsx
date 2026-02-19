@@ -24,7 +24,7 @@ export function AboutWhoSection() {
             Who this is for
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            We work with Series A+ companies and innovation teams who need strategic design engineering without hiring overhead or agency slowness.
+            We work with product teams and innovation teams who need strategic design engineering without hiring overhead or agency slowness.
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-3 mb-8">

@@ -49,44 +49,42 @@ const servicesWithProcess: ServiceWithProcess[] = [
     timeline: "3-6 weeks",
     pricing: "$8k-$15k",
     description:
-      "Validate product ideas with working coded prototypes—better than Lovable, Bolt, or v0 alone, with strategic thinking AI can't provide.",
+      "Working coded prototypes to validate ideas—with strategic thinking AI can't provide.",
     perfectFor: [
       "Testing features or new product directions with real users",
-      "Building investor-ready demos that close funding rounds",
-      "Exploring adjacent products outside your core roadmap",
-      "De-risking product bets before allocating engineering teams",
+      "Investor-ready demos that close funding rounds",
+      "Adjacent products outside your core roadmap",
+      "De-risking bets before allocating engineering teams",
     ],
     whatYouGet: [
-      "Strategic product session (what are we testing? what validates success?)",
-      "User-testable with realistic interactions and working data",
-      "AI-accelerated development using Cursor, Claude, and v0",
-      "Iteration cycles based on user feedback",
+      "Strategy session: what are we testing? what validates success?",
+      "User-testable prototype with realistic interactions",
+      "AI-accelerated build (Cursor, Claude, v0) + iteration cycles",
+      "Clean handoff and recommendation: build, kill, or pivot",
     ],
-    cta: "Start a Prototype Sprint",
+    cta: "Book a call",
     image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop",
     imageAlt: "Rapid prototyping workspace",
     steps: [
       {
         week: "Week 1",
         title: "Discovery & Strategy",
-        description:
-          "90-minute strategy session. What are we testing? What validates or invalidates this? We shape the fuzzy idea into a testable hypothesis.",
+        description: "Strategy session. Shape the idea into a testable hypothesis.",
       },
       {
         week: "Weeks 2-4",
         title: "Build & Deliver",
-        description:
-          "We use AI tools (Cursor, Claude, v0) to build 3-5x faster than traditional agencies—but bring strategic thinking and craft AI tools can't match.",
+        description: "AI-augmented build 3-5x faster. Strategic thinking and craft AI can't match.",
       },
       {
         week: "Weeks 4-6",
         title: "Test & Refine",
-        description: "You test with real users. We iterate based on learnings.",
+        description: "You test. We iterate.",
       },
       {
         week: "Handoff",
-        title: "Documentation & Handoff",
-        description: "Documentation and strategic recommendations on whether to build, kill, or pivot.",
+        title: "Handoff",
+        description: "Documentation and recommendation: build, kill, or pivot.",
       },
     ],
   },
@@ -98,41 +96,37 @@ const servicesWithProcess: ServiceWithProcess[] = [
     timeline: "3 to 6 month contracts",
     pricing: "monthly retainer",
     description:
-      "Senior design-engineer capacity without W2 overhead, hiring delays, or onboarding lag.",
+      "Senior design-eng capacity without W2 overhead or hiring delays.",
     perfectFor: [
-      "Critical feature builds that need design + engineering in one",
-      "Scaling your team temporarily without hiring delays",
-      "Short-term capacity needs (product launches, redesigns, sprints)",
-      "Teams that need senior hybrid talent (design + code) fast",
+      "Critical feature builds: design + engineering in one",
+      "Temporary capacity without hiring delays",
+      "Product launches, redesigns, sprints",
+      "Senior hybrid talent (design + code) fast",
     ],
     whatYouGet: [
-      "Senior design engineer embedded with your team (20-30 hrs/week)",
+      "Senior design engineer embedded (20-30 hrs/week)",
       "Feature design through production implementation",
-      "Strategic product thinking + hands-on AI-accelerated execution",
       "Daily collaboration via Slack/Linear/GitHub",
-      "No hiring overhead, no onboarding lag, no employment commitment",
-      "Flexible month-to-month engagement",
+      "No hiring overhead, no employment commitment. Month-to-month.",
     ],
-    cta: "Discuss Team Expansion",
+    cta: "Book a call",
     image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop",
     imageAlt: "Team expansion collaboration",
     steps: [
       {
         week: "Week 1",
         title: "Integration",
-        description:
-          "We plug into your workflow (Slack, Linear, GitHub, Figma). Understand your product, users, and goals. Align on sprint scope.",
+        description: "Plug into your workflow. Align on scope.",
       },
       {
         week: "Ongoing",
         title: "Build & Ship",
-        description:
-          "Daily collaboration. Design reviews, PRs, standups—whatever matches your cadence. We work like a senior member of your team.",
+        description: "Daily collaboration. We work like a senior member of your team.",
       },
       {
         week: "Final Week",
         title: "Handoff",
-        description: "Documentation and knowledge transfer to your team.",
+        description: "Documentation and knowledge transfer.",
       },
     ],
   },
@@ -144,40 +138,36 @@ const servicesWithProcess: ServiceWithProcess[] = [
     timeline: "3-8 weeks",
     pricing: "$10k-$15k",
     description:
-      "Transform your working MVP into a professional product that closes deals, aligns teams, and raises capital.",
+      "MVP to professional product. Closes deals, raises capital.",
     perfectFor: [
-      "Startups with traction but \"founder-built\" UI holding them back",
-      "Pre-Series A companies needing credibility for fundraising",
-      "Products moving upmarket that need enterprise polish",
-      "Teams whose scrappy MVP works but looks amateur",
+      "Traction but \"founder-built\" UI holding you back",
+      "Investor-ready credibility for fundraising",
+      "Upmarket: enterprise polish",
+      "Scrappy MVP that works but looks amateur",
     ],
     whatYouGet: [
-      "Comprehensive UX audit (where users drop off, what signals \"unprofessional\")",
-      "Redesigned core flows with modern, polished UI",
-      "Component-based design system for consistency and scale",
-      "Rebuilt with clean React architecture and smooth interactions",
+      "UX audit: where users drop off, what signals unprofessional",
+      "Redesigned core flows, design system, clean React",
+      "Polish and handoff with documentation",
     ],
-    cta: "Book a Design Audit",
+    cta: "Book a call",
     image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop",
     imageAlt: "Design refinement workspace",
     steps: [
       {
         week: "Week 1",
         title: "Audit & Strategy",
-        description:
-          "Deep dive into your current product. What's working? What's not? Where are users dropping off? What signals 'amateur hour'?",
+        description: "Deep dive. What's working, what's not, where users drop off.",
       },
       {
         week: "Weeks 2-5",
         title: "Design & Rebuild",
-        description:
-          "Redesign core flows. Build design system. Implement with modern React components and interactions.",
+        description: "Redesign core flows. Design system. Modern React.",
       },
       {
         week: "Weeks 6-8",
         title: "Polish & Handoff",
-        description:
-          "Animations, edge cases, responsive design. Handoff session with your team. Documentation so you can maintain it.",
+        description: "Polish, edge cases, handoff, documentation.",
       },
     ],
   },
@@ -276,10 +266,9 @@ export function ServicesAndProcessSection() {
     <SectionWrapper id="services">
       <div className="mx-auto max-w-7xl">
         <div className="text-left md:text-center mb-8 md:mb-12">
-          <h2 className="text-section-title mb-4">Services & How We Work</h2>
+          <h2 className="text-section-title mb-4">Services</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Choose a service to see scope, pricing, what it’s perfect for, and exactly how the
-            engagement runs.
+            We offer three types of services: rapid prototyping to validate ideas, team expansion for embedded design-eng capacity, and design refinement to take your MVP to production-ready.
           </p>
         </div>
 
@@ -470,7 +459,7 @@ export function ServicesAndProcessSection() {
               </CardContent>
 
               <CardFooter className={cn(
-                "px-0 pt-6 pb-6 border-t",
+                "px-0 pt-6 pb-6 border-t flex flex-col gap-4",
                 isInverse ? "border-zinc-700/50" : "border-zinc-200"
               )}>
                 <a href="#cta" className="w-full">
@@ -480,9 +469,15 @@ export function ServicesAndProcessSection() {
                       ? "bg-white text-zinc-900 hover:bg-zinc-100" 
                       : "bg-zinc-900 text-white hover:bg-zinc-800"
                   )} size="lg">
-                    {activeService.cta}
+                    Book a call
                   </Button>
                 </a>
+                <p className={cn(
+                  "text-sm text-center",
+                  isInverse ? "text-zinc-400" : "text-zinc-600"
+                )}>
+                  Not sure which fit? Book a call and we'll scope it.
+                </p>
               </CardFooter>
             </Card>
           </div>

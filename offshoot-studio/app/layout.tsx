@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Offshoot Studio - Strategic Design Engineering",
-  description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for Series A+ companies.",
+  description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for product teams.",
 };
 
 export default function RootLayout({

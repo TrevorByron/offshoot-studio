@@ -55,13 +55,13 @@ export function WhyOffshootSection() {
           <h2 className="text-section-title mb-6">
             What Clients Say
           </h2>
-          <p className="text-lg text-muted-foreground">
-            From founders to product leaders—here's what working with Offshoot looks like.
-          </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="flex flex-col bg-[#f7f7f7] dark:bg-card">
+            <Card
+              key={index}
+              className={`flex flex-col bg-[#f7f7f7] dark:bg-card ${index >= 3 ? "hidden md:flex" : ""}`}
+            >
               <CardContent className="p-4 flex flex-col flex-1">
                 <p className="text-foreground text-base leading-relaxed mb-4 flex-1">
                   "{testimonial.quote}"

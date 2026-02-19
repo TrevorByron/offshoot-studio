@@ -50,12 +50,10 @@ export function WhyNotAISection() {
       <div className="mx-auto max-w-7xl">
         <div className="text-left md:text-center mb-12">
           <h2 className="text-section-title mb-6">
-            Why Not Just Use AI Prototyping Tools?
+            Why not AI alone?
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Tools like Lovable, Bolt, v0, and Cursor are powerful—we use them
-            every day. But AI prototyping tools can't replace strategic product
-            thinking.
+            We use Lovable, v0, Cursor every day. AI can't replace strategy or craft.
           </p>
         </div>
         <Card className="mb-8 bg-[#f7f7f7] dark:bg-card">
@@ -90,9 +88,7 @@ export function WhyNotAISection() {
         </Card>
         <div className="bg-muted/50 rounded-lg p-8 text-left md:text-center">
           <p className="text-lg">
-            <strong>The bottom line:</strong> AI gives you what you ask for. We
-            help you figure out what to ask for. Then we use AI to build 3-5x
-            faster than traditional agencies.
+            AI gives you what you ask for. We help you decide what to ask for—then build it fast.
           </p>
         </div>
       </div>

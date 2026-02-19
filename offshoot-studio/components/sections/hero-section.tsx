@@ -1,11 +1,11 @@
 "use client"
 
 import { useRef, useCallback, useState } from "react"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { SectionWrapper } from "./section-wrapper"
 import { cn } from "@/lib/utils"
 
-const HERO_TEXT = "Design engineering to help strategize, prototype, and bring products to life."
+const HERO_TEXT = "Think of us as your AI-empowered design engineers on demand."
 
 export function HeroSection() {
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -29,7 +29,7 @@ export function HeroSection() {
 
   return (
     <SectionWrapper variant="spacious" className="relative overflow-hidden">
-      <div className="mx-auto max-w-4xl text-left md:text-center">
+      <div className="mx-auto max-w-5xl text-left md:text-center">
         <div
           ref={wrapperRef}
           className="hero-headline-wrapper"
@@ -50,23 +50,14 @@ export function HeroSection() {
           </h1>
         </div>
         <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-left md:text-center">
-          Offshoot Studio comes alongside your team to validate ideas, scale capacity, and ship production-ready prototypes—faster than traditional agencies, smarter than AI tools alone.
+          Strategic design engineering for product teams. We validate ideas, scale capacity, and ship production-ready work—faster than agencies, smarter than AI alone.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="flex justify-center">
           <a
             href="#cta"
             className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}
           >
-            Book a Strategy Call
-          </a>
-          <a
-            href="#services"
-            className={cn(
-              buttonVariants({ size: "lg", variant: "outline" }),
-              "w-full sm:w-auto"
-            )}
-          >
-            See What We Do
+            Book a call
           </a>
         </div>
       </div>

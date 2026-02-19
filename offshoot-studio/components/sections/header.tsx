@@ -8,8 +8,8 @@ import { useTheme } from "@/components/theme-provider"
 import { Sun, Moon, Monitor, Menu, X } from "lucide-react"
 
 const navLinks = [
-  { label: "Services & How We Work", href: "/#services" },
-  { label: "Case Studies", href: "/#case-studies" },
+  { label: "Services", href: "/#services" },
+  { label: "Work", href: "/#case-studies" },
   { label: "FAQ", href: "/#faq" },
   { label: "About", href: "/about" },
 ]
@@ -105,7 +105,7 @@ export function Header() {
             </div>
             <Link href="/#cta">
               <Button size="sm" className="ml-4">
-                Book a Call
+                Book a call
               </Button>
             </Link>
           </nav>
@@ -146,7 +146,7 @@ export function Header() {
             </div>
             <Link href="/#cta">
               <Button size="sm">
-                Book a Call
+                Book a call
               </Button>
             </Link>
             <button
@@ -176,7 +176,7 @@ export function Header() {
               <div className="mt-2 px-4">
                 <Link href="/#cta" onClick={() => setMobileMenuOpen(false)}>
                   <Button size="sm" className="w-full">
-                    Book a Call
+                    Book a call
                   </Button>
                 </Link>
               </div>
