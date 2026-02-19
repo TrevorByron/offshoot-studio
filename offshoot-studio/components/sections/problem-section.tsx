@@ -43,24 +43,24 @@ export function ProblemSection() {
             <p>
               Your core team is shipping the roadmap. But critical work keeps getting pushed:
             </p>
-            <Card className="bg-[#f7f7f7] dark:bg-card text-left">
-              <CardContent className="p-4 md:p-6">
+            <Card className="bg-[#faf5f5] dark:bg-card text-left">
+              <CardContent className="p-4 md:p-2">
                 <p className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
                   <X className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
                   <span>Product ideas that could change your trajectory—stuck on the backlog because your team doesn't have 3 months to test them.</span>
                 </p>
               </CardContent>
             </Card>
-            <Card className="bg-[#f7f7f7] dark:bg-card text-left">
-              <CardContent className="p-4 md:p-6">
+            <Card className="bg-[#faf5f5] dark:bg-card text-left">
+              <CardContent className="p-4 md:p-2">
                 <p className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
                   <X className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
                   <span>An MVP that works but looks homemade—costing you enterprise deals and making investors hesitate.</span>
                 </p>
               </CardContent>
             </Card>
-            <Card className="bg-[#f7f7f7] dark:bg-card text-left">
-              <CardContent className="p-4 md:p-6">
+            <Card className="bg-[#faf5f5] dark:bg-card text-left">
+              <CardContent className="p-4 md:p-2">
                 <p className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
                   <X className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
                   <span>Critical features that need to ship now for a deal, a launch, or a milestone—but hiring takes 90 days and you don't have 90 days.</span>

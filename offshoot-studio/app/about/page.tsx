@@ -1,20 +1,21 @@
+"use client"
+
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { Header } from "@/components/sections/header"
 import { Footer } from "@/components/sections/footer"
-import { AboutHeroSection } from "@/components/sections/about-hero-section"
-import { AboutProblemSection } from "@/components/sections/about-problem-section"
-import { AboutVisionSection } from "@/components/sections/about-vision-section"
-import { AboutMotivationSection } from "@/components/sections/about-motivation-section"
-import { AboutCTASection } from "@/components/sections/about-cta-section"
 
 export default function AboutPage() {
+  const router = useRouter()
+
+  useEffect(() => {
+    // Redirect to home with about modal parameter
+    router.replace("/?about=true")
+  }, [router])
+
   return (
     <main>
       <Header />
-      <AboutHeroSection />
-      <AboutProblemSection />
-      <AboutVisionSection />
-      <AboutMotivationSection />
-      <AboutCTASection />
       <Footer />
     </main>
   )

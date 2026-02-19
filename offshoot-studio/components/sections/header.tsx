@@ -2,23 +2,27 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { useTheme } from "@/components/theme-provider"
 import { Sun, Moon, Monitor, Menu, X } from "lucide-react"
+import { AboutModal } from "@/components/about-modal"
 
-const navLinks = [
+const navLinks: Array<{ label: string; href: string; isModal?: boolean }> = [
   { label: "Services & How We Work", href: "/#services" },
   { label: "Case Studies", href: "/#case-studies" },
   { label: "FAQ", href: "/#faq" },
-  { label: "About", href: "/about" },
+  { label: "About", href: "/about", isModal: true },
 ]
 
 export function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+  const [aboutModalOpen, setAboutModalOpen] = React.useState(false)
   const { theme, setTheme } = useTheme()
   const [showThemeMenu, setShowThemeMenu] = React.useState(false)
+  const router = useRouter()
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +41,30 @@ export function Header() {
     document.addEventListener("click", handleClickOutside)
     return () => document.removeEventListener("click", handleClickOutside)
   }, [showThemeMenu])
+
+  // Check for about query parameter and open modal
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search)
+      if (params.get("about") === "true") {
+        setAboutModalOpen(true)
+        // Remove query parameter from URL without reload
+        router.replace("/", { scroll: false })
+      }
+    }
+  }, [router])
+
+  // Handle modal close - ensure URL is clean
+  const handleCloseModal = React.useCallback(() => {
+    setAboutModalOpen(false)
+    // Ensure URL doesn't have about parameter
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search)
+      if (params.get("about") === "true") {
+        router.replace("/", { scroll: false })
+      }
+    }
+  }, [router])
 
   const themeOptions = [
     { value: "light" as const, icon: Sun, label: "Light" },
@@ -60,15 +88,28 @@ export function Header() {
             Offshoot Studio
           </a>
           <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              if (link.isModal) {
+                return (
+                  <button
+                    key={link.href}
+                    onClick={() => setAboutModalOpen(true)}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {link.label}
+                  </button>
+                )
+              }
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
             <div className="relative theme-menu">
               <button
                 onClick={() => setShowThemeMenu(!showThemeMenu)}
@@ -163,16 +204,32 @@ export function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-border bg-background">
             <nav className="py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors rounded-md"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                if (link.isModal) {
+                  return (
+                    <button
+                      key={link.href}
+                      onClick={() => {
+                        setAboutModalOpen(true)
+                        setMobileMenuOpen(false)
+                      }}
+                      className="px-4 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors rounded-md text-left"
+                    >
+                      {link.label}
+                    </button>
+                  )
+                }
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="px-4 py-3 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors rounded-md"
+                  >
+                    {link.label}
+                  </Link>
+                )
+              })}
               <div className="mt-2 px-4">
                 <Link href="/#cta" onClick={() => setMobileMenuOpen(false)}>
                   <Button size="sm" className="w-full">
@@ -184,6 +241,7 @@ export function Header() {
           </div>
         )}
       </div>
+      <AboutModal open={aboutModalOpen} onClose={handleCloseModal} />
     </header>
   )
 }
