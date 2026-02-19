@@ -55,7 +55,7 @@ export function ProblemSection() {
               <CardContent className="p-4 md:p-2">
                 <p className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
                   <X className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
-                  <span>An MVP that works but looks homemade—costing you enterprise deals and making investors hesitate.</span>
+                  <span>Critical features that need to ship now for a deal, a launch, or a milestone—but hiring takes 90 days and you don't have 90 days.</span>
                 </p>
               </CardContent>
             </Card>
@@ -63,12 +63,12 @@ export function ProblemSection() {
               <CardContent className="p-4 md:p-2">
                 <p className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
                   <X className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
-                  <span>Critical features that need to ship now for a deal, a launch, or a milestone—but hiring takes 90 days and you don't have 90 days.</span>
+                  <span>An MVP that works but looks homemade—costing you enterprise deals and making investors hesitate.</span>
                 </p>
               </CardContent>
             </Card>
             <p>
-              You've tried AI tools. Lovable and v0 are fast, but the output has that look—generic components, slightly off spacing, the "generated yesterday" vibe that enterprise buyers spot immediately.
+              You've tried AI tools. Lovable and v0 are fast, but the output has that look—...the "generated yesterday" vibe that always requires extra hand waving.
             </p>
             <p>
               You need work that looks like it's been in production for months, not built in an afternoon.

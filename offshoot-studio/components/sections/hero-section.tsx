@@ -51,7 +51,7 @@ export function HeroSection() {
           </h1>
         </div>
         <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto text-left md:text-center">
-          Built to validate ideas, scale capacity, and ship products users trust—Offshoot Studio is the best way to prototype and ship without the hiring overhead.
+          Here to validate ideas, scale capacity, and ship products users trust—Offshoot Studio is the best way to prototype and ship without the hiring overhead.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a
