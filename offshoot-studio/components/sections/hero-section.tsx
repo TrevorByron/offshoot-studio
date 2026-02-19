@@ -4,8 +4,9 @@ import { useRef, useCallback, useState } from "react"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { SectionWrapper } from "./section-wrapper"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
-const HERO_TEXT = "Design engineering to help strategize, prototype, and bring products to life."
+const HERO_TEXT = "Your AI-accelerated design team on demand"
 
 export function HeroSection() {
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -49,8 +50,8 @@ export function HeroSection() {
             </span>
           </h1>
         </div>
-        <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-left md:text-center">
-          Offshoot Studio comes alongside your team to validate ideas, scale capacity, and ship production-ready prototypes—faster than traditional agencies, smarter than AI tools alone.
+        <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto text-left md:text-center">
+          Built to validate ideas, scale capacity, and ship products users trust—Offshoot Studio is the best way to prototype and ship without the hiring overhead.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a
@@ -63,11 +64,16 @@ export function HeroSection() {
             href="#services"
             className={cn(
               buttonVariants({ size: "lg", variant: "outline" }),
-              "w-full sm:w-auto"
+              "hidden sm:inline-flex w-full sm:w-auto"
             )}
           >
             See What We Do
           </a>
+        </div>
+      </div>
+      <div className="mt-12 md:mt-16 w-full h-[60vh] md:h-[80vh] rounded-2xl overflow-hidden">
+        <div className="w-full h-full bg-muted rounded-2xl flex items-center justify-center">
+          <span className="text-muted-foreground text-sm">Hero Image Placeholder</span>
         </div>
       </div>
     </SectionWrapper>

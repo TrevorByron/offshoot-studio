@@ -184,7 +184,7 @@
 
   /* Typography scales */
   .text-hero {
-    @apply text-4xl font-semibold md:text-5xl lg:text-6xl;
+    @apply text-3xl font-semibold md:text-5xl lg:text-6xl;
   }
 
   .text-section-title {

@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { ChatPreview } from "@/components/chat-preview"
 import { CalendarPreview } from "@/components/calendar-preview"
 import { ProductPreview } from "@/components/product-preview"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, X } from "lucide-react"
 
 const problemCards = [
   {
@@ -39,17 +39,38 @@ export function ProblemSection() {
           <h2 className="text-section-title mb-6">
             Your team is maxed out. Your ideas aren't.
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Great product ideas die on the backlog. Good MVPs stay scrappy too
-            long. Your core team is shipping the roadmap, but there's critical
-            explorations that can't wait.
-            <br />
-            <br />
-            AI tools like Lovable and v0 build fast but lack context—the output
-            feels like a demo, not something you'd show stakeholders or
-            enterprise buyers. You need designs that feel like they are a part
-            of your product already.
-          </p>
+          <div className="text-lg text-muted-foreground space-y-4">
+            <p>
+              Your core team is shipping the roadmap. But critical work keeps getting pushed:
+            </p>
+            <Card className="bg-muted/50 border-border/50 text-left">
+              <CardContent className="p-4">
+                <p className="flex items-start gap-2 text-lg text-muted-foreground">
+                  <X className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
+                  <span>Product ideas that could change your trajectory—stuck on the backlog because your team doesn't have 3 months to test them.</span>
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="bg-muted/50 border-border/50 text-left">
+              <CardContent className="p-4">
+                <p className="flex items-start gap-2 text-lg text-muted-foreground">
+                  <X className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
+                  <span>An MVP that works but looks homemade—costing you enterprise deals and making investors hesitate.</span>
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="bg-muted/50 border-border/50 text-left">
+              <CardContent className="p-4">
+                <p className="flex items-start gap-2 text-lg text-muted-foreground">
+                  <X className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
+                  <span>Critical features that need to ship now for a deal, a launch, or a milestone—but hiring takes 90 days and you don't have 90 days.</span>
+                </p>
+              </CardContent>
+            </Card>
+            <p>
+              You've tried AI tools. Lovable and v0 are fast, but the output has that look—generic components, slightly off spacing, the "generated yesterday" vibe that enterprise buyers spot immediately. You need work that looks like it's been in production for months, not built in an afternoon.
+            </p>
+          </div>
         </div>
         <div className="grid md:grid-cols-3 gap-3 mb-10">
           {problemCards.map((card, index) => {
