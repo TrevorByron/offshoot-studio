@@ -61,7 +61,7 @@ export function WhyOffshootSection() {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="flex flex-col bg-[#f7f7f7] dark:bg-card">
+            <Card key={index} className={`flex flex-col bg-[#f7f7f7] dark:bg-card ${index >= 3 ? 'hidden md:flex' : ''}`}>
               <CardContent className="p-4 flex flex-col flex-1">
                 <p className="text-foreground text-base leading-relaxed mb-4 flex-1">
                   "{testimonial.quote}"

@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { ChatPreview } from "@/components/chat-preview"
 import { CalendarPreview } from "@/components/calendar-preview"
 import { ProductPreview } from "@/components/product-preview"
-import { ArrowRight, X } from "lucide-react"
+import { ArrowRight, X, Check } from "lucide-react"
 
 const problemCards = [
   {
@@ -16,16 +16,16 @@ const problemCards = [
     serviceId: "rapid-prototyping",
   },
   {
-    title: "Scale capacity without hiring delays",
+    title: "Scale capacity without the hiring gauntlet",
     description:
-      "Ship critical features for enterprise deals, product launches, or funding milestones. Get senior design-engineering talent embedded with your team in weeks, not months—without the commitment or overhead of a full-time hire.",
+      "Ship critical features for enterprise deals, product launches, or funding milestones. Get senior design-engineering talent embedded with your team in days, not months—without the commitment or overhead of a full-time hire.",
     linkText: "Learn about our Team Expansion",
     serviceId: "team-expansion",
   },
   {
-    title: "Turn your scrappy MVP into a professional product",
+    title: "Stop losing deals because your product looks homemade",
     description:
-      "Stop losing enterprise deals because your product looks like founders built it. Get the polish you need to close bigger customers, raise your next round, or attract senior talent.",
+      "Your MVP works. You have traction. But when enterprise prospects see it, they hesitate. When investors demo it, you see the look.\nIt's not broken—it just looks like founders built it. Because they did.",
     linkText: "Learn about our Design Refinement",
     serviceId: "design-refinement",
   },
@@ -43,32 +43,35 @@ export function ProblemSection() {
             <p>
               Your core team is shipping the roadmap. But critical work keeps getting pushed:
             </p>
-            <Card className="bg-muted/50 border-border/50 text-left">
-              <CardContent className="p-4">
-                <p className="flex items-start gap-2 text-lg text-muted-foreground">
+            <Card className="bg-[#f7f7f7] dark:bg-card text-left">
+              <CardContent className="p-4 md:p-6">
+                <p className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
                   <X className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
                   <span>Product ideas that could change your trajectory—stuck on the backlog because your team doesn't have 3 months to test them.</span>
                 </p>
               </CardContent>
             </Card>
-            <Card className="bg-muted/50 border-border/50 text-left">
-              <CardContent className="p-4">
-                <p className="flex items-start gap-2 text-lg text-muted-foreground">
+            <Card className="bg-[#f7f7f7] dark:bg-card text-left">
+              <CardContent className="p-4 md:p-6">
+                <p className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
                   <X className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
                   <span>An MVP that works but looks homemade—costing you enterprise deals and making investors hesitate.</span>
                 </p>
               </CardContent>
             </Card>
-            <Card className="bg-muted/50 border-border/50 text-left">
-              <CardContent className="p-4">
-                <p className="flex items-start gap-2 text-lg text-muted-foreground">
+            <Card className="bg-[#f7f7f7] dark:bg-card text-left">
+              <CardContent className="p-4 md:p-6">
+                <p className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
                   <X className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
                   <span>Critical features that need to ship now for a deal, a launch, or a milestone—but hiring takes 90 days and you don't have 90 days.</span>
                 </p>
               </CardContent>
             </Card>
             <p>
-              You've tried AI tools. Lovable and v0 are fast, but the output has that look—generic components, slightly off spacing, the "generated yesterday" vibe that enterprise buyers spot immediately. You need work that looks like it's been in production for months, not built in an afternoon.
+              You've tried AI tools. Lovable and v0 are fast, but the output has that look—generic components, slightly off spacing, the "generated yesterday" vibe that enterprise buyers spot immediately.
+            </p>
+            <p>
+              You need work that looks like it's been in production for months, not built in an afternoon.
             </p>
           </div>
         </div>
@@ -80,12 +83,15 @@ export function ProblemSection() {
                 className="flex flex-col bg-[#f7f7f7] dark:bg-card"
               >
                 <CardContent className="p-4 md:p-6 flex flex-col flex-1">
-                  <h3 className="font-semibold text-base mb-3">
+                  <h3 className="font-semibold text-base mb-3 flex items-center gap-2">
+                    <Check className="h-5 w-5 text-green-600 shrink-0" />
                     {card.title}
                   </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed flex-1">
-                  {card.description}
-                </p>
+                <div className="text-muted-foreground text-sm leading-relaxed flex-1 space-y-2">
+                  {card.description.split('\n').map((paragraph, idx) => (
+                    <p key={idx}>{paragraph}</p>
+                  ))}
+                </div>
                 <a
                   href={`#services-tab-${card.serviceId}`}
                   onClick={(e) => {

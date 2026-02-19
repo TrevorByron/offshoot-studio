@@ -37,7 +37,7 @@ export function CalendarPreview() {
 
   const events = [
     { date: dates[0], title: "🏁 Kickoff Day", color: "bg-blue-500/40", borderColor: "border-blue-500" },
-    { date: dates[1], title: "💡 Ideation", color: "bg-green-500/40", borderColor: "border-green-500" },
+    { date: dates[1], title: "🚧 Ideation and building", color: "bg-green-500/40", borderColor: "border-green-500" },
     { date: dates[2], title: "🕵️ Testing Day", color: "bg-yellow-500/40", borderColor: "border-yellow-500" },
     { date: dates[3], title: "🎉 Refine and decide!", color: "bg-purple-500/40", borderColor: "border-purple-500" },
   ]
