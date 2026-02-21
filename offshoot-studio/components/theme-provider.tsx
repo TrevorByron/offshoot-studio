@@ -13,8 +13,8 @@ interface ThemeContextType {
 const ThemeContext = React.createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = React.useState<Theme>("system")
-  const [resolvedTheme, setResolvedTheme] = React.useState<"light" | "dark">("light")
+  const [theme, setThemeState] = React.useState<Theme>("dark")
+  const [resolvedTheme, setResolvedTheme] = React.useState<"light" | "dark">("dark")
   const [mounted, setMounted] = React.useState(false)
 
   const updateTheme = React.useCallback((newTheme: Theme) => {
@@ -43,7 +43,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setMounted(true)
     // Get initial theme from localStorage or system preference
     const stored = localStorage.getItem("theme") as Theme | null
-    const initialTheme = stored || "system"
+    const initialTheme = (stored as Theme) || "dark"
     setThemeState(initialTheme)
     updateTheme(initialTheme)
   }, [updateTheme])

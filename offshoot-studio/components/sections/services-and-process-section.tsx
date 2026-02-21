@@ -277,7 +277,7 @@ export function ServicesAndProcessSection() {
       <div className="mx-auto max-w-7xl">
         <div className="text-left md:text-center mb-8 md:mb-12">
           <h2 className="text-section-title mb-4">Services & How We Work</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-left md:text-center">
             Choose a service to see scope, pricing, what it’s perfect for, and exactly how the
             engagement runs.
           </p>

@@ -4,11 +4,11 @@ import Image from "next/image"
 
 const testimonials = [
   {
-    quote: "It was night and day from one batch to another, adoption went from single digits to over 80%. It just spread like wildfire, all the best builders were using Cursor.",
-    name: "Diana Hu",
-    title: "General Partner",
-    company: "Y Combinator",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=faces",
+    quote: "I've had the chance to work with Trevor across both consumer and enterprise-grade products, and he consistently delivers. On a recent consumer app, he quickly gathered the right inputs, translated them into thoughtful UX flows, and delivered a ready-to-use prototype in record time. When you don't have full headcount and need fast turnaround, that kind of speed and clarity is invaluable.",
+    name: "Anna Grigoryan",
+    title: "Director of Product Management",
+    company: "Product Leader",
+    avatar: "/anna-grigoryan.png",
   },
   {
     quote: "They helped us validate our core feature in 4 weeks instead of 3 months. The prototype was so polished that we shipped it almost directly to production.",
