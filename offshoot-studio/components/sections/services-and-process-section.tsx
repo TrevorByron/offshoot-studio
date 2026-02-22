@@ -273,11 +273,11 @@ export function ServicesAndProcessSection() {
         </div>
 
         <div id="services-tabs" className="sticky top-16 z-20 flex justify-center mb-8 py-3 -mx-4 px-4 md:-mx-8 md:px-8 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-          <div className="relative inline-flex gap-1 rounded-none border bg-muted/50 p-1">
+          <div className="relative inline-flex gap-1 rounded-lg border bg-muted/50 p-1">
             {/* Sliding indicator */}
             {activeButton && (
               <motion.div
-                className="absolute rounded-none bg-foreground shadow-sm"
+                className="absolute rounded-md bg-foreground shadow-sm"
                 initial={false}
                 animate={{
                   left: activeButton.offsetLeft,
@@ -302,7 +302,7 @@ export function ServicesAndProcessSection() {
                   type="button"
                   onClick={() => setActiveServiceId(service.id)}
                   className={cn(
-                    "relative px-3 py-1.5 text-xs font-medium rounded-none border transition-colors flex items-center gap-2 z-10 border-transparent",
+                    "relative px-3 py-1.5 text-xs font-medium rounded-md border transition-colors flex items-center gap-2 z-10 border-transparent",
                     isActive
                       ? "text-background"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -316,7 +316,7 @@ export function ServicesAndProcessSection() {
           </div>
         </div>
 
-        <div className="relative z-0 rounded-2xl overflow-hidden min-h-[480px] mt-4">
+        <div className="relative z-0 rounded-xl overflow-hidden min-h-[480px] mt-4">
           {/* CSS background keeps image centered (x and y) so it doesn't jump when container resizes */}
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -327,7 +327,7 @@ export function ServicesAndProcessSection() {
           {/* Content in flow — outer container resizes for even spacing; image re-crops from center so it doesn't move */}
           <div className="relative z-10 p-2 md:p-10 flex items-start justify-center">
             <Card className={cn(
-              "w-full flex flex-col rounded-xl shadow-2xl backdrop-blur-sm p-4 md:px-8 md:pt-8 md:pb-8 gap-6 ring-0 overflow-visible",
+              "w-full flex flex-col rounded-lg shadow-2xl backdrop-blur-sm p-4 md:px-8 md:pt-8 md:pb-8 gap-6 ring-0 overflow-visible",
               isInverse 
                 ? "border border-white/10 bg-zinc-900/95" 
                 : "border border-zinc-200 bg-white"

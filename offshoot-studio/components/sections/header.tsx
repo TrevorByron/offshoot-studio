@@ -51,13 +51,13 @@ export function Header() {
         isScrolled && "shadow-sm"
       )}
     >
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex h-16 items-center justify-between">
           <a
             href="/"
             className="text-lg font-semibold hover:text-primary transition-colors"
           >
-            Offshoot Studio
+            HT Creative
           </a>
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (

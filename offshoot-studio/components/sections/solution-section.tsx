@@ -26,14 +26,14 @@ export function SolutionSection() {
       <div className="mx-auto max-w-7xl">
         <div className="text-left md:text-center mb-12">
           <h2 className="text-section-title mb-6">
-            Why Offshoot
+            Why HT Creative
           </h2>
         </div>
         <div className="grid md:grid-cols-3 gap-3">
           {features.map((feature, index) => {
             const Icon = feature.icon
             return (
-              <Card key={index} className="flex flex-col bg-[#f7f7f7] dark:bg-card">
+              <Card key={index} className="flex flex-col bg-card">
                 <CardContent className="p-4 md:p-6 flex flex-col flex-1">
                   <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <Icon className="h-6 w-6 text-primary" />

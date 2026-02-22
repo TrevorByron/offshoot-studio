@@ -21,30 +21,30 @@ export function AboutCTASection() {
             Let's work together
           </h2>
           <p className="text-lg text-muted-foreground mb-4">
-            Offshoot currently takes on 2-3 projects per quarter. Typical lead time is 2-3 weeks.
+            HT Creative currently takes on 2-3 projects per quarter. Typical lead time is 2-3 weeks.
           </p>
         </div>
-        <div className="mb-8 border border-border rounded-lg p-4 bg-muted/50">
+        <div className="mb-8 border border-border rounded-lg p-4 bg-card">
           <Cal
             namespace="30min"
-            calLink="offshoot-studio/30min"
+            calLink="ht-creative/30min"
             style={{ width: "100%", height: "100%", overflow: "scroll" }}
             config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true" }}
           />
         </div>
-        <Card className="bg-[#f7f7f7] dark:bg-card">
+        <Card className="bg-card">
           <CardContent className="p-4 md:p-6 text-left md:text-center">
             <h3 className="text-lg font-semibold mb-2">
-              Interested in joining Offshoot Studio?
+              Interested in joining HT Creative?
             </h3>
             <p className="text-muted-foreground mb-4">
               We're building a network of exceptional design engineers.
             </p>
             <a
-              href="mailto:hello@offshootstudio.com"
+              href="mailto:hello@htcreative.com"
               className="text-primary hover:underline font-medium"
             >
-              hello@offshootstudio.com
+              hello@htcreative.com
             </a>
           </CardContent>
         </Card>

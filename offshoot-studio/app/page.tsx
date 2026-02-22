@@ -1,7 +1,6 @@
 import { Header } from "@/components/sections/header"
 import { HeroSection } from "@/components/sections/hero-section"
 import { ProblemSection } from "@/components/sections/problem-section"
-import { SolutionSection } from "@/components/sections/solution-section"
 import { ServicesAndProcessSection } from "@/components/sections/services-and-process-section"
 import { WhyNotAISection } from "@/components/sections/why-not-ai-section"
 import { CaseStudiesSection } from "@/components/sections/case-studies-section"
@@ -18,7 +17,6 @@ export default function Page() {
       <ProblemSection />
       <ServicesAndProcessSection />
       <CaseStudiesSection />
-      <SolutionSection />
       <WhyOffshootSection />
       <WhyNotAISection />
       <FAQSection />

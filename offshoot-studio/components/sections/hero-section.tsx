@@ -49,7 +49,7 @@ export function HeroSection() {
             </span>
           </h1>
         </div>
-        <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto text-left md:text-center">
+        <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto text-left md:text-center">
           Strategic design engineering for product teams. We validate ideas, scale capacity, and ship production-ready work—faster than agencies, smarter than AI alone.
         </p>
         <div className="flex justify-center">

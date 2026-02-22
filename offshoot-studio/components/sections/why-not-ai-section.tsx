@@ -56,7 +56,7 @@ export function WhyNotAISection() {
             We use Lovable, v0, Cursor every day. AI can't replace strategy or craft.
           </p>
         </div>
-        <Card className="mb-8 bg-[#f7f7f7] dark:bg-card">
+        <Card className="mb-8 bg-card">
           <CardContent className="p-4 md:p-6">
             <div className="grid md:grid-cols-[2fr_5fr_5fr] gap-6 mb-6 pb-6 border-b">
               <div className="font-semibold text-sm"></div>
@@ -66,7 +66,7 @@ export function WhyNotAISection() {
               </div>
               <div className="font-semibold text-sm flex items-center gap-2">
                 <Check className="h-4 w-4 text-primary" />
-                Offshoot Studio
+                HT Creative
               </div>
             </div>
             <div className="space-y-4">

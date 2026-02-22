@@ -57,7 +57,7 @@ export function ProductPreview() {
   return (
     <div 
       ref={containerRef}
-      className={`mt-4 rounded-lg border border-border bg-card shadow-sm h-[270px] flex flex-col overflow-hidden transition-all duration-[3000ms] ${
+      className={`mt-4 rounded-lg border border-border bg-[#F7F7F4] dark:bg-background shadow-sm h-[270px] flex flex-col overflow-hidden transition-all duration-[3000ms] ${
         isPolished ? "grayscale-0" : "grayscale"
       }`}
     >

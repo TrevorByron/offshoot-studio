@@ -9,7 +9,7 @@ export function AboutHeroSection() {
           <div className="space-y-6">
             <div className="space-y-3">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight">
-                About Offshoot Studio
+                About HT Creative
               </h1>
               <h2 className="text-xl md:text-2xl font-medium text-muted-foreground">
                 Built by a designer who can&apos;t stop building
@@ -18,7 +18,7 @@ export function AboutHeroSection() {
 
             <div className="space-y-4 text-base md:text-lg text-muted-foreground">
               <p>
-                Offshoot Studio started with Trevor Borden—a design engineer who&apos;s been building
+                HT Creative started with Trevor Borden—a design engineer who&apos;s been building
                 things his entire life, and digital products since 2017.
               </p>
               <p>
@@ -47,7 +47,7 @@ export function AboutHeroSection() {
                 Our story
               </p>
               <p className="text-base leading-relaxed">
-                Offshoot Studio was born from a lifetime of building—from remote Kenya to Portugal,
+                HT Creative was born from a lifetime of building—from remote Kenya to Portugal,
                 from carpentry and songwriting to strategic product design and engineering.
               </p>
             </div>

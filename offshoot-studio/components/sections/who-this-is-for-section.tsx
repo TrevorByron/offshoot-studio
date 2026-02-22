@@ -23,7 +23,7 @@ export function WhoThisIsForSection() {
           </h2>
         </div>
         <div className="grid md:grid-cols-2 gap-3 mb-12">
-          <Card className="bg-[#f7f7f7] dark:bg-card">
+          <Card className="bg-card">
             <CardHeader>
               <h3 className="text-sm font-medium">You're a good fit if:</h3>
             </CardHeader>
@@ -38,7 +38,7 @@ export function WhoThisIsForSection() {
               </ul>
             </CardContent>
           </Card>
-          <Card className="bg-[#f7f7f7] dark:bg-card">
+          <Card className="bg-card">
             <CardHeader>
               <h3 className="text-sm font-medium">We work with:</h3>
             </CardHeader>

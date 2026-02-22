@@ -16,11 +16,11 @@ import {
   Send,
 } from "lucide-react"
 
-const TYPING_MESSAGE = "Welcome @offshoot! see you at stand-up!"
+const TYPING_MESSAGE = "Welcome @htcreative! see you at stand-up!"
 const TYPING_INTERVAL_MS = 60
 
 function renderTypedMessage(visible: string) {
-  const mention = "@offshoot"
+  const mention = "@htcreative"
   const idx = visible.indexOf(mention)
   if (idx === -1) {
     return visible
@@ -72,7 +72,7 @@ export function ChatPreview() {
   return (
     <div
       ref={containerRef}
-      className="mt-4 rounded-lg overflow-hidden border border-border bg-card shadow-sm h-[270px] flex flex-col"
+      className="mt-4 rounded-lg overflow-hidden border border-border bg-[#F7F7F4] dark:bg-background shadow-sm h-[270px] flex flex-col"
     >
       {/* Header */}
       <div className="flex items-center gap-3 p-3 border-b border-border">
@@ -88,7 +88,7 @@ export function ChatPreview() {
         </div>
         <div className="flex-1 min-w-0">
           <span className="font-semibold text-sm text-card-foreground truncate">
-            Offshoot Studio
+            HT Creative
           </span>
         </div>
       </div>
@@ -97,7 +97,7 @@ export function ChatPreview() {
       <div className="px-3 pt-2 pb-1">
         <p className="text-xs text-muted-foreground leading-relaxed">
           This conversation is just between{" "}
-          <span className="text-blue-600">@Offshoot Studio</span>. Check out their
+          <span className="text-blue-600">@HT Creative</span>. Check out their
           profile to learn more about them.
         </p>
       </div>

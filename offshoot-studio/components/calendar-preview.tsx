@@ -79,7 +79,7 @@ export function CalendarPreview() {
   }, [hasStarted])
 
   return (
-    <div ref={containerRef} className="mt-4 rounded-lg border border-border bg-card shadow-sm overflow-hidden h-[270px] flex flex-col">
+    <div ref={containerRef} className="mt-4 rounded-lg border border-border bg-[#F7F7F4] dark:bg-background shadow-sm overflow-hidden h-[270px] flex flex-col">
       {/* Calendar header */}
       <div className="border-b border-border p-3">
         <div className="flex items-center justify-between">
