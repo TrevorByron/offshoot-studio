@@ -14,8 +14,8 @@
 
   <!-- HERO -->
   <section>
-    <h1>Design team on demand—strategic thinking, production-quality work, zero bureaucracy.</h1>
-    <p>We've cleaned pools, led safaris, played dive bars, and have been shipping innovative software since 2017. The through line is craft.</p>
+    <h1>Design team on demand — strategic thinkers, prototyping extraordinaires, zero bureaucracy.</h1>
+    <p>We've led African safaris, cleaned swimming pools, played dive bars across America, and have been shipping delightful software since 2017. The through line is craft and human experience.</p>
     <button>Book a call</button>
   </section>
 
