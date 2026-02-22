@@ -37,7 +37,7 @@ export function CaseStudyCard({
   const gridCols = isImageLeft ? "md:grid-cols-[13fr_7fr]" : "md:grid-cols-[7fr_13fr]"
 
   return (
-    <div className="mb-10 md:mb-14 bg-[#f0f0f0] md:bg-[#fafafa] dark:bg-card rounded-lg p-4 md:p-6">
+    <div className="mb-10 md:mb-14 bg-card rounded-lg p-4 md:p-6 ring-foreground/10 ring-1">
       <div className={`flex flex-col md:grid ${gridCols} gap-8 md:gap-12 md:items-stretch`}>
         <div className={`max-w-3xl ${contentOrder} flex flex-col justify-center`}>
           <h2 className="text-2xl font-semibold md:text-3xl mb-2">
@@ -63,7 +63,7 @@ export function CaseStudyCard({
               href={footerLinkHref}
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80"
+              className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent-link hover:opacity-90"
             >
               {footerLinkLabel ?? "See Prototype"}
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -75,7 +75,7 @@ export function CaseStudyCard({
           style={{ backgroundImage: `url(${imageBackground})`, paddingRight: "-24px" }}
         >
           <div
-            className="absolute top-2 left-2 right-0 bottom-2 md:top-6 md:left-6 md:right-0 md:bottom-6 bg-white/90 dark:bg-card/90 rounded-lg shadow-lg flex flex-col"
+            className="absolute top-2 left-2 right-0 bottom-2 md:top-6 md:left-6 md:right-0 md:bottom-6 bg-background/95 dark:bg-card/90 rounded-lg shadow-lg flex flex-col"
             style={{ width: "calc(100% + 48px)", marginRight: "-48px" }}
           >
             <div className="flex items-center p-4 pb-3 border-b border-border">

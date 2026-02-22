@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Offshoot Studio - Strategic Design Engineering",
-  description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for Series A+ companies.",
+  title: "HT Creative - Strategic Design Engineering",
+  description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for product teams.",
 };
 
 export default function RootLayout({
@@ -28,6 +29,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Script
+          src="https://app.cal.com/embed/embed.js"
+          strategy="afterInteractive"
+        />
         <ThemeProvider>
           {children}
         </ThemeProvider>

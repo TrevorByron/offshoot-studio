@@ -9,9 +9,9 @@ import { useTheme } from "@/components/theme-provider"
 import { Sun, Moon, Monitor, Menu, X } from "lucide-react"
 import { AboutModal } from "@/components/about-modal"
 
-const navLinks: Array<{ label: string; href: string; isModal?: boolean }> = [
-  { label: "Services & How We Work", href: "/#services" },
-  { label: "Case Studies", href: "/#case-studies" },
+const navLinks = [
+  { label: "Services", href: "/#services" },
+  { label: "Work", href: "/#case-studies" },
   { label: "FAQ", href: "/#faq" },
   { label: "About", href: "/about", isModal: true },
 ]
@@ -79,13 +79,13 @@ export function Header() {
         isScrolled && "shadow-sm"
       )}
     >
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex h-16 items-center justify-between">
           <a
             href="/"
             className="text-lg font-semibold hover:text-primary transition-colors"
           >
-            Offshoot Studio
+            HT Creative
           </a>
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => {
@@ -146,7 +146,7 @@ export function Header() {
             </div>
             <Link href="/#cta">
               <Button size="sm" className="ml-4">
-                Book a Call
+                Book a call
               </Button>
             </Link>
           </nav>
@@ -187,7 +187,7 @@ export function Header() {
             </div>
             <Link href="/#cta">
               <Button size="sm">
-                Book a Call
+                Book a call
               </Button>
             </Link>
             <button
@@ -233,7 +233,7 @@ export function Header() {
               <div className="mt-2 px-4">
                 <Link href="/#cta" onClick={() => setMobileMenuOpen(false)}>
                   <Button size="sm" className="w-full">
-                    Book a Call
+                    Book a call
                   </Button>
                 </Link>
               </div>

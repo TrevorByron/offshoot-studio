@@ -1,8 +1,8 @@
-# Offshoot Studio - Project Brief
+# HT Creative - Project Brief
 
 ## Overview
 
-Offshoot Studio is a strategic design engineering service for Series A+ companies. We function as a parallel team that validates ideas, scales capacity, and refines products—without disrupting core development work.
+HT Creative is a strategic design engineering service for Series A+ companies. We function as a parallel team that validates ideas, scales capacity, and refines products—without disrupting core development work.
 
 ## Core Positioning
 

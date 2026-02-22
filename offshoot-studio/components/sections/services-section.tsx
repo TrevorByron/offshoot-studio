@@ -84,12 +84,12 @@ export function ServicesSection() {
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <Card key={index} className="card-hover flex flex-col pt-0">
-              <div className="relative aspect-video w-full overflow-hidden rounded-none">
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
                 <Image
                   src={service.image}
                   alt={`Placeholder - ${service.title}`}
                   fill
-                  className="object-cover placeholder-image rounded-none"
+                  className="object-cover placeholder-image rounded-lg"
                   style={{ borderRadius: 0 }}
                 />
               </div>

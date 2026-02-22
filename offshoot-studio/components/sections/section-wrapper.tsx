@@ -16,8 +16,8 @@ export function SectionWrapper({
   ...props
 }: SectionWrapperProps) {
   const paddingClasses = {
-    default: "py-16 md:py-24 lg:py-32",
-    spacious: "py-24 md:py-32 lg:py-40",
+    default: "py-20 md:py-28 lg:py-36",
+    spacious: "py-28 md:py-36 lg:py-44",
     compact: "py-12 md:py-16 lg:py-20",
   }
 
@@ -25,7 +25,7 @@ export function SectionWrapper({
     <section
       id={id}
       className={cn(
-        "mx-auto max-w-7xl px-4",
+        "mx-auto max-w-7xl px-4 md:px-6",
         paddingClasses[variant],
         animateOnScroll && "animate-on-scroll",
         className

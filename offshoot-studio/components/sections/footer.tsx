@@ -4,11 +4,11 @@ import { Mail, Linkedin } from "lucide-react"
 export function Footer() {
   return (
     <footer className="border-t border-border bg-muted/50">
-      <div className="mx-auto max-w-7xl px-4 py-12">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 py-12">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="font-semibold text-lg mb-2">
-              Offshoot Studio
+              HT Creative
             </h3>
             <p className="text-sm text-muted-foreground">
               Strategic design engineering for companies that move fast
@@ -43,16 +43,16 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <a
-                  href="mailto:hello@offshootstudio.com"
+                  href="mailto:hello@htcreative.com"
                   className="flex items-center gap-2 hover:text-foreground transition-colors"
                 >
                   <Mail className="h-4 w-4" />
-                  hello@offshootstudio.com
+                  hello@htcreative.com
                 </a>
               </li>
               <li>
                 <a
-                  href="https://linkedin.com/company/offshoot-studio"
+                  href="https://linkedin.com/company/ht-creative"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:text-foreground transition-colors"
@@ -67,7 +67,7 @@ export function Footer() {
         </div>
         <Separator className="mb-8" />
         <div className="text-left md:text-center text-sm text-muted-foreground">
-          © 2025 Offshoot Studio
+          © 2025 HT Creative
         </div>
       </div>
     </footer>

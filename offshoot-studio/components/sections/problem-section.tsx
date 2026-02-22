@@ -1,72 +1,63 @@
 "use client"
 
+import { useState } from "react"
 import { SectionWrapper } from "./section-wrapper"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChatPreview } from "@/components/chat-preview"
 import { CalendarPreview } from "@/components/calendar-preview"
 import { ProductPreview } from "@/components/product-preview"
-import { ArrowRight, Check } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 const problemCards = [
   {
     title: "Test ideas before you commit resources",
-    description:
-      "Put working prototypes in front of users before you allocate resources on them. Learn fast. Fail fast or double down with confidence. Validation takes days, not months.",
-    linkText: "Learn about our Rapid Prototyping",
+    description: "Working prototypes in front of users in weeks. Validation without derailing the roadmap.",
+    linkText: "Rapid prototyping",
     serviceId: "rapid-prototyping",
   },
   {
-    title: "Scale capacity without the hiring gauntlet",
-    description:
-      "Ship critical features for enterprise deals, product launches, or funding milestones. Get senior design-engineering talent embedded with your team in days, not months—without the commitment or overhead of a full-time hire.",
-    linkText: "Learn about our Team Expansion",
+    title: "Scale capacity without hiring delays",
+    description: "Senior design-eng talent embedded in weeks. No W2, no 3-month hire.",
+    linkText: "Team expansion",
     serviceId: "team-expansion",
   },
   {
-    title: "Stop losing deals because your product looks homemade",
-    description:
-      "Your MVP works. You have traction. But when enterprise prospects see it, they hesitate. When investors demo it, you see the look.\nIt's not broken—it just looks like founders built it. Because they did.",
-    linkText: "Learn about our Design Refinement",
+    title: "Turn your scrappy MVP into a professional product",
+    description: "Polish that closes deals and raises rounds. From founder-built to enterprise-ready.",
+    linkText: "Design refinement",
     serviceId: "design-refinement",
   },
 ]
 
 export function ProblemSection() {
-  return (
-    <SectionWrapper animateOnScroll={false}>
-      <div className="mx-auto max-w-4xl text-left md:text-center mb-10">
-        <h2 className="text-section-title mb-6">
-          Your team is maxed out. Your ideas aren't.
-        </h2>
-        <p className="text-lg text-muted-foreground">
-          Your core team is shipping the roadmap, but critical work keeps getting pushed. You've tried AI tools — Lovable and v0 are fast, but the output has that look: the "generated yesterday" vibe that always requires extra hand-holding. You need work that looks like it's been in production for months, not built in an afternoon.
-        </p>
-      </div>
-      <StaticBlock />
-    </SectionWrapper>
-  )
-}
+  const [previewHeight, setPreviewHeight] = useState<number | undefined>(undefined)
 
-function StaticBlock() {
   return (
-    <>
-      <div className="grid md:grid-cols-3 gap-3 mb-10">
-        {problemCards.map((card, index) => {
-          return (
-            <Card
-              key={index}
-              className="flex flex-col bg-[#f7f7f7] dark:bg-card"
-            >
-              <CardContent className="p-4 md:p-6 flex flex-col flex-1">
-                <h3 className="font-semibold text-base mb-3 flex items-center gap-2">
-                  <Check className="h-5 w-5 text-green-600 shrink-0" />
-                  {card.title}
-                </h3>
-                <div className="text-muted-foreground text-sm leading-relaxed flex-1 space-y-2">
-                  {card.description.split("\n").map((paragraph, idx) => (
-                    <p key={idx}>{paragraph}</p>
-                  ))}
-                </div>
+    <SectionWrapper>
+      <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-4xl text-left md:text-center mb-10">
+          <h2 className="text-section-title mb-6">
+            Your team is maxed out. Your ideas aren't.
+          </h2>
+          <p className="text-base text-muted-foreground leading-relaxed">
+            Ideas die on the backlog. MVPs stay scrappy. You need a parallel
+            team that validates and ships without derailing the roadmap.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-3 mb-10">
+          {problemCards.map((card, index) => {
+            return (
+              <Card
+                key={index}
+                className="flex flex-col bg-card"
+              >
+                <CardContent className="p-4 md:p-6 flex flex-col flex-1">
+                  <h3 className="font-semibold text-base mb-3">
+                    {card.title}
+                  </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed flex-1">
+                  {card.description}
+                </p>
                 <a
                   href={`#services-tab-${card.serviceId}`}
                   onClick={(e) => {
@@ -86,24 +77,20 @@ function StaticBlock() {
                       window.dispatchEvent(new HashChangeEvent("hashchange"))
                     }, 0)
                   }}
-                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors group"
+                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent-link hover:opacity-90 transition-colors group"
                 >
                   {card.linkText}
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
                 </a>
-                {index === 0 && <CalendarPreview />}
-                {index === 1 && <ChatPreview />}
-                {index === 2 && <ProductPreview />}
+                {index === 0 && <CalendarPreview height={previewHeight} />}
+                {index === 1 && <ChatPreview onHeightReport={setPreviewHeight} />}
+                {index === 2 && <ProductPreview height={previewHeight} />}
               </CardContent>
             </Card>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
-
-      <p className="mx-auto max-w-3xl text-lg text-left md:text-center font-medium">
-        You need a parallel team that validates ideas, scales capacity, and
-        ships quality—without disrupting what you're building.
-      </p>
-    </>
+    </SectionWrapper>
   )
 }

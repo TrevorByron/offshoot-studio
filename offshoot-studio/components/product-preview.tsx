@@ -3,7 +3,11 @@
 import { TrendingUp, Users, DollarSign, BarChart3 } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 
-export function ProductPreview() {
+interface ProductPreviewProps {
+  height?: number
+}
+
+export function ProductPreview({ height }: ProductPreviewProps) {
   const [isPolished, setIsPolished] = useState(false)
   const [hasStarted, setHasStarted] = useState(false)
   const [isStatusReady, setIsStatusReady] = useState(false)
@@ -55,11 +59,12 @@ export function ProductPreview() {
   }, [hasStarted])
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      className={`mt-4 rounded-lg border border-border bg-card shadow-sm h-[270px] flex flex-col overflow-hidden transition-all duration-[3000ms] ${
+      className={`mt-4 rounded-lg border border-border bg-[#F7F7F4] dark:bg-background shadow-sm min-h-[270px] flex flex-col overflow-hidden transition-all duration-[3000ms] ${
         isPolished ? "grayscale-0" : "grayscale"
       }`}
+      style={height !== undefined ? { height } : undefined}
     >
       {/* Header */}
       <div className="flex items-center gap-3 p-3 border-b border-border">
@@ -74,7 +79,7 @@ export function ProductPreview() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 p-4 flex flex-col gap-3">
+      <div className="flex-1 min-h-0 p-4 flex flex-col gap-3 overflow-y-auto">
         {/* Stats row */}
         <div className="grid grid-cols-3 gap-2">
           <div 

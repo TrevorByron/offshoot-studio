@@ -24,11 +24,11 @@ export function AboutWhoSection() {
             Who this is for
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            We work with Series A+ companies and innovation teams who need strategic design engineering without hiring overhead or agency slowness.
+            We work with product teams and innovation teams who need strategic design engineering without hiring overhead or agency slowness.
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-3 mb-8">
-          <Card className="bg-[#f7f7f7] dark:bg-card">
+          <Card className="bg-card">
             <CardContent className="p-4 md:p-6">
               <h3 className="text-sm font-medium mb-4">You're a good fit if:</h3>
               <ul className="space-y-3">
@@ -41,7 +41,7 @@ export function AboutWhoSection() {
               </ul>
             </CardContent>
           </Card>
-          <Card className="bg-[#f7f7f7] dark:bg-card">
+          <Card className="bg-card">
             <CardContent className="p-4 md:p-6">
               <h3 className="text-sm font-medium mb-4">Industries:</h3>
               <div className="flex flex-wrap gap-2">
