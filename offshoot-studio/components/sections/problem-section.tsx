@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { SectionWrapper } from "./section-wrapper"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChatPreview } from "@/components/chat-preview"
@@ -29,6 +30,8 @@ const problemCards = [
 ]
 
 export function ProblemSection() {
+  const [previewHeight, setPreviewHeight] = useState<number | undefined>(undefined)
+
   return (
     <SectionWrapper>
       <div className="mx-auto max-w-7xl">
@@ -84,9 +87,9 @@ export function ProblemSection() {
                   {card.linkText}
                   <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
                 </a>
-                {index === 0 && <CalendarPreview />}
-                {index === 1 && <ChatPreview />}
-                {index === 2 && <ProductPreview />}
+                {index === 0 && <CalendarPreview height={previewHeight} />}
+                {index === 1 && <ChatPreview onHeightReport={setPreviewHeight} />}
+                {index === 2 && <ProductPreview height={previewHeight} />}
               </CardContent>
             </Card>
             )

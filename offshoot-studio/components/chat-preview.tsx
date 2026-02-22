@@ -36,10 +36,25 @@ function renderTypedMessage(visible: string) {
   )
 }
 
-export function ChatPreview() {
+interface ChatPreviewProps {
+  onHeightReport?: (height: number) => void
+}
+
+export function ChatPreview({ onHeightReport }: ChatPreviewProps) {
   const [visibleLength, setVisibleLength] = useState(0)
   const [hasEnteredViewport, setHasEnteredViewport] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el || !onHeightReport) return
+    const observer = new ResizeObserver((entries) => {
+      const height = entries[0]?.contentRect.height
+      if (typeof height === "number") onHeightReport(height)
+    })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [onHeightReport])
 
   useEffect(() => {
     const el = containerRef.current
@@ -72,7 +87,7 @@ export function ChatPreview() {
   return (
     <div
       ref={containerRef}
-      className="mt-4 rounded-lg overflow-hidden border border-border bg-[#F7F7F4] dark:bg-background shadow-sm h-[270px] flex flex-col"
+      className="mt-4 rounded-lg overflow-hidden border border-border bg-[#F7F7F4] dark:bg-background shadow-sm min-h-[270px] flex flex-col"
     >
       {/* Header */}
       <div className="flex items-center gap-3 p-3 border-b border-border">
