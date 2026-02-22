@@ -14,8 +14,8 @@
 
   <!-- HERO -->
   <section>
-    <h1>Think of us as your AI-empowered design engineers on demand.</h1>
-    <p>Strategic design engineering for product teams. We validate ideas, scale capacity, and ship production-ready work—faster than agencies, smarter than AI alone.</p>
+    <h1>Design team on demand—strategic thinking, production-quality work, zero bureaucracy.</h1>
+    <p>We've cleaned pools, led safaris, played dive bars, and have been shipping innovative software since 2017. The through line is craft.</p>
     <button>Book a call</button>
   </section>
 

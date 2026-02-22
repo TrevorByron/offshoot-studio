@@ -4,10 +4,14 @@ import { useEffect } from "react"
 import Cal, { getCalApi } from "@calcom/embed-react"
 import { SectionWrapper } from "./section-wrapper"
 
+const CAL_EMBED_JS_URL = "https://app.cal.com/embed/embed.js"
+const CAL_ORIGIN = "https://app.cal.com"
+const CAL_LINK = "offshoot-studio/30min"
+
 export function FinalCTASection() {
   useEffect(() => {
     ;(async function () {
-      const cal = await getCalApi({ namespace: "30min" })
+      const cal = await getCalApi({ namespace: "30min", embedJsUrl: CAL_EMBED_JS_URL })
       cal("ui", { hideEventTypeDetails: false, layout: "month_view" })
     })()
   }, [])
@@ -24,7 +28,9 @@ export function FinalCTASection() {
         <div className="mb-8 border border-border rounded-lg p-4 md:p-6 bg-card">
           <Cal
             namespace="30min"
-            calLink="ht-creative/30min"
+            calLink={CAL_LINK}
+            calOrigin={CAL_ORIGIN}
+            embedJsUrl={CAL_EMBED_JS_URL}
             style={{ width: "100%", height: "100%", overflow: "scroll" }}
             config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true" }}
           />

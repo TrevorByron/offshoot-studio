@@ -304,47 +304,4 @@
     color: var(--color-hover-red);
   }
 
-  /* Hero H1: gradient revealed in a radius that follows the cursor */
-  .hero-headline-wrapper {
-    position: relative;
-    cursor: default;
-  }
-
-  .hero-headline {
-    position: relative;
-    --hero-gradient: linear-gradient(
-      90deg,
-      var(--color-hover-green),
-      var(--color-hover-blue),
-      var(--color-hover-purple),
-      var(--color-hover-red),
-      var(--color-hover-green)
-    );
-    --hero-spot-radius: 140px;
-  }
-
-  .hero-headline-base {
-    color: var(--foreground);
-  }
-
-  .hero-headline-gradient {
-    position: absolute;
-    inset: 0;
-    display: block;
-    color: transparent;
-    background: var(--hero-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    pointer-events: none;
-    -webkit-mask-image: radial-gradient(
-      circle var(--hero-spot-radius) at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      black 0%,
-      transparent 100%
-    );
-    mask-image: radial-gradient(
-      circle var(--hero-spot-radius) at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      black 0%,
-      transparent 100%
-    );
-  }
 }
