@@ -62,8 +62,8 @@ export function AboutHeroSection() {
 
             <div className="mt-8 rounded-2xl overflow-hidden bg-muted">
               <Image
-                src="/hero-image.png"
-                alt="Trevor on the road, always building and exploring"
+                src="/about-dirt-bike.png"
+                alt="Trevor on the dirt bike, always building and exploring"
                 width={1280}
                 height={720}
                 className="w-full h-auto object-cover"
