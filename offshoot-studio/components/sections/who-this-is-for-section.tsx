@@ -1,6 +1,7 @@
 import { SectionWrapper } from "./section-wrapper"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Check } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Tick02Icon } from "@hugeicons/core-free-icons"
 
 const goodFit = [
   "Your engineering team is underwater but you have ideas worth testing",
@@ -31,7 +32,7 @@ export function WhoThisIsForSection() {
               <ul className="space-y-3">
                 {goodFit.map((item, index) => (
                   <li key={index} className="flex gap-3">
-                    <Check className="h-5 w-5 text-green-600 shrink-0 mt-0.5" />
+                    <HugeiconsIcon icon={Tick02Icon} className="size-5 text-green-600 shrink-0 mt-0.5" strokeWidth={2} />
                     <span className="text-sm text-muted-foreground">{item}</span>
                   </li>
                 ))}

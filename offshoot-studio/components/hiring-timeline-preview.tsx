@@ -1,6 +1,7 @@
 "use client"
 
-import { Briefcase, User } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Briefcase01Icon, UserIcon } from "@hugeicons/core-free-icons"
 import { useState, useEffect, useRef } from "react"
 
 const STAGES = [
@@ -43,7 +44,7 @@ export function HiringTimelinePreview() {
       <div className="border-b border-border p-3">
         <div className="flex items-center gap-3">
           <div className="size-10 rounded-lg bg-muted border border-border flex items-center justify-center shrink-0">
-            <Briefcase className="size-5 text-muted-foreground" />
+            <HugeiconsIcon icon={Briefcase01Icon} className="size-5 text-muted-foreground" strokeWidth={2} />
           </div>
           <div className="flex-1 min-w-0">
             <span className="font-semibold text-sm text-card-foreground block truncate">
@@ -69,7 +70,7 @@ export function HiringTimelinePreview() {
               </span>
               {index === activeStage && (
                 <div className="mt-1 flex items-center justify-center gap-0.5 text-primary">
-                  <User className="size-3" />
+                  <HugeiconsIcon icon={UserIcon} className="size-3" strokeWidth={2} />
                 </div>
               )}
             </div>

@@ -1,5 +1,6 @@
-import { HandHelping, Users, Zap } from "lucide-react";
 import React from "react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { CustomerSupportIcon, UserGroupIcon, ZapIcon } from "@hugeicons/core-free-icons";
 
 import { cn } from "@/lib/utils";
 
@@ -7,6 +8,33 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 import type { HeroFeatureIconsProps } from "@/lib/hero-feature-icons";
+
+function withHugeIcon(Icon: typeof CustomerSupportIcon) {
+  return function IconWrapper({ className }: { className?: string }) {
+    return <HugeiconsIcon icon={Icon} className={className} strokeWidth={2} />;
+  };
+}
+
+const defaultFeatures = [
+  {
+    icon: withHugeIcon(CustomerSupportIcon),
+    title: "Flexible Support",
+    description:
+      "Benefit from around-the-clock assistance to keep your business running smoothly.",
+  },
+  {
+    icon: withHugeIcon(UserGroupIcon),
+    title: "Collaborative Tools",
+    description:
+      "Enhance teamwork with tools designed to simplify project management and communication.",
+  },
+  {
+    icon: withHugeIcon(ZapIcon),
+    title: "Lightning Fast Speed",
+    description:
+      "Experience the fastest load times with our high performance servers.",
+  },
+];
 
 const Hero45 = ({
   badge = "shadcnblocks.com",
@@ -17,26 +45,7 @@ const Hero45 = ({
       alt: "placeholder",
     },
   ],
-  features = [
-    {
-      icon: HandHelping,
-      title: "Flexible Support",
-      description:
-        "Benefit from around-the-clock assistance to keep your business running smoothly.",
-    },
-    {
-      icon: Users,
-      title: "Collaborative Tools",
-      description:
-        "Enhance teamwork with tools designed to simplify project management and communication.",
-    },
-    {
-      icon: Zap,
-      title: "Lightning Fast Speed",
-      description:
-        "Experience the fastest load times with our high performance servers.",
-    },
-  ],
+  features = defaultFeatures,
   className,
 }: HeroFeatureIconsProps) => {
   return (

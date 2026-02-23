@@ -18,7 +18,7 @@ const testimonials = [
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=faces",
   },
   {
-    quote: "Working with HT Creative was like having a senior product engineer join our team overnight. They understood our vision immediately and executed flawlessly.",
+    quote: "Working with Tiger Team Studios was like having a senior product engineer join our team overnight. They understood our vision immediately and executed flawlessly.",
     name: "Michael Rodriguez",
     title: "Founder & CEO",
     company: "DataVault",

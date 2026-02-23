@@ -15,7 +15,7 @@ export function AboutProblemSection() {
             Traditional agencies are too slow. Hiring takes months. AI tools can't think strategically.
           </p>
           <p className="text-lg text-muted-foreground font-medium">
-            So Trevor built HT Creative: a design engineering team that works alongside your core team—prototyping ideas, embedding for critical builds, and refining MVPs—without the friction of hiring or the bloat of agencies.
+            So Trevor built Tiger Team Studios: a design engineering team that works alongside your core team—prototyping ideas, embedding for critical builds, and refining MVPs—without the friction of hiring or the bloat of agencies.
           </p>
         </div>
       </div>

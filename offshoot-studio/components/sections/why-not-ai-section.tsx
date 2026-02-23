@@ -1,6 +1,7 @@
 import { SectionWrapper } from "./section-wrapper"
 import { Card, CardContent } from "@/components/ui/card"
-import { X, Check } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Cancel01Icon, Tick02Icon } from "@hugeicons/core-free-icons"
 
 const comparisons = [
   {
@@ -56,29 +57,29 @@ export function WhyNotAISection() {
             We use Lovable, v0, Cursor every day. AI can't replace strategy or craft.
           </p>
         </div>
-        <Card className="mb-8 bg-card">
+        <Card className="mb-8 bg-card overflow-hidden">
           <CardContent className="p-4 md:p-6">
-            <div className="grid md:grid-cols-[2fr_5fr_5fr] gap-6 mb-6 pb-6 border-b">
-              <div className="font-semibold text-sm"></div>
+            <div className="grid grid-cols-1 md:grid-cols-[2fr_5fr_5fr] gap-3 md:gap-6 mb-6 pb-6 border-b">
+              <div className="font-semibold text-sm hidden md:block" aria-hidden />
               <div className="font-semibold text-sm flex items-center gap-2">
-                <X className="h-4 w-4 text-destructive" />
+                <HugeiconsIcon icon={Cancel01Icon} className="size-4 text-destructive shrink-0" strokeWidth={2} />
                 AI Tools (Lovable, v0, Bolt)
               </div>
               <div className="font-semibold text-sm flex items-center gap-2">
-                <Check className="h-4 w-4 text-primary" />
-                HT Creative
+                <HugeiconsIcon icon={Tick02Icon} className="size-4 text-primary shrink-0" strokeWidth={2} />
+                Tiger Team Studios
               </div>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-6 md:space-y-4">
               {comparisons.map((comparison, index) => (
-                <div key={index} className="grid md:grid-cols-[2fr_5fr_5fr] gap-6">
-                  <div className="font-medium text-sm">{comparison.aspect}</div>
-                  <div className="text-sm text-muted-foreground flex items-start gap-2">
-                    <X className="h-4 w-4 text-destructive mt-0.5 flex-shrink-0" />
+                <div key={index} className="grid grid-cols-1 md:grid-cols-[2fr_5fr_5fr] gap-2 md:gap-6 md:items-start">
+                  <div className="font-medium text-sm text-foreground">{comparison.aspect}</div>
+                  <div className="text-sm text-muted-foreground flex items-start gap-2 pl-0 md:pl-0">
+                    <HugeiconsIcon icon={Cancel01Icon} className="size-4 text-destructive mt-0.5 flex-shrink-0" strokeWidth={2} />
                     <span>{comparison.ai}</span>
                   </div>
-                  <div className="text-sm text-muted-foreground flex items-start gap-2">
-                    <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                  <div className="text-sm text-muted-foreground flex items-start gap-2 pl-0 md:pl-0">
+                    <HugeiconsIcon icon={Tick02Icon} className="size-4 text-primary mt-0.5 flex-shrink-0" strokeWidth={2} />
                     <span>{comparison.us}</span>
                   </div>
                 </div>

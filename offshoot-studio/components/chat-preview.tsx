@@ -2,19 +2,20 @@
 
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
+import { HugeiconsIcon } from "@hugeicons/react"
 import {
-  Bold,
-  Italic,
-  Underline,
-  Strikethrough,
-  Link2,
-  ListOrdered,
-  List,
-  Plus,
-  AtSign,
-  MoreHorizontal,
-  Send,
-} from "lucide-react"
+  TextBoldIcon,
+  TextItalicIcon,
+  TextUnderlineIcon,
+  TextStrikethroughIcon,
+  Link01Icon,
+  LeftToRightListNumberIcon,
+  RightToLeftListBulletIcon,
+  PlusSignIcon,
+  MailAtSign01Icon,
+  MoreHorizontalIcon,
+  MailSend01Icon,
+} from "@hugeicons/core-free-icons"
 
 const TYPING_MESSAGE = "Welcome @htcreative! see you at stand-up!"
 const TYPING_INTERVAL_MS = 60
@@ -103,7 +104,7 @@ export function ChatPreview({ onHeightReport }: ChatPreviewProps) {
         </div>
         <div className="flex-1 min-w-0">
           <span className="font-semibold text-sm text-card-foreground truncate">
-            HT Creative
+            Tiger Team Studios
           </span>
         </div>
       </div>
@@ -112,7 +113,7 @@ export function ChatPreview({ onHeightReport }: ChatPreviewProps) {
       <div className="px-3 pt-2 pb-1">
         <p className="text-xs text-muted-foreground leading-relaxed">
           This conversation is just between{" "}
-          <span className="text-blue-600">@HT Creative</span>. Check out their
+          <span className="text-blue-600">@Tiger Team Studios</span>. Check out their
           profile to learn more about them.
         </p>
       </div>
@@ -127,49 +128,49 @@ export function ChatPreview({ onHeightReport }: ChatPreviewProps) {
               className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted/80"
               aria-label="Bold"
             >
-              <Bold className="size-3.5" />
+              <HugeiconsIcon icon={TextBoldIcon} className="size-3.5" strokeWidth={2} />
             </button>
             <button
               type="button"
               className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted/80"
               aria-label="Italic"
             >
-              <Italic className="size-3.5" />
+              <HugeiconsIcon icon={TextItalicIcon} className="size-3.5" strokeWidth={2} />
             </button>
             <button
               type="button"
               className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted/80"
               aria-label="Underline"
             >
-              <Underline className="size-3.5" />
+              <HugeiconsIcon icon={TextUnderlineIcon} className="size-3.5" strokeWidth={2} />
             </button>
             <button
               type="button"
               className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted/80"
               aria-label="Strikethrough"
             >
-              <Strikethrough className="size-3.5" />
+              <HugeiconsIcon icon={TextStrikethroughIcon} className="size-3.5" strokeWidth={2} />
             </button>
             <button
               type="button"
               className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted/80"
               aria-label="Link"
             >
-              <Link2 className="size-3.5" />
+              <HugeiconsIcon icon={Link01Icon} className="size-3.5" strokeWidth={2} />
             </button>
             <button
               type="button"
               className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted/80"
               aria-label="Numbered list"
             >
-              <ListOrdered className="size-3.5" />
+              <HugeiconsIcon icon={LeftToRightListNumberIcon} className="size-3.5" strokeWidth={2} />
             </button>
             <button
               type="button"
               className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted/80"
               aria-label="Bullet list"
             >
-              <List className="size-3.5" />
+              <HugeiconsIcon icon={RightToLeftListBulletIcon} className="size-3.5" strokeWidth={2} />
             </button>
           </div>
           {/* Message text */}
@@ -190,7 +191,7 @@ export function ChatPreview({ onHeightReport }: ChatPreviewProps) {
                 className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted/80"
                 aria-label="Add"
               >
-                <Plus className="size-4" />
+                <HugeiconsIcon icon={PlusSignIcon} className="size-4" strokeWidth={2} />
               </button>
               <button
                 type="button"
@@ -211,14 +212,14 @@ export function ChatPreview({ onHeightReport }: ChatPreviewProps) {
                 className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted/80"
                 aria-label="Mention"
               >
-                <AtSign className="size-4" />
+                <HugeiconsIcon icon={MailAtSign01Icon} className="size-4" strokeWidth={2} />
               </button>
               <button
                 type="button"
                 className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-muted/80"
                 aria-label="More"
               >
-                <MoreHorizontal className="size-4" />
+                <HugeiconsIcon icon={MoreHorizontalIcon} className="size-4" strokeWidth={2} />
               </button>
             </div>
             <div className="flex items-center gap-0.5">
@@ -227,7 +228,7 @@ export function ChatPreview({ onHeightReport }: ChatPreviewProps) {
                 className="flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-600 text-white hover:bg-emerald-500 transition-colors"
                 aria-label="Send"
               >
-                <Send className="size-4" />
+                <HugeiconsIcon icon={MailSend01Icon} className="size-4" strokeWidth={2} />
               </button>
             </div>
           </div>

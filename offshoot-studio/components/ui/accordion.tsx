@@ -3,7 +3,8 @@
 import * as React from "react"
 import { Collapsible } from "@base-ui/react/collapsible"
 import { cn } from "@/lib/utils"
-import { ChevronDown } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { ArrowDown01Icon } from "@hugeicons/core-free-icons"
 
 interface AccordionContextValue {
   value: string | undefined
@@ -109,7 +110,7 @@ function AccordionTrigger({
       {...props}
     >
       {children}
-      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" />
+      <HugeiconsIcon icon={ArrowDown01Icon} className="size-4 shrink-0 transition-transform duration-200" strokeWidth={2} />
     </Collapsible.Trigger>
   )
 }

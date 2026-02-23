@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import { motion } from "framer-motion"
 
 import { SectionWrapper } from "./section-wrapper"
-import { useTheme } from "@/components/theme-provider"
 import {
   Card,
   CardContent,
@@ -15,7 +15,8 @@ import {
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Check, Zap, Code, Sparkles, Users } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { ZapIcon, SparklesIcon, UserGroupIcon, Tick02Icon } from "@hugeicons/core-free-icons"
 import { cn } from "@/lib/utils"
 
 type ServiceStep = {
@@ -27,7 +28,7 @@ type ServiceStep = {
 type ServiceWithProcess = {
   id: string
   tabLabel: string
-  icon: React.ComponentType<{ className?: string }>
+  icon: typeof ZapIcon | typeof UserGroupIcon | typeof SparklesIcon
   title: string
   timeline: string
   pricing: string
@@ -44,7 +45,7 @@ const servicesWithProcess: ServiceWithProcess[] = [
   {
     id: "rapid-prototyping",
     tabLabel: "Rapid Prototyping",
-    icon: Zap,
+    icon: ZapIcon,
     title: "AI-Powered Rapid Prototyping",
     timeline: "3-6 weeks",
     pricing: "$8k-$15k",
@@ -91,10 +92,10 @@ const servicesWithProcess: ServiceWithProcess[] = [
   {
     id: "team-expansion",
     tabLabel: "Team Expansion",
-    icon: Users,
+    icon: UserGroupIcon,
     title: "Team Expansion",
-    timeline: "3 to 6 month contracts",
-    pricing: "monthly retainer",
+    timeline: "$12k / month",
+    pricing: "Month-to-month",
     description:
       "Senior design-eng capacity without W2 overhead or hiring delays.",
     perfectFor: [
@@ -133,7 +134,7 @@ const servicesWithProcess: ServiceWithProcess[] = [
   {
     id: "design-refinement",
     tabLabel: "Design Refinement",
-    icon: Sparkles,
+    icon: SparklesIcon,
     title: "0-to-MVP Design Refinement",
     timeline: "3-8 weeks",
     pricing: "$10k-$15k",
@@ -174,9 +175,8 @@ const servicesWithProcess: ServiceWithProcess[] = [
 ]
 
 export function ServicesAndProcessSection() {
-  const { resolvedTheme } = useTheme()
-  const isInverse = resolvedTheme === "light" // Dark card in light mode, light card in dark mode
-  
+  const isInverse = false // Fixed dark mode; no theme switching
+
   // Parse hash to get initial service ID
   const getInitialServiceId = () => {
     if (typeof window !== "undefined") {
@@ -263,17 +263,26 @@ export function ServicesAndProcessSection() {
   const activeButton = buttonRefs.current.get(activeServiceId)
 
   return (
-    <SectionWrapper id="services">
+    <SectionWrapper id="pricing-how-we-work">
       <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col gap-4 md:flex-row md:flex-wrap md:gap-12 md:gap-16 mb-6">
+          <div className="flex flex-col gap-4 md:flex-row md:items-start md:gap-12 w-full">
+            <div className="w-full md:w-[140px] shrink-0">
+              <span className="font-geist-mono text-[12px] text-left">
+                Working Together:
+              </span>
+            </div>
+          </div>
+        </div>
         <div className="text-left md:text-center mb-8 md:mb-12">
-          <h2 className="text-section-title mb-4">Services</h2>
+          <h2 className="text-section-title mb-4">Pricing & How We Work</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             We offer three types of services: rapid prototyping to validate ideas, team expansion for embedded design-eng capacity, and design refinement to take your MVP to production-ready.
           </p>
         </div>
 
-        <div id="services-tabs" className="sticky top-16 z-20 flex justify-center mb-8 py-3 -mx-4 px-4 md:-mx-8 md:px-8 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-          <div className="relative inline-flex gap-1 rounded-lg border bg-muted/50 p-1">
+        <div id="services-tabs" className="sticky top-0 z-20 flex justify-center mb-8 py-3 -mx-4 px-4 md:-mx-8 md:px-8 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 overflow-x-auto">
+          <div className="relative inline-flex gap-1 rounded-lg border bg-muted/50 p-1 flex-shrink-0">
             {/* Sliding indicator */}
             {activeButton && (
               <motion.div
@@ -293,7 +302,6 @@ export function ServicesAndProcessSection() {
               />
             )}
             {servicesWithProcess.map((service) => {
-              const Icon = service.icon
               const isActive = activeServiceId === service.id
               return (
                 <button
@@ -308,7 +316,7 @@ export function ServicesAndProcessSection() {
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                   )}
                 >
-                  <Icon className="hidden sm:block h-4 w-4 shrink-0" />
+                  <HugeiconsIcon icon={service.icon} className="hidden sm:block size-4 shrink-0" strokeWidth={2} />
                   {service.tabLabel}
                 </button>
               )
@@ -338,9 +346,7 @@ export function ServicesAndProcessSection() {
                     "text-lg flex items-center gap-2",
                     isInverse ? "text-zinc-50" : "text-zinc-900"
                   )}>
-                    {React.createElement(activeService.icon, { 
-                      className: cn("h-5 w-5", isInverse ? "text-zinc-400" : "text-zinc-600")
-                    })}
+                    <HugeiconsIcon icon={activeService.icon} className={cn("size-5", isInverse ? "text-zinc-400" : "text-zinc-600")} strokeWidth={2} />
                     {activeService.title}
                   </CardTitle>
                 </div>
@@ -351,12 +357,12 @@ export function ServicesAndProcessSection() {
                   <Badge variant="outline" className={cn(
                     isInverse ? "border-zinc-600 text-zinc-300" : "border-zinc-300 text-zinc-700"
                   )}>
-                    {activeService.timeline}
+                    {activeService.pricing}
                   </Badge>
                   <Badge variant="outline" className={cn(
                     isInverse ? "border-zinc-600 text-zinc-300" : "border-zinc-300 text-zinc-700"
                   )}>
-                    {activeService.pricing}
+                    {activeService.timeline}
                   </Badge>
                 </div>
                 <CardDescription className={cn(
@@ -383,10 +389,10 @@ export function ServicesAndProcessSection() {
                             "flex gap-3 text-sm",
                             isInverse ? "text-zinc-400" : "text-zinc-700"
                           )}>
-                            <Check className={cn(
-                              "h-4 w-4 shrink-0 mt-0.5",
+                            <HugeiconsIcon icon={Tick02Icon} className={cn(
+                              "size-4 shrink-0 mt-0.5",
                               isInverse ? "text-white" : "text-zinc-900"
-                            )} />
+                            )} strokeWidth={2} />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -406,10 +412,10 @@ export function ServicesAndProcessSection() {
                             "flex gap-3 text-sm",
                             isInverse ? "text-zinc-400" : "text-zinc-700"
                           )}>
-                            <Check className={cn(
-                              "h-4 w-4 shrink-0 mt-0.5",
+                            <HugeiconsIcon icon={Tick02Icon} className={cn(
+                              "size-4 shrink-0 mt-0.5",
                               isInverse ? "text-white" : "text-zinc-900"
-                            )} />
+                            )} strokeWidth={2} />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -433,7 +439,7 @@ export function ServicesAndProcessSection() {
                           )} />
                           <div className={cn(
                             "absolute left-0 top-0 h-4 w-4 rounded-full -translate-x-1.5 z-[2]",
-                            isInverse ? "bg-zinc-300" : "bg-zinc-600"
+                            isInverse ? "bg-zinc-300" : "bg-zinc-400"
                           )} />
                           <Badge variant="outline" className={cn(
                             "mb-2",
@@ -464,12 +470,19 @@ export function ServicesAndProcessSection() {
               )}>
                 <a href="#cta" className="w-full">
                   <Button className={cn(
-                    "w-full transition-colors",
+                    "w-full transition-colors gap-2",
                     isInverse 
                       ? "bg-white text-zinc-900 hover:bg-zinc-100" 
                       : "bg-zinc-900 text-white hover:bg-zinc-800"
                   )} size="lg">
-                    Book a call
+                    Book a call with Trevor
+                    <Image
+                      src="/trevor-driving.png"
+                      alt=""
+                      width={28}
+                      height={28}
+                      className="size-7 shrink-0 rounded-full object-cover ring-2 ring-white/20"
+                    />
                   </Button>
                 </a>
                 <p className={cn(

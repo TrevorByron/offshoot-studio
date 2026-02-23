@@ -1,6 +1,7 @@
 "use client"
 
-import { Layers } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Layers01Icon } from "@hugeicons/core-free-icons"
 
 export function HomemadeMVPPreview() {
   return (
@@ -9,7 +10,7 @@ export function HomemadeMVPPreview() {
     >
       <div className="flex items-center gap-3 p-3 border-b border-border">
         <div className="size-10 rounded-lg bg-muted border border-border flex items-center justify-center shrink-0">
-          <Layers className="size-5 text-muted-foreground" />
+          <HugeiconsIcon icon={Layers01Icon} className="size-5 text-muted-foreground" strokeWidth={2} />
         </div>
         <div className="flex-1 min-w-0">
           <span className="font-semibold text-sm text-card-foreground truncate">

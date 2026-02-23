@@ -2,7 +2,8 @@
 
 import * as React from "react"
 import { createPortal } from "react-dom"
-import { X } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Cancel01Icon } from "@hugeicons/core-free-icons"
 import { AboutHeroSection } from "./sections/about-hero-section"
 import { AboutProblemSection } from "./sections/about-problem-section"
 import { AboutVisionSection } from "./sections/about-vision-section"
@@ -62,7 +63,7 @@ export function AboutModal({ open, onClose }: AboutModalProps) {
             className="p-2 rounded-md hover:bg-muted transition-colors"
             aria-label="Close about modal"
           >
-            <X className="h-5 w-5" />
+            <HugeiconsIcon icon={Cancel01Icon} className="size-5" strokeWidth={2} />
           </button>
         </div>
 

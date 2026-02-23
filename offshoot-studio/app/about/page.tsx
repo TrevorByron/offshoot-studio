@@ -2,7 +2,6 @@
 
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Header } from "@/components/sections/header"
 import { Footer } from "@/components/sections/footer"
 
 export default function AboutPage() {
@@ -15,7 +14,6 @@ export default function AboutPage() {
 
   return (
     <main>
-      <Header />
       <Footer />
     </main>
   )

@@ -1,6 +1,7 @@
 "use client"
 
-import { TrendingUp, Users, DollarSign, BarChart3 } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { ChartIncreaseIcon, UserGroupIcon, Dollar01Icon, BarChartIcon } from "@hugeicons/core-free-icons"
 import { useState, useEffect, useRef } from "react"
 
 interface ProductPreviewProps {
@@ -69,7 +70,7 @@ export function ProductPreview({ height }: ProductPreviewProps) {
       {/* Header */}
       <div className="flex items-center gap-3 p-3 border-b border-border">
         <div className="size-10 rounded-lg bg-muted border border-border flex items-center justify-center shrink-0">
-          <BarChart3 className="size-5 text-purple-600" />
+          <HugeiconsIcon icon={BarChartIcon} className="size-5 text-purple-600" strokeWidth={2} />
         </div>
         <div className="flex-1 min-w-0">
           <span className="font-semibold text-sm text-card-foreground truncate">
@@ -90,12 +91,12 @@ export function ProductPreview({ height }: ProductPreviewProps) {
             }`}
           >
             <div className="flex items-center gap-1.5 mb-1">
-              <Users className="size-3 text-muted-foreground" />
+              <HugeiconsIcon icon={UserGroupIcon} className="size-3 text-muted-foreground" strokeWidth={2} />
               <span className="text-[10px] text-muted-foreground uppercase">Users</span>
             </div>
             <div className="text-sm font-semibold text-card-foreground">12.4K</div>
             <div className="text-[10px] text-green-600 flex items-center gap-0.5">
-              <TrendingUp className="size-2.5" />
+              <HugeiconsIcon icon={ChartIncreaseIcon} className="size-2.5" strokeWidth={2} />
               +24%
             </div>
           </div>
@@ -107,12 +108,12 @@ export function ProductPreview({ height }: ProductPreviewProps) {
             }`}
           >
             <div className="flex items-center gap-1.5 mb-1">
-              <DollarSign className="size-3 text-muted-foreground" />
+              <HugeiconsIcon icon={Dollar01Icon} className="size-3 text-muted-foreground" strokeWidth={2} />
               <span className="text-[10px] text-muted-foreground uppercase">Revenue</span>
             </div>
             <div className="text-sm font-semibold text-card-foreground">$89K</div>
             <div className="text-[10px] text-green-600 flex items-center gap-0.5">
-              <TrendingUp className="size-2.5" />
+              <HugeiconsIcon icon={ChartIncreaseIcon} className="size-2.5" strokeWidth={2} />
               +18%
             </div>
           </div>
@@ -124,12 +125,12 @@ export function ProductPreview({ height }: ProductPreviewProps) {
             }`}
           >
             <div className="flex items-center gap-1.5 mb-1">
-              <TrendingUp className="size-3 text-muted-foreground" />
+              <HugeiconsIcon icon={ChartIncreaseIcon} className="size-3 text-muted-foreground" strokeWidth={2} />
               <span className="text-[10px] text-muted-foreground uppercase">Growth</span>
             </div>
             <div className="text-sm font-semibold text-card-foreground">142%</div>
             <div className="text-[10px] text-green-600 flex items-center gap-0.5">
-              <TrendingUp className="size-2.5" />
+              <HugeiconsIcon icon={ChartIncreaseIcon} className="size-2.5" strokeWidth={2} />
               +32%
             </div>
           </div>

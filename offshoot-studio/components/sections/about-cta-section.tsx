@@ -25,7 +25,7 @@ export function AboutCTASection() {
             Let's work together
           </h2>
           <p className="text-lg text-muted-foreground mb-4">
-            HT Creative currently takes on 2-3 projects per quarter. Typical lead time is 2-3 weeks.
+            Tiger Team Studios currently takes on 2-3 projects per quarter. Typical lead time is 2-3 weeks.
           </p>
         </div>
         <div className="mb-8 border border-border rounded-lg p-4 bg-card">
@@ -41,7 +41,7 @@ export function AboutCTASection() {
         <Card className="bg-card">
           <CardContent className="p-4 md:p-6 text-left md:text-center">
             <h3 className="text-lg font-semibold mb-2">
-              Interested in joining HT Creative?
+              Interested in joining Tiger Team Studios?
             </h3>
             <p className="text-muted-foreground mb-4">
               We're building a network of exceptional design engineers.

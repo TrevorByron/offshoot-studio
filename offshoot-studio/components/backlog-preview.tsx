@@ -1,6 +1,7 @@
 "use client"
 
-import { ListTodo } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { CheckListIcon } from "@hugeicons/core-free-icons"
 import { useState, useEffect, useRef } from "react"
 
 const BACKLOG_ITEMS = [
@@ -48,7 +49,7 @@ export function BacklogPreview() {
       <div className="border-b border-border p-3">
         <div className="flex items-center gap-3">
           <div className="size-10 rounded-lg bg-muted border border-border flex items-center justify-center shrink-0">
-            <ListTodo className="size-5 text-muted-foreground" />
+            <HugeiconsIcon icon={CheckListIcon} className="size-5 text-muted-foreground" strokeWidth={2} />
           </div>
           <span className="font-semibold text-sm text-card-foreground">
             Backlog

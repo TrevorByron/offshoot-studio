@@ -1,5 +1,6 @@
 import { Separator } from "@/components/ui/separator"
-import { Mail, Linkedin } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Mail01Icon, Linkedin01Icon } from "@hugeicons/core-free-icons"
 
 export function Footer() {
   return (
@@ -8,7 +9,7 @@ export function Footer() {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="font-semibold text-lg mb-2">
-              HT Creative
+              Tiger Team Studios
             </h3>
             <p className="text-sm text-muted-foreground">
               Strategic design engineering for companies that move fast
@@ -20,17 +21,17 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <a href="#services" className="hover:text-foreground transition-colors">
+                <a href="#pricing-how-we-work" className="hover:text-foreground transition-colors">
                   Rapid Prototyping (AI-Augmented)
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-foreground transition-colors">
+                <a href="#pricing-how-we-work" className="hover:text-foreground transition-colors">
                   Embedded Design Engineering
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-foreground transition-colors">
+                <a href="#pricing-how-we-work" className="hover:text-foreground transition-colors">
                   0-to-1 Design Refinement
                 </a>
               </li>
@@ -46,7 +47,7 @@ export function Footer() {
                   href="mailto:hello@htcreative.com"
                   className="flex items-center gap-2 hover:text-foreground transition-colors"
                 >
-                  <Mail className="h-4 w-4" />
+                  <HugeiconsIcon icon={Mail01Icon} className="size-4" strokeWidth={2} />
                   hello@htcreative.com
                 </a>
               </li>
@@ -57,7 +58,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:text-foreground transition-colors"
                 >
-                  <Linkedin className="h-4 w-4" />
+                  <HugeiconsIcon icon={Linkedin01Icon} className="size-4" strokeWidth={2} />
                   LinkedIn
                 </a>
               </li>
@@ -67,7 +68,7 @@ export function Footer() {
         </div>
         <Separator className="mb-8" />
         <div className="text-left md:text-center text-sm text-muted-foreground">
-          © 2025 HT Creative
+          © 2025 Tiger Team Studios
         </div>
       </div>
     </footer>

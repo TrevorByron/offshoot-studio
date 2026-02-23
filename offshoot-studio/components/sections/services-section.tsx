@@ -2,7 +2,8 @@ import { SectionWrapper } from "./section-wrapper"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Check } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { Tick02Icon } from "@hugeicons/core-free-icons"
 import Image from "next/image"
 
 const services = [
@@ -109,7 +110,7 @@ export function ServicesSection() {
                   <ul className="space-y-2">
                     {service.perfectFor.map((item, idx) => (
                       <li key={idx} className="flex gap-2 text-sm text-muted-foreground">
-                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                        <HugeiconsIcon icon={Tick02Icon} className="size-4 text-primary shrink-0 mt-0.5" strokeWidth={2} />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -120,7 +121,7 @@ export function ServicesSection() {
                   <ul className="space-y-2">
                     {service.whatYouGet.map((item, idx) => (
                       <li key={idx} className="flex gap-2 text-sm text-muted-foreground">
-                        <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                        <HugeiconsIcon icon={Tick02Icon} className="size-4 text-primary shrink-0 mt-0.5" strokeWidth={2} />
                         <span>{item}</span>
                       </li>
                     ))}

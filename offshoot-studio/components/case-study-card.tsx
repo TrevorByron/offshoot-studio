@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import { HugeiconsIcon } from "@hugeicons/react"
+import { ArrowRight01Icon } from "@hugeicons/core-free-icons"
 
 interface CaseStudyCardProps {
   title: string
@@ -66,7 +67,7 @@ export function CaseStudyCard({
               className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent-link hover:opacity-90"
             >
               {footerLinkLabel ?? "See Prototype"}
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              <HugeiconsIcon icon={ArrowRight01Icon} className="size-4" strokeWidth={2} aria-hidden />
             </a>
           )}
         </div>

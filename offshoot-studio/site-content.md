@@ -1,9 +1,9 @@
-# HT Creative – Site Content & Structure (Cursor-style, stripped down)
+# Tiger Team Studios – Site Content & Structure (Cursor-style, stripped down)
 
 <main>
   <!-- HEADER -->
   <header>
-    <a href="/">HT Creative</a>
+    <a href="/">Tiger Team Studios</a>
     <nav>
       <a href="#services">Services</a>
       <a href="#case-studies">Work</a>
@@ -63,7 +63,7 @@
 
   <!-- WHY OFFSHOOT (pillars) -->
   <section>
-    <h2>Why HT Creative</h2>
+    <h2>Why Tiger Team Studios</h2>
     <p><strong>Strategic thinking first.</strong> We help you figure out what to build, not just execute the brief.</p>
     <p><strong>AI-augmented speed.</strong> We use Cursor, Claude, v0 to move 3-5x faster—and bring the judgment AI can't.</p>
     <p><strong>Design + engineering in one.</strong> No handoff lag, no translation loss.</p>
