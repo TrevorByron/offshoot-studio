@@ -89,7 +89,9 @@ export function HeroSection() {
             Product Design Agency
           </span>
           <h1 className="text-[40px] md:text-[56px] font-normal leading-tight tracking-tight mb-10">
-            Your design strike team on demand.
+            Your design strike team
+              <br className="hidden md:block" />
+              {" "}on demand.
           </h1>
           <p className="font-pp-neue-montreal text-base text-muted-foreground leading-relaxed mb-10 max-w-2xl md:max-w-[85%] md:mx-0">
             Your core team is heads down shipping the roadmap. But you have ideas that can't wait, features in discovery, and MVPs that need polish. Tiger Team Studios exists for these very moments. We validate directions, embed to ship features, and refine products. We parachute in, solve it, and move on.

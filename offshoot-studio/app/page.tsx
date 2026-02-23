@@ -6,7 +6,6 @@ import { WhyNotAISection } from "@/components/sections/why-not-ai-section"
 import { WhyOffshootSection } from "@/components/sections/why-offshoot-section"
 import { FAQSection } from "@/components/sections/faq-section"
 import { FinalCTASection } from "@/components/sections/final-cta-section"
-import { MightUseLaterSection } from "@/components/sections/might-use-later-section"
 import { Footer } from "@/components/sections/footer"
 
 export default function Page() {
@@ -20,7 +19,6 @@ export default function Page() {
       <FinalCTASection />
       <FAQSection />
       <WhyNotAISection />
-      <MightUseLaterSection />
       <Footer />
     </main>
   )

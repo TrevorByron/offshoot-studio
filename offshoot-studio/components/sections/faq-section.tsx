@@ -43,24 +43,28 @@ const faqs = [
 export function FAQSection() {
   return (
     <SectionWrapper id="faq">
-      <div className="mx-auto max-w-3xl">
-        <div className="text-left md:text-center mb-12">
-          <h2 className="text-section-title mb-6">
-            FAQ
-          </h2>
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col gap-4 md:flex-row md:items-start md:gap-12 mb-6">
+          <div className="w-full md:w-auto md:shrink-0">
+            <span className="font-geist-mono text-[12px] text-left whitespace-nowrap">
+              Frequently asked questions:
+            </span>
+          </div>
+          <div className="flex-1 min-w-0 max-w-3xl md:ml-auto">
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger className="text-left">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
         </div>
-        <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger className="text-left">
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
       </div>
     </SectionWrapper>
   )

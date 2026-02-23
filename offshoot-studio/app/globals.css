@@ -334,4 +334,12 @@
     color: var(--color-hover-red);
   }
 
+  /* Cal.com embed: fill container and force light iframe */
+  #cta .cal-embed-card .cal-embed-wrapper iframe {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 600px !important;
+    border: 0;
+  }
+
 }

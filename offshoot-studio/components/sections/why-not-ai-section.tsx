@@ -49,13 +49,10 @@ export function WhyNotAISection() {
   return (
     <SectionWrapper>
       <div className="mx-auto max-w-7xl">
-        <div className="text-left md:text-center mb-12">
-          <h2 className="text-section-title mb-6">
-            Why not AI alone?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            We use Lovable, v0, Cursor every day. AI can't replace strategy or craft.
-          </p>
+        <div className="mb-6">
+          <span className="font-geist-mono text-[12px] text-left whitespace-nowrap">
+            Why not just AI?
+          </span>
         </div>
         <Card className="mb-8 bg-card overflow-hidden">
           <CardContent className="p-4 md:p-6">
@@ -87,9 +84,9 @@ export function WhyNotAISection() {
             </div>
           </CardContent>
         </Card>
-        <div className="bg-muted/50 rounded-lg p-8 text-left md:text-center">
-          <p className="text-lg">
-            AI gives you what you ask for. We help you decide what to ask for—then build it fast.
+        <div className="bg-muted/50 rounded-lg p-8 text-left">
+          <p className="text-lg max-w-2xl text-left">
+            We use Lovable, v0, Cursor every day. AI can't replace strategy or craft. AI gives you what you ask for. We help you decide what to ask for and help you build it.
           </p>
         </div>
       </div>

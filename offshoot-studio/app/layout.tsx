@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Tiger Team Studios - Strategic Design Engineering",
   description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for product teams.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

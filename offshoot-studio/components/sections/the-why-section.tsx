@@ -50,7 +50,7 @@ export function TheWhySection() {
             </ScrollReveal>
             <ScrollReveal staggerDelay={0.2} className="relative w-96 h-96 max-w-[90vw] max-h-[90vw] rounded-full overflow-hidden">
               <div
-                className="absolute inset-0 w-full h-[110%] top-[-50%] left-0"
+                className="absolute inset-0 w-full h-[115%] top-[-55%] left-0"
                 style={{ transform: `translateY(${parallaxY}px)` }}
               >
                 <Image

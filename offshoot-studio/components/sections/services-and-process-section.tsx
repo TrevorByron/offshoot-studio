@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import Image from "next/image"
 import { motion } from "framer-motion"
 
 import { SectionWrapper } from "./section-wrapper"
@@ -94,8 +93,8 @@ const servicesWithProcess: ServiceWithProcess[] = [
     tabLabel: "Team Expansion",
     icon: UserGroupIcon,
     title: "Team Expansion",
-    timeline: "$12k / month",
-    pricing: "Month-to-month",
+    timeline: "Month-to-month",
+    pricing: "$12k / month",
     description:
       "Senior design-eng capacity without W2 overhead or hiring delays.",
     perfectFor: [
@@ -267,22 +266,20 @@ export function ServicesAndProcessSection() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-4 md:flex-row md:flex-wrap md:gap-12 md:gap-16 mb-6">
           <div className="flex flex-col gap-4 md:flex-row md:items-start md:gap-12 w-full">
-            <div className="w-full md:w-[140px] shrink-0">
-              <span className="font-geist-mono text-[12px] text-left">
-                Working Together:
+            <div className="w-full shrink-0">
+              <span className="font-geist-mono text-[12px] text-left whitespace-nowrap">
+                Pricing & How We Work
               </span>
             </div>
           </div>
         </div>
-        <div className="text-left md:text-center mb-8 md:mb-12">
-          <h2 className="text-section-title mb-4">Pricing & How We Work</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We offer three types of services: rapid prototyping to validate ideas, team expansion for embedded design-eng capacity, and design refinement to take your MVP to production-ready.
-          </p>
+        <div className="w-full -mb-4 md:mb-6 flex justify-center">
+          <h2 className="max-w-3xl font-geist-mono text-lg md:text-[24px] font-normal leading-relaxed text-foreground mt-6 mb-4 md:-mb-6 text-center">We offer three types of services:</h2>
         </div>
 
-        <div id="services-tabs" className="sticky top-0 z-20 flex justify-center mb-8 py-3 -mx-4 px-4 md:-mx-8 md:px-8 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 overflow-x-auto">
-          <div className="relative inline-flex gap-1 rounded-lg border bg-muted/50 p-1 flex-shrink-0">
+        <div className="w-full">
+          <div id="services-tabs" className="sticky top-0 z-20 flex w-full justify-center py-3 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 overflow-x-auto">
+            <div className="relative flex w-full justify-between gap-1 rounded-lg border bg-muted/50 p-1 sm:inline-flex sm:w-auto sm:justify-start">
             {/* Sliding indicator */}
             {activeButton && (
               <motion.div
@@ -310,7 +307,7 @@ export function ServicesAndProcessSection() {
                   type="button"
                   onClick={() => setActiveServiceId(service.id)}
                   className={cn(
-                    "relative px-3 py-1.5 text-xs font-medium rounded-md border transition-colors flex items-center gap-2 z-10 border-transparent",
+                    "relative px-4 py-2 text-xs sm:text-sm font-medium rounded-md border transition-colors flex items-center gap-2 z-10 border-transparent",
                     isActive
                       ? "text-background"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -321,10 +318,10 @@ export function ServicesAndProcessSection() {
                 </button>
               )
             })}
+            </div>
           </div>
-        </div>
 
-        <div className="relative z-0 rounded-xl overflow-hidden min-h-[480px] mt-4">
+          <div className="relative z-0 rounded-xl overflow-hidden min-h-[480px] mt-4">
           {/* CSS background keeps image centered (x and y) so it doesn't jump when container resizes */}
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -476,13 +473,6 @@ export function ServicesAndProcessSection() {
                       : "bg-zinc-900 text-white hover:bg-zinc-800"
                   )} size="lg">
                     Book a call with Trevor
-                    <Image
-                      src="/trevor-driving.png"
-                      alt=""
-                      width={28}
-                      height={28}
-                      className="size-7 shrink-0 rounded-full object-cover ring-2 ring-white/20"
-                    />
                   </Button>
                 </a>
                 <p className={cn(
@@ -494,6 +484,7 @@ export function ServicesAndProcessSection() {
               </CardFooter>
             </Card>
           </div>
+        </div>
         </div>
       </div>
     </SectionWrapper>
