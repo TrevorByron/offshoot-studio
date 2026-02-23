@@ -16,7 +16,7 @@ export function Footer() {
           </a>
         </div>
         <div className="w-full">
-          <p className="mb-4 text-sm text-muted-foreground">
+          <p className="mb-4 font-geist-mono text-[12px] text-left text-muted-foreground">
             © 2025 Tiger Team Studios
           </p>
           <Image

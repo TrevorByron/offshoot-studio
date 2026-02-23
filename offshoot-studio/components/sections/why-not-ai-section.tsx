@@ -84,7 +84,7 @@ export function WhyNotAISection() {
             </div>
           </CardContent>
         </Card>
-        <div className="bg-muted/50 rounded-lg p-8 text-left">
+        <div className="bg-muted/50 rounded-lg pl-0 pr-4 pt-0 pb-8 md:pr-6 text-left">
           <p className="text-lg max-w-2xl text-left">
             We use Lovable, v0, Cursor every day. AI can't replace strategy or craft. AI gives you what you ask for. We help you decide what to ask for and help you build it.
           </p>
