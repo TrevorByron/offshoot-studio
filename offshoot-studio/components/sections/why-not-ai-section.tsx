@@ -1,11 +1,16 @@
 "use client"
 
 import { createPortal } from "react-dom"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { useInView } from "framer-motion"
 import { SectionWrapper } from "./section-wrapper"
 import { Card, CardContent } from "@/components/ui/card"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { Cancel01Icon, Tick02Icon } from "@hugeicons/core-free-icons"
+
+const TYPING_TEXT =
+  "We use Lovable, v0, Cursor every day. AI can't replace strategy or craft. AI gives you what you ask for. We help you decide what to ask for and help you build it."
+const TYPING_MS_PER_CHAR = 55
 
 const TOOLTIP_OFFSET = 20
 const DESKTOP_BREAKPOINT = 768
@@ -61,6 +66,29 @@ export function WhyNotAISection() {
   const [hoveredLabel, setHoveredLabel] = useState<keyof typeof HOVER_MESSAGES | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isDesktop, setIsDesktop] = useState(true)
+  const [typingLength, setTypingLength] = useState(0)
+  const typingRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(typingRef, { once: true, amount: 0.3 })
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  useEffect(() => {
+    if (!isInView) return
+    intervalRef.current = setInterval(() => {
+      setTypingLength((n) => {
+        if (n >= TYPING_TEXT.length) {
+          if (intervalRef.current) clearInterval(intervalRef.current)
+          return n
+        }
+        return n + 1
+      })
+    }, TYPING_MS_PER_CHAR)
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+  }, [isInView])
 
   useEffect(() => {
     const mq = window.matchMedia(`(min-width: ${DESKTOP_BREAKPOINT}px)`)
@@ -122,9 +150,17 @@ export function WhyNotAISection() {
             </div>
           </CardContent>
         </Card>
-        <div className="bg-muted/50 rounded-lg pl-0 pr-4 pt-0 pb-8 md:pr-6 text-left">
-          <p className="text-lg max-w-2xl text-left">
-            We use Lovable, v0, Cursor every day. AI can't replace strategy or craft. AI gives you what you ask for. We help you decide what to ask for and help you build it.
+        <div
+          ref={typingRef}
+          className="bg-muted/50 rounded-lg pl-0 pr-4 pt-0 pb-8 md:pr-6 text-left"
+        >
+          <p className="text-lg max-w-2xl text-left inline">
+            {TYPING_TEXT.slice(0, typingLength)}
+            <span
+              className="chat-typing-cursor inline-block w-0.5 h-5 align-middle bg-foreground ml-0.5"
+              style={{ marginLeft: "2px" }}
+              aria-hidden
+            />
           </p>
         </div>
       </div>
