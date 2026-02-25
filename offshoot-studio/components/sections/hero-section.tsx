@@ -94,7 +94,7 @@ export function HeroSection() {
               {" "}on demand.
           </h1>
           <p className="font-pp-neue-montreal text-base text-muted-foreground leading-relaxed mb-10 max-w-2xl md:max-w-[85%] md:mx-0">
-            Your core team is heads down shipping the roadmap. But you have ideas that can't wait, features in discovery, and MVPs that need polish. Tiger Team Studios exists for these very moments. We validate directions, embed to ship features, and refine products. We parachute in, solve it, and move on.
+            Your core team is heads down shipping the roadmap. But you have ideas that can't wait, features in discovery, and MVPs that need polish. Tiger Team Studios exists for these very moments. Like the original NASA Tiger Team, we parachute in, solve it, and move on.
           </p>
           <div className="flex flex-wrap justify-start gap-3 mb-10">
             <a

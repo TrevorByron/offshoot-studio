@@ -1,8 +1,7 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
 import Image from "next/image"
-import { motion, useInView } from "framer-motion"
 import Cal, { getCalApi } from "@calcom/embed-react"
 import { SectionWrapper } from "./section-wrapper"
 
@@ -11,9 +10,6 @@ const CAL_ORIGIN = "https://app.cal.com"
 const CAL_LINK = "offshoot-studio/30min"
 
 export function FinalCTASection() {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(cardRef, { once: true, amount: 0.2 })
-
   useEffect(() => {
     ;(async function () {
       const cal = await getCalApi({ namespace: "30min", embedJsUrl: CAL_EMBED_JS_URL })
@@ -48,13 +44,7 @@ export function FinalCTASection() {
               </p>
             </div>
           </div>
-          <motion.div
-            ref={cardRef}
-            className="mb-0 min-h-[600px] w-full flex justify-center"
-            initial={{ opacity: 0, y: 24 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-            transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
+          <div className="mb-0 min-h-[600px] w-full flex justify-center">
             <Cal
               namespace="30min"
               calLink={CAL_LINK}
@@ -68,7 +58,7 @@ export function FinalCTASection() {
                 theme: "light",
               }}
             />
-          </motion.div>
+          </div>
         </div>
       </div>
     </SectionWrapper>

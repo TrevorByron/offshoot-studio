@@ -1,0 +1,14 @@
+---
+description: Use Hugeicons as the default icon library (no Lucide)
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# Icons: use Hugeicons
+
+- **Default icon library:** Use **Hugeicons** for all icons. Do not use `lucide-react` for new or updated UI.
+- **Packages:** `@hugeicons/react` (component) and `@hugeicons/core-free-icons` (icon set).
+- **Usage:**
+  - Import: `import { HugeiconsIcon } from "@hugeicons/react"` and icon(s) from `@hugeicons/core-free-icons` (e.g. `import { ArrowRight01Icon } from "@hugeicons/core-free-icons"`).
+  - Render: `<HugeiconsIcon icon={ArrowRight01Icon} strokeWidth={2} className="…" />` (use `className` for size, e.g. `size-4`, and other styling).
+- When adding or replacing icons, prefer Hugeicons and the free set; only use another library if a specific icon is missing and cannot be approximated.

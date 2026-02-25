@@ -1,7 +1,19 @@
+"use client"
+
+import { createPortal } from "react-dom"
+import { useCallback, useEffect, useState } from "react"
 import { SectionWrapper } from "./section-wrapper"
 import { Card, CardContent } from "@/components/ui/card"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { Cancel01Icon, Tick02Icon } from "@hugeicons/core-free-icons"
+
+const TOOLTIP_OFFSET = 20
+const DESKTOP_BREAKPOINT = 768
+
+const HOVER_MESSAGES = {
+  ai: "🤖 = 👎",
+  us: "🤖 + 🐅 = 🚀",
+} as const
 
 const comparisons = [
   {
@@ -46,6 +58,22 @@ const comparisons = [
 ]
 
 export function WhyNotAISection() {
+  const [hoveredLabel, setHoveredLabel] = useState<keyof typeof HOVER_MESSAGES | null>(null)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isDesktop, setIsDesktop] = useState(true)
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(min-width: ${DESKTOP_BREAKPOINT}px)`)
+    const update = () => setIsDesktop(mq.matches)
+    update()
+    mq.addEventListener("change", update)
+    return () => mq.removeEventListener("change", update)
+  }, [])
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    setMousePosition({ x: e.clientX, y: e.clientY })
+  }, [])
+
   return (
     <SectionWrapper>
       <div className="mx-auto max-w-7xl">
@@ -58,11 +86,21 @@ export function WhyNotAISection() {
           <CardContent className="p-4 md:p-6">
             <div className="grid grid-cols-1 md:grid-cols-[2fr_5fr_5fr] gap-3 md:gap-6 mb-6 pb-6 border-b">
               <div className="font-semibold text-sm hidden md:block" aria-hidden />
-              <div className="font-semibold text-sm flex items-center gap-2">
+              <div
+                className="font-semibold text-sm flex items-center gap-2 cursor-default"
+                onMouseEnter={() => setHoveredLabel("ai")}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={() => setHoveredLabel(null)}
+              >
                 <HugeiconsIcon icon={Cancel01Icon} className="size-4 text-destructive shrink-0" strokeWidth={2} />
                 AI Tools (Lovable, v0, Bolt)
               </div>
-              <div className="font-semibold text-sm flex items-center gap-2">
+              <div
+                className="font-semibold text-sm flex items-center gap-2 cursor-default"
+                onMouseEnter={() => setHoveredLabel("us")}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={() => setHoveredLabel(null)}
+              >
                 <HugeiconsIcon icon={Tick02Icon} className="size-4 text-primary shrink-0" strokeWidth={2} />
                 Tiger Team Studios
               </div>
@@ -90,6 +128,20 @@ export function WhyNotAISection() {
           </p>
         </div>
       </div>
+      {isDesktop &&
+        typeof document !== "undefined" &&
+        hoveredLabel &&
+        createPortal(
+          <div
+            className="fixed left-0 top-0 z-[9999] pointer-events-none font-geist-mono text-sm text-foreground/90 bg-background/95 backdrop-blur-sm border border-border/50 rounded-lg px-3 py-2 shadow-lg max-w-[280px]"
+            style={{
+              transform: `translate(${mousePosition.x + TOOLTIP_OFFSET}px, ${mousePosition.y + TOOLTIP_OFFSET}px)`,
+            }}
+          >
+            {HOVER_MESSAGES[hoveredLabel]}
+          </div>,
+          document.body
+        )}
     </SectionWrapper>
   )
 }

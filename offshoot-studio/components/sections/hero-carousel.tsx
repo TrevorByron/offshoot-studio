@@ -1,8 +1,9 @@
 "use client"
 
+import { createPortal } from "react-dom"
 import Image from "next/image"
 import Link from "next/link"
-import { type ReactNode, useState, useEffect } from "react"
+import { type ReactNode, useCallback, useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons"
@@ -19,6 +20,8 @@ export interface CarouselScreenshot {
   alt: string
   /** Optional image to fill the inner content area (e.g. case study cover). */
   coverImage?: string
+  /** Optional logo shown in cursor-following tooltip on hover. */
+  hoverLogo?: string
   /** Optional content rendered in an inner div (e.g. service card, CTA). Container is prepared with relative z-10 and flex layout. */
   content?: ReactNode
 }
@@ -32,10 +35,13 @@ const DEFAULT_LOGOS: CarouselLogo[] = [
   { src: "/logos/Toro.png", alt: "Toro" },
 ]
 
+const TOOLTIP_OFFSET = 20
+const DESKTOP_BREAKPOINT = 768
+
 const DEFAULT_SCREENSHOTS: CarouselScreenshot[] = [
-  { src: "/background-images/man-on-rock.png", alt: "Man on rock", coverImage: "/case-study-covers/procore-cover.png" },
-  { src: "/background-images/rock.png", alt: "Rock", coverImage: "/case-study-covers/gsd-cover.png" },
-  { src: "/background-images/two-on-rock.png", alt: "Two on rock", coverImage: "/case-study-covers/toro-cover.png" },
+  { src: "/background-images/man-on-rock.png", alt: "Man on rock", coverImage: "/case-study-covers/procore-cover.png", hoverLogo: "/logos/Procore.png" },
+  { src: "/background-images/rock.png", alt: "Rock", coverImage: "/case-study-covers/gsd-cover.png", hoverLogo: "/logos/TweakingCat.png" },
+  { src: "/background-images/two-on-rock.png", alt: "Two on rock", coverImage: "/case-study-covers/toro-cover.png", hoverLogo: "/logos/Toro.png" },
 ]
 
 interface HeroCarouselProps {
@@ -58,6 +64,10 @@ export function HeroCarousel({
   const screenshotDurationBase = baseDuration * (screenshotSegmentWidth / logoSegmentWidth)
 
   const [isMobile, setIsMobile] = useState(false)
+  const [hoveredLogo, setHoveredLogo] = useState<string | null>(null)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isDesktop, setIsDesktop] = useState(true)
+
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)")
     const update = () => setIsMobile(mq.matches)
@@ -65,6 +75,19 @@ export function HeroCarousel({
     mq.addEventListener("change", update)
     return () => mq.removeEventListener("change", update)
   }, [])
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(min-width: ${DESKTOP_BREAKPOINT}px)`)
+    const update = () => setIsDesktop(mq.matches)
+    update()
+    mq.addEventListener("change", update)
+    return () => mq.removeEventListener("change", update)
+  }, [])
+
+  const handleCardMouseMove = useCallback((e: React.MouseEvent) => {
+    setMousePosition({ x: e.clientX, y: e.clientY })
+  }, [])
+
   // Faster scroll on mobile (~3x vs desktop)
   const screenshotDuration = isMobile ? screenshotDurationBase / 3 : screenshotDurationBase
 
@@ -124,7 +147,10 @@ export function HeroCarousel({
           {screenshotList.map((shot, i) => (
             <div
               key={`${shot.src}-${i}`}
-              className="group relative flex-shrink-0 w-[80vh] h-[50vh] md:w-[78vw] md:h-auto md:aspect-[16/10] max-w-[1200px] rounded-lg border border-border overflow-hidden flex flex-col p-6 md:p-[60px]"
+              className={cn(
+                "group relative flex-shrink-0 w-[80vh] h-[50vh] md:w-[78vw] md:h-auto md:aspect-[16/10] max-w-[1200px] rounded-lg border border-border overflow-hidden flex flex-col p-6 md:p-[60px]",
+                shot.hoverLogo && "cursor-default"
+              )}
               style={{
                 backgroundImage: `url(${shot.src})`,
                 backgroundSize: "cover",
@@ -132,6 +158,11 @@ export function HeroCarousel({
               }}
               role="img"
               aria-label={shot.alt}
+              {...(shot.hoverLogo && {
+                onMouseEnter: () => setHoveredLogo(shot.hoverLogo!),
+                onMouseMove: handleCardMouseMove,
+                onMouseLeave: () => setHoveredLogo(null),
+              })}
             >
               <div
                 className="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-300 pointer-events-none rounded-lg"
@@ -161,7 +192,7 @@ export function HeroCarousel({
       {/* View all recent work – right-aligned */}
       <div className="w-full flex justify-end px-4 md:px-6 pt-2 pb-2">
         <Link
-          href="#case-studies"
+          href="/recent-work"
           className={cn(
             buttonVariants({ variant: "outline", size: "lg" }),
             "inline-flex items-center justify-center gap-2 w-full md:w-auto"
@@ -171,6 +202,24 @@ export function HeroCarousel({
           <HugeiconsIcon icon={ArrowRight01Icon} className="size-4 shrink-0" strokeWidth={2} aria-hidden />
         </Link>
       </div>
+      {isDesktop &&
+        typeof document !== "undefined" &&
+        hoveredLogo &&
+        createPortal(
+          <div
+            className="fixed left-0 top-0 z-[9999] pointer-events-none rounded-lg border border-border/50 shadow-lg overflow-hidden bg-background/95 backdrop-blur-sm p-3 max-w-[200px]"
+            style={{
+              transform: `translate(${mousePosition.x + TOOLTIP_OFFSET}px, ${mousePosition.y + TOOLTIP_OFFSET}px)`,
+            }}
+          >
+            <img
+              src={hoveredLogo}
+              alt=""
+              className="block w-full h-auto max-h-[40px] object-contain"
+            />
+          </div>,
+          document.body
+        )}
     </div>
   )
 }

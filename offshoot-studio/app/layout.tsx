@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
+import { FloatingNav } from "@/components/floating-nav";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -42,6 +43,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
         {children}
+        <FloatingNav />
       </body>
     </html>
   );
