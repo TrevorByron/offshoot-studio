@@ -4,7 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const NAV_LINKS = [
@@ -72,16 +72,16 @@ export function FloatingNav() {
         </Link>
 
         {/* Book a call — scroll to #cta on home, or go to /#cta from other pages */}
-        <Button
-          asChild
-          variant="default"
-          size="default"
-          className="shrink-0 rounded-lg bg-foreground text-background hover:bg-foreground/90"
+        <Link
+          href="/#cta"
+          onClick={handleBookACallClick}
+          className={cn(
+            buttonVariants({ variant: "default", size: "default" }),
+            "shrink-0 rounded-lg bg-foreground text-background hover:bg-foreground/90"
+          )}
         >
-          <Link href="/#cta" onClick={handleBookACallClick}>
-            Book a call
-          </Link>
-        </Button>
+          Book a call
+        </Link>
 
         {/* Hamburger + menu */}
         <div className="relative shrink-0" ref={menuRef}>
