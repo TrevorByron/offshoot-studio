@@ -14,10 +14,10 @@ const IMAGE_HOVER_TEXT = "👋 Hi! Nice to meet you. Glad you're here!"
 
 const FOUNDER_QUOTE = (
   <>
-    I spent 10 years watching the most succesful products and features not come from the roadmap. They came out of hackathons and side-projects, big bet ideas that felt too risky to put resources on.
+    I spent 10 years watching some of the most adopted and successful products not come from a road map. They came out of hackathons and side-projects, big bet ideas that felt too risky to put resources on.
     <br />
     <br />
-    I started Tiger Team to de-risk those big-bets before they die in a backlog.
+    I started Tiger Team Studios to de-risk those big bets before they die in a backlog.
   </>
 )
 
