@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
+import { CTAModalProvider } from "@/components/cta-modal-provider";
 import { FloatingNav } from "@/components/floating-nav";
 import "./globals.css";
 
@@ -38,12 +38,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Script
-          src="https://app.cal.com/embed/embed.js"
-          strategy="afterInteractive"
-        />
-        {children}
-        <FloatingNav />
+        <CTAModalProvider>
+          {/* Cal.com script is loaded by @calcom/embed-react when Cal component mounts — do not load here to avoid double load / race */}
+          {children}
+          <FloatingNav />
+        </CTAModalProvider>
       </body>
     </html>
   );

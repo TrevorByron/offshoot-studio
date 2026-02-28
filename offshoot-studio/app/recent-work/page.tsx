@@ -1,7 +1,10 @@
+import Link from "next/link"
 import { SectionWrapper } from "@/components/sections/section-wrapper"
+import { HeroLogoStack } from "@/components/sections/hero-logo-stack"
 import { Footer } from "@/components/sections/footer"
 import { CaseStudyCard } from "@/components/case-study-card"
 import { getAllProjects } from "@/lib/recent-work"
+import { getCaseStudy, getCaseStudyCardProps } from "@/lib/case-studies"
 
 export default function RecentWorkPage() {
   const projects = getAllProjects()
@@ -10,84 +13,79 @@ export default function RecentWorkPage() {
     <main>
       <SectionWrapper
         variant="spacious"
-        className="overflow-visible !pt-28 md:!pt-36 lg:!pt-44 !pb-0"
+        className="overflow-visible !pt-44 !pb-0"
         animateOnScroll={false}
       >
+        <HeroLogoStack />
         <div className="mx-auto max-w-7xl">
-          <div className="text-left mb-12 md:mb-18">
-            <h1 className="text-section-title mb-6">Selected Recent Work</h1>
-            <p className="text-lg text-muted-foreground">
-              Prototyping, embedded design-eng, and refinement.
-            </p>
+          <div className="text-left md:text-center mb-12 md:mb-18">
+            <h1 className="text-[40px] md:text-[56px] font-normal leading-tight tracking-tight mb-10">
+              Selected work
+            </h1>
           </div>
 
           <div className="space-y-14 md:space-y-18 lg:space-y-22">
-            {projects.map((project) => (
-              <section key={project.slug} className="scroll-mt-8">
-                <h2 className="font-geist-mono text-[12px] text-left mb-1">
-                  {project.title}
-                </h2>
-                {project.subtitle ? (
-                  <h3 className="font-sans text-[22px] font-medium text-left mb-6">
-                    {project.subtitle}
-                  </h3>
-                ) : (
-                  <div className="mb-6" />
-                )}
-                {project.slug === "procore" && (
+            {projects.map((project, index) => {
+              const caseStudy = project.caseStudySlug
+                ? getCaseStudy(project.caseStudySlug)
+                : null
+              const cardProps = caseStudy
+                ? getCaseStudyCardProps(caseStudy)
+                : {
+                    title: project.title,
+                    badge: project.badge ?? "",
+                    description: project.description,
+                    imageBackground:
+                      project.imageBackground ?? project.imageUrls?.[0] ?? "",
+                    imageScreenshot:
+                      project.imageScreenshot ??
+                      project.imageUrls?.[1] ??
+                      project.imageUrls?.[0] ??
+                      "",
+                    imagePosition: (project.imagePosition ?? "right") as
+                      | "left"
+                      | "right",
+                    imageAlt:
+                      project.imageAlt ?? `${project.title} screenshot`,
+                  }
+
+              const card = (
+                <CaseStudyCard
+                  title={cardProps.title}
+                  badge={cardProps.badge}
+                  description={cardProps.description}
+                  imageBackground={cardProps.imageBackground}
+                  imageScreenshot={cardProps.imageScreenshot}
+                  imagePosition={cardProps.imagePosition}
+                  imageAlt={cardProps.imageAlt}
+                  footerLinkHref={project.footerLinkHref}
+                  footerLinkLabel={project.footerLinkLabel}
+                />
+              )
+
+              return (
+                <section
+                  key={project.slug}
+                  className="scroll-mt-8"
+                >
+                  <h2 className="font-geist-mono text-[12px] text-left mb-6">
+                    {String(index + 1).padStart(2, "0")} {project.title}
+                  </h2>
                   <div className="mb-6">
-                    <CaseStudyCard
-                      title="Procore Construction Network"
-                      badge="Embedded Design"
-                      description={[
-                        "Discovery, vision casting, and internal alignment for a free business directory connecting contractors, owners, architects, and vendors.",
-                        "RITE research, HTML/CSS prototype for rapid iteration, then final polish and front-end implementation in their production repo. Launched 2021.",
-                      ]}
-                      imageBackground="/procore-case-study.png"
-                      imageScreenshot="/procore-screenshot.png"
-                      imagePosition="right"
-                      imageAlt="Procore Construction Network screenshot"
-                      footerLinkHref="https://trevorborden.github.io/GCN-prototype/index.html"
-                      footerLinkLabel="See Prototype"
-                    />
+                    {caseStudy ? (
+                      <Link
+                        href={`/case-studies/${project.caseStudySlug}`}
+                        className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-lg"
+                      >
+                        {card}
+                      </Link>
+                    ) : (
+                      card
+                    )}
                   </div>
-                )}
-                {project.slug === "open-joy" && (
-                  <div className="mb-6">
-                    <CaseStudyCard
-                      title="Recibook – Onboarding Audit & Redesign"
-                      badge="Rapid Prototype • 11 hours | 2 days"
-                      description={[
-                        "Recipe app was losing users before they saw value. Audited onboarding, identified activation killers, built two prototypes in 11 hours: show value first, ask for commitment after.",
-                        "Also flagged generic branding and produced cookbook-inspired visual direction.",
-                      ]}
-                      imageBackground="/recibook-background.png"
-                      imageScreenshot="/recibook-screenshot.png"
-                      imagePosition="right"
-                      imageAlt="Recibook onboarding redesign screenshot"
-                      footerLinkHref="https://furry-suggestion-fb5.notion.site/Onboarding-Flow-Audit-Redesign-304f942244b680ad9c78ca9fe209b9a3"
-                      footerLinkLabel="View 11hr deliverable"
-                    />
-                  </div>
-                )}
-                {project.slug === "get-shit-done" && (
-                  <div className="mb-6">
-                    <CaseStudyCard
-                      title="Get Sh*t Done"
-                      badge="Rapid Prototype"
-                      description={[
-                        "Two-person strike team with Robert Hohman (Glassdoor cofounder) to validate a to-do app concept inspired by Getting Things Done.",
-                        "Defined core problems, mapped user journeys and IA, assessed the market for differentiated positioning. 2-week sprint.",
-                      ]}
-                      imageBackground="/case-study-background.png"
-                      imageScreenshot="/get-shit-done-screenshot.png"
-                      imagePosition="left"
-                      imageAlt="Get Sh*t Done app screenshot"
-                    />
-                  </div>
-                )}
-              </section>
-            ))}
+                </section>
+              )
+            })}
           </div>
         </div>
       </SectionWrapper>

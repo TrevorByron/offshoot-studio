@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { HugeiconsIcon } from "@hugeicons/react"
@@ -60,15 +61,25 @@ export function CaseStudyCard({
             </p>
           ))}
           {footerLinkHref && (
-            <a
-              href={footerLinkHref}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent-link hover:opacity-90"
-            >
-              {footerLinkLabel ?? "See Prototype"}
-              <HugeiconsIcon icon={ArrowRight01Icon} className="size-4" strokeWidth={2} aria-hidden />
-            </a>
+            (footerLinkHref.startsWith("/") ? (
+              <Link
+                href={footerLinkHref}
+                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent-link hover:opacity-90"
+              >
+                {footerLinkLabel ?? "See Prototype"}
+                <HugeiconsIcon icon={ArrowRight01Icon} className="size-4" strokeWidth={2} aria-hidden />
+              </Link>
+            ) : (
+              <a
+                href={footerLinkHref}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent-link hover:opacity-90"
+              >
+                {footerLinkLabel ?? "See Prototype"}
+                <HugeiconsIcon icon={ArrowRight01Icon} className="size-4" strokeWidth={2} aria-hidden />
+              </a>
+            ))
           )}
         </div>
         <div

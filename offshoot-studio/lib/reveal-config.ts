@@ -1,11 +1,12 @@
 /**
  * Shared scroll-reveal animation config (Halaska-style).
  * Used by SectionWrapper and ScrollReveal for consistent, refined reveal-on-scroll.
+ * Slower duration + ease for a more immersive feel.
  */
 
-export const REVEAL_Y_OFFSET = 28
-export const REVEAL_DURATION = 0.55
-export const REVEAL_EASE = [0.25, 0.46, 0.45, 0.94] as const
+export const REVEAL_Y_OFFSET = 36
+export const REVEAL_DURATION = 0.95
+export const REVEAL_EASE = [0.22, 0.55, 0.38, 0.98] as const
 
 export const revealInitial = {
   opacity: 0,

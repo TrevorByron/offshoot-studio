@@ -22,6 +22,8 @@ export interface CarouselScreenshot {
   coverImage?: string
   /** Optional logo shown in cursor-following tooltip on hover. */
   hoverLogo?: string
+  /** Optional case study slug; when set, the card links to /case-studies/[slug]. */
+  caseStudySlug?: string
   /** Optional content rendered in an inner div (e.g. service card, CTA). Container is prepared with relative z-10 and flex layout. */
   content?: ReactNode
 }
@@ -33,6 +35,7 @@ const DEFAULT_LOGOS: CarouselLogo[] = [
   { src: "/logos/Transcarent.png", alt: "Transcarent" },
   { src: "/logos/TweakingCat.png", alt: "Tweaking Cat Studios" },
   { src: "/logos/Toro.png", alt: "Toro" },
+  { src: "/logos/prc.png", alt: "The Public Run Club" },
 ]
 
 const TOOLTIP_OFFSET = 20
@@ -40,7 +43,7 @@ const DESKTOP_BREAKPOINT = 768
 
 const DEFAULT_SCREENSHOTS: CarouselScreenshot[] = [
   { src: "/background-images/man-on-rock.png", alt: "Man on rock", coverImage: "/case-study-covers/procore-cover.png", hoverLogo: "/logos/Procore.png" },
-  { src: "/background-images/rock.png", alt: "Rock", coverImage: "/case-study-covers/gsd-cover.png", hoverLogo: "/logos/TweakingCat.png" },
+  { src: "/background-images/rock.png", alt: "Rock", coverImage: "/case-study-covers/gsd-cover.png", hoverLogo: "/logos/TweakingCat.png", caseStudySlug: "gsd" },
   { src: "/background-images/two-on-rock.png", alt: "Two on rock", coverImage: "/case-study-covers/toro-cover.png", hoverLogo: "/logos/Toro.png" },
 ]
 
@@ -60,7 +63,7 @@ export function HeroCarousel({
   // Same duration would make the wider strip move more pixels/sec. Scale screenshot duration by approximate segment-width ratio so both strips have the same perceived (pixel) speed.
   const logoSegmentWidth = logos.length * 170 + (logos.length - 1) * 14 // ~170px per logo, 14px gap
   const screenshotSegmentWidth = screenshots.length * 1000 + (screenshots.length - 1) * 8 // ~1000px per card (85vw-ish), 8px gap
-  const baseDuration = 55
+  const baseDuration = 78
   const screenshotDurationBase = baseDuration * (screenshotSegmentWidth / logoSegmentWidth)
 
   const [isMobile, setIsMobile] = useState(false)
@@ -144,48 +147,74 @@ export function HeroCarousel({
           }}
           style={{ willChange: "transform" }}
         >
-          {screenshotList.map((shot, i) => (
-            <div
-              key={`${shot.src}-${i}`}
-              className={cn(
-                "group relative flex-shrink-0 w-[80vh] h-[50vh] md:w-[78vw] md:h-auto md:aspect-[16/10] max-w-[1200px] rounded-lg border border-border overflow-hidden flex flex-col p-6 md:p-[60px]",
-                shot.hoverLogo && "cursor-default"
-              )}
-              style={{
-                backgroundImage: `url(${shot.src})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-              role="img"
-              aria-label={shot.alt}
-              {...(shot.hoverLogo && {
-                onMouseEnter: () => setHoveredLogo(shot.hoverLogo!),
-                onMouseMove: handleCardMouseMove,
-                onMouseLeave: () => setHoveredLogo(null),
-              })}
-            >
+          {screenshotList.map((shot, i) => {
+            const cardClassName = cn(
+              "group relative flex-shrink-0 w-[80vh] h-[50vh] md:w-[78vw] md:h-auto md:aspect-[16/10] max-w-[1200px] rounded-lg border border-border overflow-hidden flex flex-col p-6 md:p-[60px]",
+              shot.caseStudySlug ? "cursor-pointer" : shot.hoverLogo && "cursor-default"
+            )
+            const cardStyle = {
+              backgroundImage: `url(${shot.src})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }
+            const cardContent = (
+              <>
+                <div
+                  className="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-300 pointer-events-none rounded-lg"
+                  aria-hidden
+                />
+                <div
+                  className={cn(
+                    "relative z-10 w-full flex-1 min-h-0 rounded-lg overflow-hidden transition-transform duration-300 ease-out origin-center group-hover:scale-[1.02]",
+                    !shot.coverImage && "bg-muted"
+                  )}
+                  style={
+                    shot.coverImage
+                      ? {
+                          backgroundImage: `url(${shot.coverImage})`,
+                          backgroundSize: "contain",
+                          backgroundPosition: "center",
+                          backgroundRepeat: "no-repeat",
+                        }
+                      : undefined
+                  }
+                />
+              </>
+            )
+            if (shot.caseStudySlug) {
+              return (
+                <Link
+                  key={`${shot.src}-${i}`}
+                  href={`/case-studies/${shot.caseStudySlug}`}
+                  className={cardClassName}
+                  style={cardStyle}
+                  role="img"
+                  aria-label={shot.alt}
+                  onMouseEnter={() => shot.hoverLogo && setHoveredLogo(shot.hoverLogo)}
+                  onMouseMove={handleCardMouseMove}
+                  onMouseLeave={() => setHoveredLogo(null)}
+                >
+                  {cardContent}
+                </Link>
+              )
+            }
+            return (
               <div
-                className="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-300 pointer-events-none rounded-lg"
-                aria-hidden
-              />
-              <div
-                className={cn(
-                  "relative z-10 w-full flex-1 min-h-0 rounded-lg overflow-hidden transition-transform duration-300 ease-out origin-center group-hover:scale-[1.02]",
-                  !shot.coverImage && "bg-muted"
-                )}
-                style={
-                  shot.coverImage
-                    ? {
-                        backgroundImage: `url(${shot.coverImage})`,
-                        backgroundSize: "contain",
-                        backgroundPosition: "center",
-                        backgroundRepeat: "no-repeat",
-                      }
-                    : undefined
-                }
-              />
-            </div>
-          ))}
+                key={`${shot.src}-${i}`}
+                className={cardClassName}
+                style={cardStyle}
+                role="img"
+                aria-label={shot.alt}
+                {...(shot.hoverLogo && {
+                  onMouseEnter: () => setHoveredLogo(shot.hoverLogo!),
+                  onMouseMove: handleCardMouseMove,
+                  onMouseLeave: () => setHoveredLogo(null),
+                })}
+              >
+                {cardContent}
+              </div>
+            )
+          })}
         </motion.div>
       </div>
 

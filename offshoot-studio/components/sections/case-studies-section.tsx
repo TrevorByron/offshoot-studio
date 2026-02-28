@@ -1,7 +1,17 @@
 import { SectionWrapper } from "./section-wrapper"
 import { CaseStudyCard } from "@/components/case-study-card"
+import {
+  getCaseStudy,
+  getCaseStudyCardProps,
+  FEATURED_CASE_STUDY_SLUGS,
+} from "@/lib/case-studies"
 
 export function CaseStudiesSection() {
+  const featuredCards = FEATURED_CASE_STUDY_SLUGS.map((slug) => {
+    const caseStudy = getCaseStudy(slug)
+    return caseStudy ? { slug, ...getCaseStudyCardProps(caseStudy) } : null
+  }).filter(Boolean) as { slug: string; title: string; badge: string; description: string[]; imageBackground: string; imageScreenshot: string; imageAlt: string; imagePosition: "left" | "right" }[]
+
   return (
     <SectionWrapper id="case-studies">
       <div className="mx-auto max-w-7xl">
@@ -29,18 +39,20 @@ export function CaseStudiesSection() {
           footerLinkLabel="See Prototype"
         />
 
-        <CaseStudyCard
-          title="Get Sh*t Done"
-          badge="Rapid Prototype"
-          description={[
-            "Two-person strike team with Robert Hohman (Glassdoor cofounder) to validate a to-do app concept inspired by Getting Things Done.",
-            "Defined core problems, mapped user journeys and IA, assessed the market for differentiated positioning. 2-week sprint.",
-          ]}
-          imageBackground="/case-study-background.png"
-          imageScreenshot="/get-shit-done-screenshot.png"
-          imagePosition="left"
-          imageAlt="Get Sh*t Done app screenshot"
-        />
+        {featuredCards.map((card) => (
+          <CaseStudyCard
+            key={card.slug}
+            title={card.title}
+            badge={card.badge}
+            description={card.description}
+            imageBackground={card.imageBackground}
+            imageScreenshot={card.imageScreenshot}
+            imagePosition={card.imagePosition}
+            imageAlt={card.imageAlt}
+            footerLinkHref={`/case-studies/${card.slug}`}
+            footerLinkLabel="View more"
+          />
+        ))}
 
         <CaseStudyCard
           title="Recibook – Onboarding Audit & Redesign"

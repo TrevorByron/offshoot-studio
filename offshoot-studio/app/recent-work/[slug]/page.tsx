@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation"
-import Link from "next/link"
 import Image from "next/image"
+import { BackLink } from "@/components/back-link"
 import { SectionWrapper } from "@/components/sections/section-wrapper"
 import { Footer } from "@/components/sections/footer"
 import { Badge } from "@/components/ui/badge"
 import { getProject, getAllProjects } from "@/lib/recent-work"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { ArrowLeft01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons"
+import { ArrowRight01Icon } from "@hugeicons/core-free-icons"
 import type { Metadata } from "next"
 
 interface PageProps {
@@ -43,17 +43,11 @@ export default async function RecentWorkProjectPage({ params }: PageProps) {
     <main>
       <SectionWrapper
         variant="spacious"
-        className="overflow-visible !pt-28 md:!pt-36 lg:!pt-44 !pb-0"
+        className="overflow-visible !pt-44 !pb-0"
         animateOnScroll={false}
       >
         <div className="mx-auto max-w-7xl">
-          <Link
-            href="/recent-work"
-            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
-          >
-            <HugeiconsIcon icon={ArrowLeft01Icon} className="size-4 shrink-0" strokeWidth={2} aria-hidden />
-            Back to recent work
-          </Link>
+          <BackLink />
 
           <header className="mb-8 md:mb-12">
             <h1 className="text-2xl font-semibold md:text-3xl mb-2">

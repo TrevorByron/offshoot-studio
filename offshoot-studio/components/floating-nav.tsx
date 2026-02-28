@@ -4,6 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useCTAModal } from "@/components/cta-modal-provider"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -15,6 +16,7 @@ const NAV_LINKS = [
 
 export function FloatingNav() {
   const pathname = usePathname()
+  const { openCTAModal } = useCTAModal()
   const [menuOpen, setMenuOpen] = React.useState(false)
   const menuRef = React.useRef<HTMLDivElement>(null)
 
@@ -26,10 +28,12 @@ export function FloatingNav() {
   }
 
   const handleBookACallClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
     if (pathname === "/") {
-      e.preventDefault()
       const el = document.getElementById("cta")
       el?.scrollIntoView({ behavior: "smooth", block: "start" })
+    } else {
+      openCTAModal()
     }
   }
 

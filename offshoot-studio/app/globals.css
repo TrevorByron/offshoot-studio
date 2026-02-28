@@ -112,7 +112,7 @@
 }
 
 .dark {
-  --background: oklch(0.147 0.004 49.25);
+  --background: #191816;
   --foreground: oklch(0.985 0.001 106.423);
   --card: oklch(0.216 0.006 56.043);
   --card-foreground: oklch(0.985 0.001 106.423);
@@ -203,7 +203,7 @@
   }
 
   .animate-on-scroll {
-    animation: fade-in-up 0.6s ease-out forwards;
+    animation: fade-in-up 1s cubic-bezier(0.22, 0.55, 0.38, 0.98) forwards;
     opacity: 0;
   }
 
@@ -256,19 +256,19 @@
 
   /* Stagger animation delays */
   .stagger-1 {
-    animation-delay: 0.1s;
+    animation-delay: 0.15s;
   }
 
   .stagger-2 {
-    animation-delay: 0.2s;
-  }
-
-  .stagger-3 {
     animation-delay: 0.3s;
   }
 
+  .stagger-3 {
+    animation-delay: 0.45s;
+  }
+
   .stagger-4 {
-    animation-delay: 0.4s;
+    animation-delay: 0.6s;
   }
 
   /* Smooth scroll behavior */
@@ -335,7 +335,9 @@
   }
 
   /* Cal.com embed: fill container and force light iframe */
-  #cta .cal-embed-card .cal-embed-wrapper iframe {
+  #cta .cal-embed-card .cal-embed-wrapper iframe,
+  #cta .cal-embed-wrapper iframe,
+  .cta-embed-container .cal-embed-wrapper iframe {
     width: 100% !important;
     height: 100% !important;
     min-height: 600px !important;

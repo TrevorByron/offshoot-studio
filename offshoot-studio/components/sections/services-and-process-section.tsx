@@ -3,6 +3,7 @@
 import * as React from "react"
 import { motion } from "framer-motion"
 
+import { BookACallLink } from "@/components/book-a-call-link"
 import { SectionWrapper } from "./section-wrapper"
 import {
   Card,
@@ -465,7 +466,7 @@ export function ServicesAndProcessSection() {
                 "px-0 pt-6 pb-6 border-t flex flex-col gap-4",
                 isInverse ? "border-zinc-700/50" : "border-zinc-200"
               )}>
-                <a href="#cta" className="w-full">
+                <BookACallLink className="w-full">
                   <Button className={cn(
                     "w-full transition-colors gap-2",
                     isInverse 
@@ -474,7 +475,7 @@ export function ServicesAndProcessSection() {
                   )} size="lg">
                     Book a call with Trevor
                   </Button>
-                </a>
+                </BookACallLink>
                 <p className={cn(
                   "text-sm text-center",
                   isInverse ? "text-zinc-400" : "text-zinc-600"

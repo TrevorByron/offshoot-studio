@@ -1,22 +1,25 @@
 import Image from "next/image"
+import { BookACallLink } from "@/components/book-a-call-link"
 
-export function Footer() {
+interface FooterProps {
+  variant?: "default" | "dark"
+}
+
+/** Footer always uses light-mode colors so it looks the same on dark pages (e.g. case studies). */
+export function Footer({ variant = "default" }: FooterProps) {
   return (
-    <footer className="border-t border-border bg-zinc-200 pb-20">
+    <footer className="border-t border-zinc-300 pb-20 bg-zinc-200 text-zinc-900 dark:bg-zinc-200 dark:text-zinc-900 dark:border-zinc-300">
       <div className="mx-auto max-w-7xl px-4 md:px-6 py-12">
         <div className="mb-12 md:mb-16">
           <h3 className="font-semibold text-xl md:text-2xl mb-4 max-w-md leading-snug">
             Have a project in mind? Let's work together, we're always open to a chat.
           </h3>
-          <a
-            href="#cta"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-transparent bg-primary px-6 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-2"
-          >
+          <BookACallLink className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-transparent bg-[#1A1A1A] px-6 text-sm font-medium text-white transition-all hover:bg-[#2a2a2a] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-500 focus-visible:ring-offset-2">
             Book a call
-          </a>
+          </BookACallLink>
         </div>
         <div className="w-full">
-          <p className="mb-4 font-geist-mono text-[12px] text-left text-muted-foreground">
+          <p className="mb-4 font-geist-mono text-[12px] text-left text-zinc-600 dark:text-zinc-600">
             © 2025 Tiger Team Studios
           </p>
           <Image

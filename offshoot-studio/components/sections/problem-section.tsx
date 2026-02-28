@@ -182,7 +182,7 @@ export function ProblemSection() {
               )}
             </div>
           </ScrollReveal>
-          <ScrollReveal staggerDelay={0.1} className="flex flex-col gap-4 w-full md:flex-row md:items-start md:gap-12 md:flex-1 md:min-w-0">
+          <ScrollReveal staggerDelay={0.2} className="flex flex-col gap-4 w-full md:flex-row md:items-start md:gap-12 md:flex-1 md:min-w-0">
             <div className="w-full md:w-[116px] shrink-0">
               <span className="font-geist-mono text-[12px] text-left">
                 Who we work with

@@ -67,13 +67,13 @@ export function TheWhySection() {
                 &ldquo;{FOUNDER_QUOTE}&rdquo;
               </blockquote>
             </ScrollReveal>
-            <ScrollReveal staggerDelay={0.1}>
+            <ScrollReveal staggerDelay={0.2}>
               <p className="font-geist-mono text-[12px] text-muted-foreground mb-10">
                 Trevor Borden, Founder
               </p>
             </ScrollReveal>
             <ScrollReveal
-              staggerDelay={0.2}
+              staggerDelay={0.4}
               className="relative w-96 h-96 max-w-[90vw] max-h-[90vw] rounded-full overflow-hidden"
             >
               <div
