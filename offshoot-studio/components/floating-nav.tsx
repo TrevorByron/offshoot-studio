@@ -4,6 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { motion, useReducedMotion } from "framer-motion"
 import { useCTAModal } from "@/components/cta-modal-provider"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -18,7 +19,18 @@ export function FloatingNav() {
   const pathname = usePathname()
   const { openCTAModal } = useCTAModal()
   const [menuOpen, setMenuOpen] = React.useState(false)
+  const [hasScrolledHalfway, setHasScrolledHalfway] = React.useState(false)
   const menuRef = React.useRef<HTMLDivElement>(null)
+  const prefersReducedMotion = useReducedMotion()
+
+  React.useEffect(() => {
+    const checkScroll = () => {
+      setHasScrolledHalfway(window.scrollY >= window.innerHeight / 2)
+    }
+    checkScroll()
+    window.addEventListener("scroll", checkScroll, { passive: true })
+    return () => window.removeEventListener("scroll", checkScroll)
+  }, [])
 
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (pathname === "/") {
@@ -49,9 +61,21 @@ export function FloatingNav() {
   }, [menuOpen])
 
   return (
-    <nav
+    <motion.nav
       className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 px-4"
       aria-label="Floating navigation"
+      initial={false}
+      animate={{
+        y: hasScrolledHalfway ? 0 : 80,
+        opacity: hasScrolledHalfway ? 1 : 0,
+        pointerEvents: hasScrolledHalfway ? "auto" : "none",
+      }}
+      transition={{
+        type: prefersReducedMotion ? "tween" : "spring",
+        stiffness: 300,
+        damping: 30,
+        opacity: { duration: prefersReducedMotion ? 0.2 : 0.25 },
+      }}
     >
       <div
         className={cn(
@@ -121,6 +145,6 @@ export function FloatingNav() {
           )}
         </div>
       </div>
-    </nav>
+    </motion.nav>
   )
 }
