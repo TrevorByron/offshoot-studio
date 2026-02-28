@@ -17,8 +17,8 @@ export const recibookCaseStudy: CaseStudyContent = {
       "Recipe app was losing users before they saw value. Audited onboarding, identified activation killers, built two prototypes in 11 hours: show value first, ask for commitment after.",
       "Also flagged generic branding and produced cookbook-inspired visual direction.",
     ],
-    imageBackground: PLACEHOLDER("Recibook"),
-    imageScreenshot: PLACEHOLDER("Recibook"),
+    imageBackground: "/background-images/tz.png",
+    imageScreenshot: "/case-studies/recibook/reci-purple.png",
     imageAlt: "Recibook onboarding redesign screenshot",
     imagePosition: "right",
   },
@@ -73,11 +73,11 @@ export const recibookCaseStudy: CaseStudyContent = {
   ],
   sections: [
     {
-      images: [PLACEHOLDER("Audit + user journey")],
+      images: ["/case-studies/recibook/reci-screens.png"],
       text: "We mapped the current flow and found that too many steps stood between the visitor and the “aha” moment. The audit made it clear: value was buried behind signup and friction. The full journey and audit are in the Figma file and the Notion deliverable (link above).",
     },
     {
-      images: [PLACEHOLDER("Option 1 – In-app")],
+      images: ["/case-studies/recibook/option-1.gif"],
       text: "Option 1 prioritizes the in-app experience. People can try the product right on the marketing page—no signup wall—and only after they’ve seen what it does do we ask for signup. Best when the product shines when users explore the full web app. Prototype: recibook-sable.vercel.app",
     },
     {
@@ -85,7 +85,7 @@ export const recibookCaseStudy: CaseStudyContent = {
       text: "Option 2 uses the same value-first idea but funnels people into the WhatsApp chatbot. They still get to try things on the marketing page, but the flow is designed to get them into the messaging experience. Best when the magic is in WhatsApp and your users already live there. Prototype: recibook-whatsapp.vercel.app",
     },
     {
-      images: [PLACEHOLDER("Branding exploration")],
+      images: ["/case-studies/recibook/branding.png"],
       text: "The current branding felt like every other AI product—gradients and generic “AI slop.” We explored what it could look like if we pulled from real cookbooks: color palettes, typography, and that print-like warmth. The goal: bridge digital app and kitchen, and feel connected to what the product actually does.",
     },
   ],

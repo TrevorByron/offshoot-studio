@@ -53,6 +53,7 @@ export function CaseStudyPageLayout({ caseStudy }: CaseStudyPageLayoutProps) {
                 section={section}
                 leadingParagraph={i === 0 && !caseStudy.introBlocks ? caseStudy.introBlurb : undefined}
                 introBlocks={i === 0 ? caseStudy.introBlocks : undefined}
+                isFirstSection={i === 0}
               />
             </ScrollReveal>
           ))}

@@ -25,6 +25,8 @@ interface CaseStudyBlockProps {
   leadingParagraph?: string
   /** Rich intro for first block (paragraphs + list). When set, text column uses this instead of leadingParagraph + section text. */
   introBlocks?: CaseStudyIntroBlock[]
+  /** When true, the image container uses the purple background (first section only). */
+  isFirstSection?: boolean
 }
 
 function IntroContent({ blocks }: { blocks: CaseStudyIntroBlock[] }) {
@@ -70,7 +72,7 @@ function IntroContent({ blocks }: { blocks: CaseStudyIntroBlock[] }) {
   )
 }
 
-export function CaseStudyBlock({ section, leadingParagraph, introBlocks }: CaseStudyBlockProps) {
+export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirstSection }: CaseStudyBlockProps) {
   const ref = React.useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, amount: revealViewport.amount })
   const prefersReducedMotion = useReducedMotion()
@@ -99,13 +101,13 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks }: CaseS
         {images.map((src, i) => (
           <div
             key={i}
-            className="w-full overflow-hidden rounded-lg border border-border bg-muted/30"
+            className={`w-full overflow-hidden rounded-[24px] border border-border flex justify-center items-center p-6 ${isFirstSection ? "bg-purple" : "bg-muted/30"}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={src}
               alt=""
-              className="w-full h-auto block"
+              className="max-h-[452px] max-w-full w-auto h-auto block object-contain"
             />
           </div>
         ))}

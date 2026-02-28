@@ -18,11 +18,11 @@ const testimonials = [
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=faces",
   },
   {
-    quote: "Like having a senior product engineer join overnight. Understood our vision and executed flawlessly.",
-    name: "Michael Rodriguez",
-    title: "Founder & CEO",
-    company: "DataVault",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=faces",
+    quote: "Trevor was my lead design partner on a big bet we made to bring a bidding network to life at Procore. He helped take a big idea to production at an incredibly fast pace. This helped us derisk the bet quickly and provided the validation we needed to double down. The Procore construction network wouldn't be what it is today without him!",
+    name: "Tim Hey",
+    title: "Head of Product Management",
+    company: "Procore",
+    avatar: "/tim-hey.png",
   },
   {
     quote: "The strategic thinking they brought was invaluable. We thought we knew what to build, but they helped us see the bigger picture and pivot early. That early alignment saved us months of rework and gave the whole team confidence in the direction.",
