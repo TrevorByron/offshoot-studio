@@ -107,7 +107,10 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
   const hasText = introBlocks || leadingParagraph || text
 
   return (
-    <div ref={ref} className="flex flex-col gap-6 md:gap-8">
+    <div
+      ref={ref}
+      className={`flex flex-col gap-6 md:gap-8 ${embedUrl ? "hidden md:flex" : ""}`}
+    >
       {label && (
         <motion.span
           className="font-geist-mono text-[12px] text-foreground uppercase tracking-wide"
