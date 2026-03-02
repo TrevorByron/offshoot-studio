@@ -106,10 +106,13 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
 
   const hasText = introBlocks || leadingParagraph || text
 
+  /** Only hide the whole block on mobile when it's an embedded prototype (e.g. try the prototype), not when it's a video (YouTube). */
+  const isEmbeddedPrototype = Boolean(embedUrl && !embedUrl.includes("youtube"))
+
   return (
     <div
       ref={ref}
-      className={`flex flex-col gap-6 md:gap-8 ${embedUrl ? "hidden md:flex" : ""}`}
+      className={`flex flex-col gap-6 md:gap-8 ${isEmbeddedPrototype ? "hidden md:flex" : ""}`}
     >
       {label && (
         <motion.span
