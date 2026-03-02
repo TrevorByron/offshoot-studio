@@ -16,12 +16,15 @@ interface ScrollRevealProps {
   className?: string
   /** Delay in seconds for staggered reveals (e.g. 0, 0.1, 0.2). */
   staggerDelay?: number
+  /** When true, content starts visible (no reveal). Use for first section on a page. */
+  startInView?: boolean
   children?: React.ReactNode
 }
 
 export function ScrollReveal({
   className,
   staggerDelay = 0,
+  startInView = false,
   children,
 }: ScrollRevealProps) {
   const ref = React.useRef<HTMLDivElement>(null)
@@ -30,13 +33,14 @@ export function ScrollReveal({
 
   const initial = prefersReducedMotion ? revealInitialReduced : revealInitial
   const animate = prefersReducedMotion ? revealAnimateReduced : revealAnimate
+  const inViewState = isInView ? animate : initial
 
   return (
     <motion.div
       ref={ref}
       className={cn(className)}
-      initial={initial}
-      animate={isInView ? animate : initial}
+      initial={startInView ? animate : initial}
+      animate={startInView ? animate : inViewState}
       transition={{
         ...revealTransition,
         delay: staggerDelay,

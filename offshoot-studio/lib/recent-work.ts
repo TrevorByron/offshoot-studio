@@ -19,7 +19,7 @@ export interface RecentWorkProject {
   imagePosition?: "left" | "right"
   footerLinkHref?: string
   footerLinkLabel?: string
-  /** When set, the project has a full case study at /case-studies/[caseStudySlug]; card uses case study content. */
+  /** When set, the project has a case study; card uses case study content and opens the modal on /selected-work. */
   caseStudySlug?: string
 }
 
@@ -31,8 +31,8 @@ export const recentWorkProjects: RecentWorkProject[] = [
     badge: "Embedded Design",
     shortDescription: "Strategic design and prototyping for Procore.",
     description: [
-      "Discovery, vision casting, and internal alignment for a free business directory connecting contractors, owners, architects, and vendors.",
-      "RITE research, HTML/CSS prototype for rapid iteration, then final polish and front-end implementation in their production repo. Launched 2021.",
+      "Procore had talked about building a Construction Network for years, but couldn't commit resources to an abstract vision. We built a coded prototype that made the concept tangible—unlocking internal buy-in and full funding for a dedicated team.",
+      "From catalyst to launch, we led discovery, design, and front-end implementation for a platform that continues to connect the construction industry.",
     ],
     imageCount: 0,
     imageUrls: ["/procore-case-study.png", "/procore-screenshot.png"],
@@ -42,6 +42,7 @@ export const recentWorkProjects: RecentWorkProject[] = [
     imagePosition: "right",
     footerLinkHref: "https://trevorborden.github.io/GCN-prototype/index.html",
     footerLinkLabel: "See Prototype",
+    caseStudySlug: "procore",
   },
   {
     slug: "get-shit-done",

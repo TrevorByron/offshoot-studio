@@ -1,6 +1,6 @@
 /**
- * One content block: 65% left (images / optional hero card), 35% right (text).
- * Used for all case study sections; keeps column layout consistent across case studies.
+ * One content block in single-column layout: Label → Heading → Text → Supporting imagery.
+ * Matches the structure used on aaronkettl.com/procore for case study sections.
  */
 "use client"
 
@@ -15,17 +15,18 @@ import {
   revealInitialReduced,
   revealAnimateReduced,
 } from "@/lib/reveal-config"
-import { CaseStudyHeroCard } from "./case-study-hero-card"
+import { CaseStudyBrowserFrame } from "./case-study-browser-frame"
+import { CaseStudyEmbedFrame } from "./case-study-embed-frame"
 
-const COLUMN_STAGGER_DELAY = 0.22
+const STAGGER_DELAY = 0.12
 
 interface CaseStudyBlockProps {
   section: CaseStudySection
-  /** Rendered as the first paragraph in the text column (e.g. intro blurb on first block) */
+  /** Rendered as the first paragraph (e.g. intro blurb on first block) */
   leadingParagraph?: string
-  /** Rich intro for first block (paragraphs + list). When set, text column uses this instead of leadingParagraph + section text. */
+  /** Rich intro for first block (paragraphs + list). When set, uses this instead of leadingParagraph + section text. */
   introBlocks?: CaseStudyIntroBlock[]
-  /** When true, the image container uses the purple background (first section only). */
+  /** When true, the first image container uses the purple background. */
   isFirstSection?: boolean
 }
 
@@ -36,18 +37,29 @@ function IntroContent({ blocks }: { blocks: CaseStudyIntroBlock[] }) {
         block.type === "paragraph" ? (
           <div key={i} className="space-y-1">
             {block.label && (
-              <p className="text-white text-sm leading-relaxed font-geist-mono">
+              <p className="text-foreground text-sm leading-relaxed font-geist-mono">
                 {block.label}
               </p>
             )}
-            <p
-              className={`text-white text-sm leading-relaxed ${block.font === "mono" ? "font-geist-mono" : ""}`}
-            >
-              {block.text}
-            </p>
+            {block.href ? (
+              <a
+                href={block.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`text-muted-foreground text-sm leading-relaxed hover:text-foreground underline underline-offset-2 transition-colors ${block.font === "mono" ? "font-geist-mono" : ""}`}
+              >
+                {block.text}
+              </a>
+            ) : (
+              <p
+                className={`text-muted-foreground text-sm leading-relaxed ${block.font === "mono" ? "font-geist-mono" : ""}`}
+              >
+                {block.text}
+              </p>
+            )}
           </div>
         ) : (
-          <ul key={i} className="list-disc list-inside space-y-2 text-white text-sm leading-relaxed pl-1">
+          <ul key={i} className="list-disc list-inside space-y-2 text-muted-foreground text-sm leading-relaxed pl-1">
             {block.items.map((item, j) => {
               const colonIndex = item.indexOf(":")
               const label = colonIndex >= 0 ? item.slice(0, colonIndex) : null
@@ -56,7 +68,7 @@ function IntroContent({ blocks }: { blocks: CaseStudyIntroBlock[] }) {
                 <li key={j}>
                   {label !== null ? (
                     <>
-                      <span className="font-semibold">{label}</span>
+                      <span className="font-geist-mono font-semibold">{label}</span>
                       {rest}
                     </>
                   ) : (
@@ -77,58 +89,109 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
   const isInView = useInView(ref, { once: true, amount: revealViewport.amount })
   const prefersReducedMotion = useReducedMotion()
 
-  const { heroImage, heroImages, images, text } = section
-  const heroCards = heroImages?.length
-    ? heroImages
-    : heroImage
-      ? [heroImage, heroImage]
-      : []
+  const {
+    images,
+    text,
+    browserFrame,
+    browserFrameBackground,
+    label,
+    heading,
+    embedUrl,
+    fullWidth,
+  } = section
 
   const initial = prefersReducedMotion ? revealInitialReduced : revealInitial
   const animate = prefersReducedMotion ? revealAnimateReduced : revealAnimate
+  const effectiveInView = isFirstSection || isInView
+
+  const hasText = introBlocks || leadingParagraph || text
 
   return (
-    <div ref={ref} className="grid grid-cols-1 lg:grid-cols-[65fr_35fr] gap-8 lg:gap-12 items-start">
+    <div ref={ref} className="flex flex-col gap-6 md:gap-8">
+      {label && (
+        <motion.span
+          className="font-geist-mono text-[12px] text-foreground uppercase tracking-wide"
+          initial={isFirstSection ? animate : initial}
+          animate={effectiveInView ? animate : initial}
+          transition={{ ...revealTransition, delay: 0 }}
+        >
+          {label}
+        </motion.span>
+      )}
+
+      {heading && (
+        <motion.h2
+          className="text-2xl md:text-3xl font-normal leading-tight tracking-tight text-foreground"
+          initial={isFirstSection ? animate : initial}
+          animate={effectiveInView ? animate : initial}
+          transition={{ ...revealTransition, delay: STAGGER_DELAY }}
+        >
+          {heading}
+        </motion.h2>
+      )}
+
+      {hasText && (
+        <motion.div
+          className="space-y-4 max-w-3xl"
+          initial={isFirstSection ? animate : initial}
+          animate={effectiveInView ? animate : initial}
+          transition={{ ...revealTransition, delay: STAGGER_DELAY * 2 }}
+        >
+          {introBlocks ? (
+            <IntroContent blocks={introBlocks} />
+          ) : (
+            <>
+              {leadingParagraph && (
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {leadingParagraph}
+                </p>
+              )}
+              {text ? (
+                <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">{text}</p>
+              ) : null}
+            </>
+          )}
+        </motion.div>
+      )}
+
       <motion.div
-        className="order-2 lg:order-1 flex flex-col gap-4 w-full"
-        initial={initial}
-        animate={isInView ? animate : initial}
-        transition={{ ...revealTransition, delay: 0 }}
+        className={`flex flex-col gap-4 w-full ${fullWidth ? "max-w-full" : ""}`}
+        initial={isFirstSection ? animate : initial}
+        animate={effectiveInView ? animate : initial}
+        transition={{ ...revealTransition, delay: hasText ? STAGGER_DELAY * 3 : STAGGER_DELAY }}
       >
-        {heroCards.map((card, i) => (
-          <CaseStudyHeroCard key={i} heroImage={card} />
-        ))}
-        {images.map((src, i) => (
-          <div
-            key={i}
-            className={`w-full overflow-hidden rounded-[24px] border border-border flex justify-center items-center p-6 ${isFirstSection ? "bg-purple" : "bg-muted/30"}`}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={src}
-              alt=""
-              className="max-h-[452px] max-w-full w-auto h-auto block object-contain"
-            />
-          </div>
-        ))}
-      </motion.div>
-      <motion.div
-        className="order-1 lg:order-2 flex flex-col justify-center lg:pt-1 space-y-4 lg:sticky lg:top-6 lg:self-start"
-        initial={initial}
-        animate={isInView ? animate : initial}
-        transition={{ ...revealTransition, delay: COLUMN_STAGGER_DELAY }}
-      >
-        {introBlocks ? (
-          <IntroContent blocks={introBlocks} />
+        {embedUrl ? (
+          <CaseStudyEmbedFrame
+            embedUrl={embedUrl}
+            className="min-h-[280px]"
+            backgroundImage={browserFrameBackground}
+            posterImage={section.embedPosterImage}
+            fallbackLabel={section.embedFallbackLabel}
+          />
         ) : (
-          <>
-            {leadingParagraph && (
-              <p className="text-white text-sm leading-relaxed">
-                {leadingParagraph}
-              </p>
-            )}
-            <p className="text-white text-sm leading-relaxed">{text}</p>
-          </>
+          images.map((src, i) =>
+            browserFrame ? (
+              <CaseStudyBrowserFrame
+                key={i}
+                src={src}
+                alt=""
+                className="min-h-[280px]"
+                backgroundImage={browserFrameBackground}
+              />
+            ) : (
+              <div
+                key={i}
+                className={`w-full overflow-hidden rounded-[24px] border border-border ${isFirstSection ? "bg-purple" : "bg-muted/30"}`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={src}
+                  alt=""
+                  className="w-full h-auto block"
+                />
+              </div>
+            )
+          )
         )}
       </motion.div>
     </div>

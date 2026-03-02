@@ -1,0 +1,195 @@
+.half {
+  width: 50%;
+}
+
+.full {
+  width: 100%;
+}
+// Core overrides
+.core-checkbox__input:checked + .core-checkbox__label:before {
+  border-radius: 2px;
+}
+
+.core-checkbox__label:before {
+  border-radius: 2px;
+}
+
+.flex-box {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.flex-start {
+  justify-content: flex-start;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.white-container {
+  width: 100%;
+  background: #fff;
+  padding-top: 5.6rem;
+  padding-bottom: 5.6rem;
+  border-top: 1px solid rgba(0,0,0, .12);
+}
+
+.logo_turner {
+  background-image: url("../img/turner.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.logo_unander {
+  background-image: url("../img/unander-logo.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.logo_AC {
+  background-image: url("../img/ACelectric.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.logo_DE {
+  background-image: url("../img/DE.png");
+  background-color: #EEF0F1 !important;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.logo_EE {
+  background-image: url("../img/EE.png");
+  background-color: #EEF0F1 !important;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.logo_JP {
+  background-image: url("../img/jim-peterson.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+
+.logo_todd {
+  background-image: url("../img/Todd.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+
+.logo_bw {
+  background-image: url("../img/BW.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+
+.logo_jr {
+  background-image: url("../img/jr-electric.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+
+.claimed {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 10px;
+  margin-left: auto;
+
+  .material-icons-round {
+    color: #FF5100;
+    margin-right: 4px;
+    font-size: 20px;
+  }
+}
+// Tooltips
+.tooltip {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  min-width: 120px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 95%;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #000 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.margin-bottom--big {
+ margin-bottom: 7.6rem !important;
+}
+
+
+// Pills
+
+
+.pill {
+  border-radius: 15px;
+  display: inline-block;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.pill--green {
+  background: #26AD1F;
+  color: #fff;
+}
+
+.pill--grey {
+  background: #F3F4F6;
+  color: #171A1C;
+}
+
+.pill--blue {
+  background: #1D5CC9;
+  color: #fff;
+
+}

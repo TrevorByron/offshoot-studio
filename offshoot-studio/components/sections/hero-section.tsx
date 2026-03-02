@@ -82,7 +82,7 @@ export function HeroSection() {
               Book a call
             </BookACallLink>
             <a
-              href="/recent-work"
+              href="/selected-work"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "hidden md:inline-flex w-full sm:w-auto"

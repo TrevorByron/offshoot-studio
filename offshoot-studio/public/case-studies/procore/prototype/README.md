@@ -1,0 +1,1 @@
+Use the "index.html" as the home screen

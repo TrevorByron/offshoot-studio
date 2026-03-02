@@ -1,0 +1,285 @@
+.site-header {
+  background: #fff;
+  width: 100vw;
+  height: 7.7rem;
+  z-index: 100;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 200;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+
+
+
+  &_logo {
+     margin-left: 2.5%;
+     width: 15rem;
+    margin-right: 2.4rem;
+
+
+    &_img {
+        width: 150px;
+    }
+  }
+
+    .header-buttons {
+        margin: 0px 0px 0px auto;
+        height: 4.8rem;
+
+        &--login {
+            margin: 0px 5rem 0px auto;
+             height: 4.8rem;
+        }
+    }
+
+&_pages {
+font-size: 15px;
+line-height: 20px;
+text-align: center;
+font-weight: 500;
+letter-spacing: 0.25px;
+  li {
+    display: inline-block;
+transition: 200ms;
+       padding: 10px 0 4px;
+    margin: 22px 12.5px;
+    border-bottom: 2px solid transparent;
+    position: relative;
+
+
+a {
+  color: #555;
+
+}
+  }
+
+  &_selected {
+  border-bottom:2px solid #FF5200;
+  border-radius: 1px;
+  padding-bottom: 12px;
+  color: #fff;
+  }
+  &_selected a{
+  color: #fff;
+  }
+}
+
+}
+
+.site-header_logo_small {
+  height: 52px;
+    width: 40px;
+    background-image: url(../img/small-logo.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: none;
+    margin-right: 16px;
+}
+
+.revealing-logo {
+    left: 2.5%;
+    top:40px;
+    position: absolute;
+}
+
+.revealing-button {
+  right: 2.5%;
+top: 32px;
+    position: absolute;
+}
+
+.reveal {
+    visibility: hidden;
+    display: none;
+    z-index: 1000000;
+}
+
+
+.tool-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0px 2.4rem;
+  margin-top:  6.4rem;
+  opacity: 0%;
+  animation-delay: 100ms;
+  animation: FadeIn 1000ms;
+  animation-fill-mode: forwards;
+  margin-bottom: 2.4rem;
+
+  &_name-and-instruction{
+
+  a {
+    color: #000;
+    font-weight: 600;
+  }
+}
+
+&_name {
+font-style: normal;
+font-weight: bold;
+font-size: 3.4rem;
+line-height: 4.4rem;
+margin-top: 38px;
+}
+
+&_actions {
+  margin-top: 3.8rem;
+
+}
+
+
+}
+
+.construction-network-search {
+
+    select {
+        box-shadow: none;
+        height: 4.8rem;
+    }
+
+    input {
+
+        box-shadow: none;
+
+    }
+}
+
+.search-location {
+  display: flex;
+  background: #E3E6E8;
+  border-radius: 40px;
+  padding: 4px;
+  max-width: 687px;
+  margin: 0 auto;
+  transition: 300ms;
+  border: 1px solid #E3E6E8;
+
+  &:focus-within {
+    background: #fff;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.14)
+  }
+
+  &:hover {
+    border: 1px solid #ACB5B9;
+  }
+
+input[type=search] {
+    padding: 4px 12px 4px 40px;
+    max-width: 400px;
+    width: 100%;
+    border-right: 1px solid #D6DADC;
+    caret-color : #ff5100;
+    border-radius: 0px;
+}
+
+.search-trigger {
+  background-image: url(../img/search-white.svg);
+  background-color: #FD531F;
+  background-position: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px ;
+  border-radius: 100px;
+  background-repeat: no-repeat;
+  transition: 300ms;
+
+
+  &:hover {
+
+    background-color: #e64900;
+    cursor: pointer;
+  }
+
+  &:active {
+    box-shadow: 0px 0px 0px 2px #FD531F;
+
+
+  }
+}
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0px;
+      box-shadow: 0 5px 7px rgb(0 0 0 / 8%);
+}
+
+
+.marketing-reveal {
+    opacity: 0;
+    display: block;
+    transition: 100ms;
+}
+
+.marketing-header {
+
+padding-left: 50px;
+padding-right: 50px;
+letter-spacing: normal;
+
+.site-header_logo {
+  position: relative;
+  height: 100%;
+}
+
+.site-header_logo_img {
+  position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 100%;
+    }
+
+  .marketing-pages {
+  list-style: none;
+
+li {
+  display: inline-block;
+  color: #555;
+padding: 10px 0 4px;
+margin: 0px 12.5px;
+border-bottom: 2px solid transparent;
+position: relative;
+font-size: 15px;
+font-weight: 500;
+}
+}
+
+.marketing-buttons {
+      margin: 0px 5rem 0px auto;
+
+      .header-buttons--login {
+        padding: 12px 18px;
+font-weight: 600;
+        height: 40px;
+        font-size: 16px;
+        margin: 0px 0px 0px auto;
+      }
+
+}
+}
+
+.construction-network-search--marketing {
+ margin: 0 auto;
+ background: none !important;
+ box-shadow: none!important;
+
+  opacity: 0%;
+  animation-delay: 0ms;
+  animation: none;
+  animation-fill-mode: forwards;
+
+  z-index: 10000;
+  width: auto !important;
+  justify-content: center;
+  padding: inherit !important;
+
+  position: absolute !important;
+  top: 50% !important;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}

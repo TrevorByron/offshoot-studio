@@ -26,14 +26,15 @@ export function CaseStudyHeroCard({ heroImage }: CaseStudyHeroCardProps) {
         aria-hidden
       />
       <div
-        className="relative z-10 w-full flex-1 min-h-[450px] rounded-lg overflow-hidden"
-        style={{
-          backgroundImage: `url(${inner})`,
-          backgroundSize: "contain",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
+        className="relative z-10 w-full flex-1 min-h-0 rounded-lg overflow-hidden flex items-start justify-center"
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={inner}
+          alt=""
+          className="w-full h-auto block object-contain object-center"
+        />
+      </div>
     </div>
   )
 }

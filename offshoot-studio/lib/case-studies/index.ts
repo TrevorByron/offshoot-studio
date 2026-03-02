@@ -1,20 +1,23 @@
 import type { CaseStudyContent } from "./types"
 import { gsdCaseStudy, GSD_SLUG } from "./content/gsd"
+import { procoreCaseStudy, PROCORE_SLUG } from "./content/procore"
 import { recibookCaseStudy, RECIBOOK_SLUG } from "./content/recibook"
 
 const caseStudies: Record<string, CaseStudyContent> = {
   [GSD_SLUG]: gsdCaseStudy,
+  [PROCORE_SLUG]: procoreCaseStudy,
   [RECIBOOK_SLUG]: recibookCaseStudy,
 }
 
 /** Slugs of case studies to show on the homepage Work section. Add new slugs here when you add a case study. */
-export const FEATURED_CASE_STUDY_SLUGS: string[] = [GSD_SLUG, RECIBOOK_SLUG]
+export const FEATURED_CASE_STUDY_SLUGS: string[] = [PROCORE_SLUG, GSD_SLUG, RECIBOOK_SLUG]
 
 export type {
   CaseStudyContent,
   CaseStudySection,
   CaseStudyHeroImage,
   CaseStudyBanner,
+  CaseStudyQuote,
   CaseStudyTag,
   CaseStudyIntroBlock,
   CaseStudyCardPreview,
@@ -33,23 +36,28 @@ export function getAllCaseStudySlugs(): string[] {
 export function getCaseStudyCardProps(caseStudy: CaseStudyContent): {
   title: string
   badge: string
+  badges: string[]
   description: string[]
   imageBackground: string
   imageScreenshot: string
   imageAlt: string
   imagePosition: "left" | "right"
+  coverImageOnly?: boolean
 } {
   const card = caseStudy.cardPreview
   const badge = caseStudy.badges?.[0] ?? caseStudy.badge ?? ""
+  const badges = caseStudy.badges?.length ? caseStudy.badges : badge ? [badge] : []
   if (card) {
     return {
       title: caseStudy.title,
       badge,
+      badges,
       description: card.description,
       imageBackground: card.imageBackground,
       imageScreenshot: card.imageScreenshot,
       imageAlt: card.imageAlt ?? `${caseStudy.title} screenshot`,
       imagePosition: card.imagePosition ?? "right",
+      coverImageOnly: card.coverImageOnly,
     }
   }
   const firstSection = caseStudy.sections[0]
@@ -64,6 +72,7 @@ export function getCaseStudyCardProps(caseStudy: CaseStudyContent): {
   return {
     title: caseStudy.title,
     badge,
+    badges,
     description,
     imageBackground,
     imageScreenshot: imageScreenshot || imageBackground,

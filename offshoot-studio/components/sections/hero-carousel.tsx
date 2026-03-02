@@ -22,7 +22,7 @@ export interface CarouselScreenshot {
   coverImage?: string
   /** Optional logo shown in cursor-following tooltip on hover. */
   hoverLogo?: string
-  /** Optional case study slug; when set, the card links to /case-studies/[slug]. */
+  /** Optional case study slug; when set, the card links to /selected-work?case=[slug]. */
   caseStudySlug?: string
   /** Optional content rendered in an inner div (e.g. service card, CTA). Container is prepared with relative z-10 and flex layout. */
   content?: ReactNode
@@ -42,7 +42,7 @@ const TOOLTIP_OFFSET = 20
 const DESKTOP_BREAKPOINT = 768
 
 const DEFAULT_SCREENSHOTS: CarouselScreenshot[] = [
-  { src: "/background-images/man-on-rock.png", alt: "Man on rock", coverImage: "/case-study-covers/procore-cover.png", hoverLogo: "/logos/Procore.png" },
+  { src: "/background-images/man-on-rock.png", alt: "Man on rock", coverImage: "/case-study-covers/procore-cover.png", hoverLogo: "/logos/Procore.png", caseStudySlug: "procore" },
   { src: "/background-images/rock.png", alt: "Rock", coverImage: "/case-study-covers/gsd-cover.png", hoverLogo: "/logos/TweakingCat.png", caseStudySlug: "gsd" },
   { src: "/background-images/two-on-rock.png", alt: "Two on rock", coverImage: "/case-study-covers/toro-cover.png", hoverLogo: "/logos/Toro.png" },
 ]
@@ -185,7 +185,7 @@ export function HeroCarousel({
               return (
                 <Link
                   key={`${shot.src}-${i}`}
-                  href={`/case-studies/${shot.caseStudySlug}`}
+                  href={`/selected-work?case=${shot.caseStudySlug}&from=home`}
                   className={cardClassName}
                   style={cardStyle}
                   role="img"
@@ -221,7 +221,7 @@ export function HeroCarousel({
       {/* View all recent work – right-aligned */}
       <div className="w-full flex justify-end px-4 md:px-6 pt-2 pb-2">
         <Link
-          href="/recent-work"
+          href="/selected-work"
           className={cn(
             buttonVariants({ variant: "outline", size: "lg" }),
             "inline-flex items-center justify-center gap-2 w-full md:w-auto"

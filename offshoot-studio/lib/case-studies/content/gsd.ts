@@ -13,10 +13,11 @@ export const gsdCaseStudy: CaseStudyContent = {
       "Two-person strike team with Robert Hohman (Glassdoor cofounder) to validate a to-do app concept inspired by Getting Things Done.",
       "Defined core problems, mapped user journeys and IA, assessed the market for differentiated positioning. 2-week sprint.",
     ],
-    imageBackground: "/case-study-background.png",
-    imageScreenshot: "/get-shit-done-screenshot.png",
+    imageBackground: "/background-images/rock.png",
+    imageScreenshot: "/case-study-covers/gsd-cover.png",
     imageAlt: "Get Sh*t Done app screenshot",
     imagePosition: "left",
+    coverImageOnly: true,
   },
   introBlurb:
     "Two-person strike team with Robert Hohman (Glassdoor cofounder) to validate a to-do app concept inspired by Getting Things Done. We defined the general structure of the app, laid out the groundwork for the design system, and built out a prototype together.",
