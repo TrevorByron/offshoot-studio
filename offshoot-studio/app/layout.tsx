@@ -21,6 +21,27 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.png",
   },
+  openGraph: {
+    title: "Tiger Team Studios — Strategic Design Engineering",
+    description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for product teams.",
+    url: "https://tigerteamstudios.com",
+    siteName: "Tiger Team Studios",
+    images: [
+      {
+        url: "https://tigerteamstudios.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Tiger Team Studios",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tiger Team Studios — Strategic Design Engineering",
+    description: "Your parallel team for the ideas your core team doesn't have time for.",
+    images: ["https://tigerteamstudios.com/og-image.png"],
+  },
 };
 
 export default function RootLayout({
