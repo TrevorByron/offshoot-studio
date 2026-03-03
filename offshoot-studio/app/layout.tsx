@@ -15,6 +15,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = "https://tigerteamstudios.com";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://tigerteamstudios.com/#organization",
+      name: "Tiger Team Studios",
+      url: siteUrl,
+      logo: `${siteUrl}/og-image.png`,
+      description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for product teams.",
+    },
+    {
+      "@type": "WebSite",
+      name: "Tiger Team Studios - Strategic Design Engineering",
+      url: siteUrl,
+      description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for product teams.",
+      image: `${siteUrl}/og-image.png`,
+      publisher: { "@id": "https://tigerteamstudios.com/#organization" },
+    },
+  ],
+};
+
 export const metadata: Metadata = {
   title: "Tiger Team Studios - Strategic Design Engineering",
   description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for product teams.",
@@ -52,6 +75,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="" suppressHydrationWarning>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <link
           href="https://fonts.cdnfonts.com/css/pp-neue-montreal"
           rel="stylesheet"
