@@ -74,8 +74,8 @@ export function AboutModal({ open, onClose }: AboutModalProps) {
           <AboutVisionSection />
           <AboutMotivationSection />
           <AboutCTASection />
-          <Footer />
         </div>
+        <Footer />
       </div>
     </div>
   )
