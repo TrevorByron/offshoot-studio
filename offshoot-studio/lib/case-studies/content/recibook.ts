@@ -50,6 +50,14 @@ export const recibookCaseStudy: CaseStudyContent = {
   ],
   metaDescription:
     "Case study: Recibook onboarding audit and redesign — 11-hour audit, two value-first prototypes (in-app and WhatsApp), and cookbook-inspired branding exploration.",
+  quote: {
+    quote:
+      "Tiger Team Studios quickly gathered the right inputs, translated them into thoughtful UX flows, and delivered a ready-to-use prototype in record time. When you don't have full headcount and need fast turnaround, that kind of speed and clarity is invaluable.",
+    name: "Anna Grigoryan",
+    title: "Director of Product Management",
+    company: "Product Leader",
+    avatar: "/anna-grigoryan.png",
+  },
   banners: [
     {
       heading: "View the full 11-hour deliverable and both prototypes",
