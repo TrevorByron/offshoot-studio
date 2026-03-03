@@ -16,42 +16,71 @@ const geistMono = Geist_Mono({
 });
 
 const siteUrl = "https://tigerteamstudios.com";
+const siteTitle = "Tiger Team Studios - Strategic Design Engineering";
+const siteDescription =
+  "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for product teams.";
+const ogImageUrl = `${siteUrl}/og-image.png`;
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://tigerteamstudios.com/#organization",
+      "@id": `${siteUrl}/#organization`,
       name: "Tiger Team Studios",
       url: siteUrl,
-      logo: `${siteUrl}/og-image.png`,
-      description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for product teams.",
+      logo: ogImageUrl,
+      description: siteDescription,
     },
     {
       "@type": "WebSite",
-      name: "Tiger Team Studios - Strategic Design Engineering",
+      "@id": `${siteUrl}/#website`,
+      name: siteTitle,
       url: siteUrl,
-      description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for product teams.",
-      image: `${siteUrl}/og-image.png`,
-      publisher: { "@id": "https://tigerteamstudios.com/#organization" },
+      description: siteDescription,
+      image: ogImageUrl,
+      publisher: { "@id": `${siteUrl}/#organization` },
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/#webpage`,
+      name: siteTitle,
+      description: siteDescription,
+      url: siteUrl,
+      image: ogImageUrl,
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      about: { "@id": `${siteUrl}/#organization` },
     },
   ],
 };
 
 export const metadata: Metadata = {
-  title: "Tiger Team Studios - Strategic Design Engineering",
-  description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for product teams.",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  authors: [{ name: "Tiger Team Studios", url: siteUrl }],
+  keywords: [
+    "strategic design",
+    "design engineering",
+    "product team",
+    "prototyping",
+    "MVP",
+    "Tiger Team Studios",
+  ],
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/favicon.png",
   },
   openGraph: {
-    title: "Tiger Team Studios — Strategic Design Engineering",
-    description: "Your parallel team for the ideas your core team doesn't have time for. Strategic design engineering for product teams.",
-    url: "https://tigerteamstudios.com",
+    title: siteTitle,
+    description: siteDescription,
+    url: siteUrl,
     siteName: "Tiger Team Studios",
     images: [
       {
-        url: "https://tigerteamstudios.com/og-image.png",
+        url: ogImageUrl,
         width: 1200,
         height: 630,
         alt: "Tiger Team Studios",
@@ -61,9 +90,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tiger Team Studios — Strategic Design Engineering",
-    description: "Your parallel team for the ideas your core team doesn't have time for.",
-    images: ["https://tigerteamstudios.com/og-image.png"],
+    title: siteTitle,
+    description: siteDescription,
+    images: [ogImageUrl],
   },
 };
 
