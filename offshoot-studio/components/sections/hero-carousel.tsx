@@ -50,11 +50,14 @@ const DEFAULT_SCREENSHOTS: CarouselScreenshot[] = [
 interface HeroCarouselProps {
   logos?: CarouselLogo[]
   screenshots?: CarouselScreenshot[]
+  /** When set, case study cards open the modal in-place (no navigation). Use on home page for a polished feel. */
+  onCaseStudyClick?: (slug: string) => void
 }
 
 export function HeroCarousel({
   logos = DEFAULT_LOGOS,
   screenshots = DEFAULT_SCREENSHOTS,
+  onCaseStudyClick,
 }: HeroCarouselProps) {
   // Triple the lists so the loop is long and feels unending; animate by one segment for seamless repeat
   const logoList = [...logos, ...logos, ...logos]
@@ -182,6 +185,23 @@ export function HeroCarousel({
               </>
             )
             if (shot.caseStudySlug) {
+              if (onCaseStudyClick) {
+                return (
+                  <button
+                    type="button"
+                    key={`${shot.src}-${i}`}
+                    onClick={() => onCaseStudyClick(shot.caseStudySlug!)}
+                    className={cardClassName}
+                    style={cardStyle}
+                    aria-label={shot.alt}
+                    onMouseEnter={() => shot.hoverLogo && setHoveredLogo(shot.hoverLogo)}
+                    onMouseMove={handleCardMouseMove}
+                    onMouseLeave={() => setHoveredLogo(null)}
+                  >
+                    {cardContent}
+                  </button>
+                )
+              }
               return (
                 <Link
                   key={`${shot.src}-${i}`}

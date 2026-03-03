@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { motion } from "framer-motion"
 import { CaseStudyBadge } from "@/components/case-study/case-study-badge"
 import Image from "next/image"
 import { HugeiconsIcon } from "@hugeicons/react"
@@ -149,9 +148,7 @@ export function CaseStudyCard({
   return (
     <div className="mb-10 md:mb-14 bg-card rounded-lg p-4 md:p-6 ring-foreground/10 ring-1">
       {slug ? (
-        <motion.div
-          layoutId={`case-study-hero-${slug}`}
-          transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
+        <div
           className={`flex flex-col md:grid ${gridCols} gap-8 md:gap-12 md:items-stretch`}
         >
           <div className={`max-w-3xl ${contentOrder} flex flex-col justify-center`}>
@@ -246,7 +243,7 @@ export function CaseStudyCard({
               </div>
             )}
           </div>
-        </motion.div>
+        </div>
       ) : (
         gridContent
       )}

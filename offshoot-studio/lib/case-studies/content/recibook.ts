@@ -1,8 +1,5 @@
 import type { CaseStudyContent } from "../types"
 
-const PLACEHOLDER = (text: string) =>
-  `https://placehold.co/1200x675/1a1a1a/71717a?text=${encodeURIComponent(text)}`
-
 export const RECIBOOK_SLUG = "recibook"
 
 const NOTION_DELIVERABLE =
@@ -14,52 +11,41 @@ export const recibookCaseStudy: CaseStudyContent = {
   badges: ["UI/UX Refinement", "Design Sprints"],
   cardPreview: {
     description: [
-      "Recipe app was losing users before they saw value. Audited onboarding, identified activation killers, built two prototypes in 11 hours: show value first, ask for commitment after.",
-      "Also flagged generic branding and produced cookbook-inspired visual direction.",
+      "Open Joy needed help fast—their onboarding was broken and users were dropping off before experiencing the core product. We agreed to a 2-day strike mission: audit the existing flows, prototype two potential new directions, and provide strategic recommendations they could act on immediately.",
+      "In 11 hours of focused work, we delivered two functional prototypes and branding nudges that gave their team clarity and momentum to move forward.",
     ],
-    imageBackground: "/background-images/tz.png",
-    imageScreenshot: "/case-studies/recibook/reci-purple.png",
+    imageBackground: "/background-images/man-on-rock.png",
+    imageScreenshot: "/case-studies/recibook/recibook-cover.png",
     imageAlt: "Recibook onboarding redesign screenshot",
     imagePosition: "right",
+    coverImageOnly: true,
   },
   introBlurb:
-    "In 11 hours over two days we audited Recibook’s onboarding flow, identified why users were bouncing before seeing value, and built two redesign prototypes—each flipping the funnel to show value first and ask for commitment after. We also explored cookbook-inspired branding to move away from generic AI aesthetics.",
+    "Open Joy's onboarding was broken and the team needed help now. We agreed to a 2-day strike mission: audit flows, build two prototypes, and deliver strategic recommendations. In 11 hours we gave them options, clarity, and momentum to move forward.",
   introBlocks: [
     {
       type: "paragraph",
-      text: "Recibook is a recipe app. Users were dropping off before they could experience what the product does. The brief: audit the onboarding, find the friction, and propose a better path.",
+      text: "This wasn't a normal engagement. Open Joy's onboarding was broken—users were dropping off before they could experience the core product, and the team needed help now. Not in two weeks. Not after a discovery phase. Now.",
     },
     {
       type: "paragraph",
-      text: "The challenge:",
-      font: "mono",
+      label: "The challenge:",
+      text: "Diagnose what wasn't working, explore new directions, and give the team something concrete they could act on—all within 2 days.",
     },
     {
       type: "paragraph",
-      text: "There were way too many steps between landing on the page and actually getting to use the app. Every extra step delayed the “aha” moment and likely hurt activation and retention. Best practice is around three steps; the current journey had many more.",
+      label: "Our approach:",
+      text: "We agreed to a strike mission. We audited their existing flows to identify where users were getting stuck, built two functional prototypes exploring different onboarding approaches, and provided strategic recommendations on branding and positioning that would help them stand out in a crowded loyalty app market.",
     },
     {
       type: "paragraph",
-      text: "Our approach:",
-      font: "mono",
-    },
-    {
-      type: "list",
-      items: [
-        "Audit: Mapped the user journey and identified where value was hidden behind signup and friction.",
-        "Option 1 (In-app): Let people play with the app on the marketing page, then ask for signup after they’ve seen what it does. Prototype: try before you commit.",
-        "Option 2 (WhatsApp): Same value-first idea but funnel users into the WhatsApp chatbot experience first. Prototype: value on the page, then into messaging.",
-        "Branding: Explored cookbook-inspired color, type, and imagery so the product feels like cooking, not generic AI.",
-      ],
+      label: "The outcome:",
+      text: "In 11 hours of focused work, we delivered working prototypes and clear direction. The team had options, clarity, and the momentum to move forward immediately.",
     },
     {
       type: "paragraph",
-      text: "The outcome:",
-      font: "mono",
-    },
-    {
-      type: "paragraph",
-      text: "Two working prototypes and a clear recommendation: choose strategy first (full app vs. WhatsApp-led), then ship the prototype that matches. Full deliverable and prototype links are in the sections below.",
+      label: "The value:",
+      text: "Sometimes you don't need a month-long engagement. You need someone who can parachute in, diagnose fast, and give you something you can ship. When speed matters more than process, we move.",
     },
   ],
   metaDescription:
@@ -73,16 +59,26 @@ export const recibookCaseStudy: CaseStudyContent = {
   ],
   sections: [
     {
-      images: ["/case-studies/recibook/reci-screens.png"],
+      label: "Overview",
+      heading: "A true strike mission",
+      images: [],
       text: "We mapped the current flow and found that too many steps stood between the visitor and the “aha” moment. The audit made it clear: value was buried behind signup and friction. The full journey and audit are in the Figma file and the Notion deliverable (link above).",
     },
     {
-      images: ["/case-studies/recibook/option-1.gif"],
-      text: "Option 1 prioritizes the in-app experience. People can try the product right on the marketing page—no signup wall—and only after they’ve seen what it does do we ask for signup. Best when the product shines when users explore the full web app. Prototype: recibook-sable.vercel.app",
+      label: "Audit",
+      images: ["/case-studies/recibook/audit.png"],
+      text: "We mapped the current experience from app store landing through onboarding, sharing, and in-app actions. The audit surfaced a large drop-off after onboarding, friction in sharing from external apps, and a signup wall that hurt retention—plus inconsistent UI and unclear next steps once users viewed a recipe.",
     },
     {
-      images: [PLACEHOLDER("Option 2 – WhatsApp")],
-      text: "Option 2 uses the same value-first idea but funnels people into the WhatsApp chatbot. They still get to try things on the marketing page, but the flow is designed to get them into the messaging experience. Best when the magic is in WhatsApp and your users already live there. Prototype: recibook-whatsapp.vercel.app",
+      label: "Explore",
+      heading: "Try the embedded prototype",
+      embedUrl: "/case-studies/recibook/prototype/index.html",
+      images: [],
+      text: "",
+      browserFrame: true,
+      fullWidth: true,
+      embedMaxWidth: 360,
+      embedShowOnMobile: true,
     },
     {
       images: ["/case-studies/recibook/branding.png"],

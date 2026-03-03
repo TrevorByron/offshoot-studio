@@ -40,6 +40,8 @@ interface CaseStudyEmbedFrameProps {
   posterImage?: string
   /** Label for the fallback link (e.g. "Play on YouTube"). Default: "Play on YouTube" */
   fallbackLabel?: string
+  /** Optional max-width in px for the container (e.g. 420 for phone-style prototype). */
+  maxWidth?: number
 }
 
 export function CaseStudyEmbedFrame({
@@ -48,6 +50,7 @@ export function CaseStudyEmbedFrame({
   backgroundImage = DEFAULT_FRAME_BACKGROUND,
   posterImage,
   fallbackLabel = "Play on YouTube",
+  maxWidth,
 }: CaseStudyEmbedFrameProps) {
   const isYoutube = embedUrl.includes("youtube.com") || embedUrl.includes("youtube-nocookie.com")
   const scale = isYoutube ? 1 : SCALE
@@ -71,7 +74,10 @@ export function CaseStudyEmbedFrame({
       className={`relative p-2 md:p-6 w-full rounded-lg overflow-hidden bg-cover bg-center ${className ?? ""}`}
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="relative w-full bg-white rounded-lg shadow-lg flex flex-col border border-gray-200/80">
+      <div
+        className={`relative w-full bg-white shadow-lg flex flex-col border border-gray-200/80 ${maxWidth != null ? "rounded-[2rem]" : "rounded-lg"}`}
+        style={maxWidth != null ? { maxWidth: `${maxWidth}px`, marginLeft: "auto", marginRight: "auto", height: "80vh" } : undefined}
+      >
         <div className="flex items-center p-4 pb-3 border-b border-gray-200 shrink-0">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-gray-300" />
@@ -79,14 +85,20 @@ export function CaseStudyEmbedFrame({
             <div className="w-2 h-2 rounded-full bg-gray-300" />
           </div>
         </div>
-        <div className="relative w-full aspect-video overflow-hidden rounded-b-lg">
+        <div
+          className={`relative w-full overflow-hidden ${maxWidth != null ? "flex-1 min-h-0 rounded-b-[2rem]" : "aspect-video rounded-b-lg"}`}
+        >
           <div
-            className="absolute top-0 left-0 origin-top-left overflow-hidden"
-            style={{
-              width: `${innerSizePercent}%`,
-              height: `${innerSizePercent}%`,
-              transform: scale < 1 ? `scale(${scale})` : "none",
-            }}
+            className="absolute top-0 left-0 right-0 bottom-0 origin-top-left overflow-hidden"
+            style={
+              maxWidth != null
+                ? { width: "100%", height: "100%" }
+                : {
+                    width: `${innerSizePercent}%`,
+                    height: `${innerSizePercent}%`,
+                    transform: scale < 1 ? `scale(${scale})` : "none",
+                  }
+            }
           >
             <iframe
               src={embedUrl}

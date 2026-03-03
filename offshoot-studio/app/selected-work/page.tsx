@@ -95,13 +95,20 @@ function SelectedWorkContent() {
                   </h2>
                   <div className="mb-6">
                     {caseStudy ? (
-                      <button
-                        type="button"
+                      <div
+                        role="button"
+                        tabIndex={0}
                         onClick={() => setOpenSlug(project.caseStudySlug ?? null)}
-                        className="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-lg"
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault()
+                            setOpenSlug(project.caseStudySlug ?? null)
+                          }
+                        }}
+                        className="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-lg cursor-pointer"
                       >
                         {card}
-                      </button>
+                      </div>
                     ) : (
                       card
                     )}

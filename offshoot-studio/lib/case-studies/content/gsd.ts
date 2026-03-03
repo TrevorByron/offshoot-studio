@@ -10,8 +10,8 @@ export const gsdCaseStudy: CaseStudyContent = {
   badges: ["Design Sprints", "UI/UX Refinement", "Design systems"],
   cardPreview: {
     description: [
-      "Two-person strike team with Robert Hohman (Glassdoor cofounder) to validate a to-do app concept inspired by Getting Things Done.",
-      "Defined core problems, mapped user journeys and IA, assessed the market for differentiated positioning. 2-week sprint.",
+      "Robert Hohman (co-founder of Glassdoor) had a vision for a productivity app based on GTD principles that transformed his workflow as a CEO—but needed to validate whether it would resonate beyond his own use case. He'd already started building, but the experience felt founder-designed and lacked the strategic foundation to move forward confidently.",
+      "We established a design system, mapped the user journey, and built a polished V1 that gave Robert the clarity he needed.",
     ],
     imageBackground: "/background-images/rock.png",
     imageScreenshot: "/case-study-covers/gsd-cover.png",
@@ -24,42 +24,34 @@ export const gsdCaseStudy: CaseStudyContent = {
   introBlocks: [
     {
       type: "paragraph",
-      text: "We partnered directly with Robert Hohman (co-founder of Glassdoor) to explore and validate a productivity app concept inspired by David Allen's Getting Things Done.",
+      text: "Robert Hohman had a compelling vision: a task management app based on David Allen's Getting Things Done framework—the organizational system that transformed how he worked as a CEO. He'd already started building an experience, but it felt founder-designed. Before committing serious engineering resources or raising capital, he needed to answer a harder question: Would this resonate beyond his own workflow?",
     },
     {
       type: "paragraph",
       label: "The challenge:",
-      text: "Robert had a vision for a task management app based on organizational principles that transformed how he worked as a CEO. Before committing engineering resources or raising capital, he needed to answer: Would this resonate beyond his own workflow?",
+      text: "Take an early prototype and turn it into something testable—fast. We needed strategic clarity on positioning, a design foundation that could scale, and a polished V1 that would validate (or invalidate) core assumptions.",
     },
     {
       type: "paragraph",
-      text: "Our approach:",
-      font: "mono",
-    },
-    {
-      type: "list",
-      items: [
-        "Strategic foundation: Deep-dive into the GTD framework to identify which principles translated to software and which didn't",
-        "Market positioning: Assessed the crowded to-do app landscape to find where a differentiated approach could win",
-        "Information architecture: Mapped user journeys and defined the minimum testable version that would validate core assumptions",
-        "Design system: Established guidelines that balanced speed with polish—designed for testing, built for learning",
-      ],
+      label: "Our approach:",
+      text: "We started over from a design system standpoint, establishing baseline rules so we could move quickly without compromising quality. We journey-mapped at a high level to align on the outcome we were building toward, then assessed the crowded productivity app landscape to identify where a differentiated approach could win. We built a functional V1 that balanced speed with polish—designed for testing, built for learning.",
     },
     {
       type: "paragraph",
       label: "The outcome:",
-      text: "After 1 month and a half of strategic exploration and hands-on building, we delivered a functional V1 and the clarity Robert needed: the market timing and differentiation weren't there to justify a full build.",
+      text: "After two months of strategic exploration and hands-on building, Robert had his answer. The market timing and differentiation weren't there to justify a full build.",
     },
     {
       type: "paragraph",
       label: "The value:",
-      text: "By testing the idea thoroughly in 6 weeks, we saved months of engineering time and prevented a costly build that wouldn't have found product-market fit. Knowing when not to build is as valuable as knowing what to build.",
+      text: "By testing the idea thoroughly in 8 weeks, we saved months of engineering time and prevented a costly build that wouldn't have found product-market fit. Knowing when not to build is as valuable as knowing what to build.",
     },
   ],
   metaDescription:
     "Case study: Get Sh*t Done — strategy, design system, and prototype for a GTD-inspired to-do app with Robert Hohman (Glassdoor cofounder).",
   sections: [
     {
+      label: "Overview",
       heroImages: [
         { background: "/background-images/rock.png", inner: "/case-study-covers/gsd-login.png" },
         { background: "/background-images/rock.png", inner: "/case-study-covers/gsd-cover.png" },
@@ -68,20 +60,22 @@ export const gsdCaseStudy: CaseStudyContent = {
       text: "We started by defining the app’s structure and information architecture. The site map and user flows set a clear foundation for how tasks, projects, and contexts would connect—core to any GTD-inspired experience.",
     },
     {
-      images: [`${BASE}/Site-Map.png`, `${BASE}/Colors.png`, `${BASE}/Themes.png`, `${BASE}/Typography.png`],
-      text: "The design system began with color and type. A restrained palette and consistent typography scale give the product a calm, focused feel so the interface stays out of the way of getting things done.",
-    },
-    {
-      images: [`${BASE}/Buttons.png`, `${BASE}/Cards.png`, `${BASE}/Radio.png`, `${BASE}/Calendar.png`],
-      text: "Reusable components—buttons, cards, controls like radio groups, and calendar—were specified so we could move fast in the prototype while keeping the UI consistent and easy to extend later.",
-    },
-    {
-      images: [`${BASE}/Nav-Bar.png`, `${BASE}/Drawer.png`, `${BASE}/Modal.png`],
-      text: "Navigation, drawer, and modal patterns were designed to support quick capture, project switching, and focused task editing without leaving the main flow.",
-    },
-    {
-      images: [`${BASE}/To dos.png`],
-      text: "The to-do experience is the heart of the app. We focused on clear lists, minimal friction for capture and completion, and a layout that scales from a few items to many without feeling noisy.",
+      label: "Site Map and Design System",
+      images: [
+        `${BASE}/Site-Map.png`,
+        `${BASE}/Colors.png`,
+        `${BASE}/Themes.png`,
+        `${BASE}/Typography.png`,
+        `${BASE}/Buttons.png`,
+        `${BASE}/Cards.png`,
+        `${BASE}/Radio.png`,
+        `${BASE}/Calendar.png`,
+        `${BASE}/Nav-Bar.png`,
+        `${BASE}/Drawer.png`,
+        `${BASE}/Modal.png`,
+        `${BASE}/To dos.png`,
+      ],
+      text: "",
     },
   ],
 }

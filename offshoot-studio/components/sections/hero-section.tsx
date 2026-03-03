@@ -17,7 +17,12 @@ const NASA_TIGER_TEAM_GIF =
   "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWVncmx4ZWdyNTFjZGFoaDc0dWNjam85Z3A5ZzU0NWF1c3A5ZmhidiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5ndfKr0Nv92LkWrKpU/giphy.gif"
 const heroTransition = { duration: REVEAL_DURATION + 0.7, ease: REVEAL_EASE }
 
-export function HeroSection() {
+interface HeroSectionProps {
+  /** When set, carousel case study cards open the modal in-place (no navigation). */
+  onCaseStudyClick?: (slug: string) => void
+}
+
+export function HeroSection({ onCaseStudyClick }: HeroSectionProps) {
   const prefersReducedMotion = useReducedMotion()
   const [showTigerTeamCard, setShowTigerTeamCard] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -121,7 +126,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...heroTransition, delay: 0.4 }}
         >
-          <HeroCarousel />
+          <HeroCarousel onCaseStudyClick={onCaseStudyClick} />
         </motion.div>
       </div>
     </SectionWrapper>

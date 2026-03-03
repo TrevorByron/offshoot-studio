@@ -3,7 +3,6 @@
 import * as React from "react"
 import { createPortal } from "react-dom"
 import Image from "next/image"
-import { motion } from "framer-motion"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { ArrowLeft01Icon } from "@hugeicons/core-free-icons"
 import { CaseStudyBadge } from "@/components/case-study/case-study-badge"
@@ -20,25 +19,16 @@ interface CaseStudyDetailModalProps {
   backLabel?: string
 }
 
-const FADE_DURATION = 0.2
-
 const DEFAULT_BACK_LABEL = "Back to Selected Work"
 
 export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_BACK_LABEL }: CaseStudyDetailModalProps) {
   const closeRef = React.useRef<HTMLButtonElement>(null)
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null)
   const [mounted, setMounted] = React.useState(false)
-  const [isExiting, setIsExiting] = React.useState(false)
 
   const handleClose = React.useCallback(() => {
-    setIsExiting(true)
-  }, [])
-
-  const handleFadeComplete = React.useCallback(() => {
-    if (isExiting) {
-      setIsExiting(false)
-      onClose()
-    }
-  }, [isExiting, onClose])
+    onClose()
+  }, [onClose])
 
   React.useEffect(() => {
     setMounted(true)
@@ -58,13 +48,13 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
 
   React.useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && open && !isExiting) {
+      if (e.key === "Escape" && open) {
         handleClose()
       }
     }
     document.addEventListener("keydown", handleEscape)
     return () => document.removeEventListener("keydown", handleEscape)
-  }, [open, isExiting, handleClose])
+  }, [open, handleClose])
 
   if (!open || !mounted) return null
 
@@ -76,19 +66,16 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
   const imageOrder = isImageLeft ? "order-1 md:order-1" : "order-2 md:order-2"
 
   const modalContent = (
-    <motion.div
+    <div
       className="fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm"
-      initial={false}
-      animate={{ opacity: isExiting ? 0 : 1 }}
-      transition={{ duration: FADE_DURATION }}
-      onAnimationComplete={handleFadeComplete}
       onClick={handleClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby={caseStudy ? "case-study-modal-title" : undefined}
     >
       <div
-        className="h-full w-full overflow-y-auto bg-card min-h-screen"
+        ref={scrollContainerRef}
+        className="dark h-full w-full overflow-y-auto bg-card min-h-screen"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button top-left */}
@@ -98,7 +85,7 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
               ref={closeRef}
               type="button"
               onClick={handleClose}
-              className="flex items-center gap-2 px-3 py-2 rounded-md bg-background border border-border shadow-sm hover:bg-muted transition-colors text-sm font-medium"
+              className="flex items-center gap-2 px-3 py-2 rounded-md bg-background border border-border text-foreground shadow-sm hover:bg-muted transition-colors text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               aria-label={backLabel}
               title={backLabel}
             >
@@ -111,73 +98,12 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
         {caseStudy && cardProps ? (
           <div className="min-h-screen bg-card text-foreground">
             {slug ? (
-              isExiting ? (
-                <section
-                  className={`relative w-full min-h-[70vh] md:min-h-[80vh] flex flex-col md:grid ${gridCols} gap-8 md:gap-12 md:items-stretch p-6 max-w-7xl mx-auto`}
-                >
-                  <div
-                    className={`max-w-3xl bg-muted/30 md:bg-muted/20 flex flex-col justify-center p-4 md:p-6 ${contentOrder}`}
-                  >
-                    <span id="case-study-modal-title" className="sr-only">
-                      {caseStudy.title}
-                    </span>
-                    <h2 className="text-2xl font-semibold md:text-3xl mb-2 text-foreground">
-                      {caseStudy.title}
-                    </h2>
-                    {cardProps.badges.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {cardProps.badges.map((label) => (
-                          <CaseStudyBadge key={label} label={label} />
-                        ))}
-                      </div>
-                    )}
-                    {cardProps.description.map((paragraph, index) => (
-                      <p
-                        key={index}
-                        className={`text-muted-foreground text-sm leading-relaxed ${
-                          index < cardProps.description.length - 1 ? "mb-4" : ""
-                        }`}
-                      >
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                  <div
-                    className={`relative p-2 md:p-6 w-full min-h-[70vh] md:h-full rounded-lg overflow-hidden bg-cover bg-center ${imageOrder}`}
-                    style={{ backgroundImage: `url(${cardProps.imageBackground})`, paddingRight: "-24px" }}
-                  >
-                    <div
-                      className="absolute top-2 left-2 right-0 bottom-2 md:top-6 md:left-6 md:right-0 md:bottom-6 bg-background/95 dark:bg-card/90 rounded-lg shadow-lg flex flex-col"
-                      style={{ width: "calc(100% + 48px)", marginRight: "-48px" }}
-                    >
-                      <div className="flex items-center p-4 pb-3 border-b border-border">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
-                          <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
-                          <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
-                        </div>
-                      </div>
-                      <div className="flex-1 relative overflow-hidden rounded-b-lg">
-                        <Image
-                          src={cardProps.imageScreenshot}
-                          alt={cardProps.imageAlt}
-                          fill
-                          unoptimized
-                          className="object-cover object-left-top"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              ) : (
-              <motion.section
-                layoutId={`case-study-hero-${slug}`}
-                transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
+              <section
                 className={`relative w-full min-h-[70vh] md:min-h-[80vh] flex flex-col md:grid ${gridCols} gap-8 md:gap-12 md:items-stretch p-6 max-w-7xl mx-auto`}
               >
                   {/* Left: same sizing as case-study card — title, badge, description */}
                   <div
-                    className={`max-w-3xl bg-muted/30 md:bg-muted/20 flex flex-col justify-center p-4 md:p-6 ${contentOrder}`}
+                    className={`max-w-3xl bg-muted/30 md:bg-muted/20 dark:bg-transparent flex flex-col justify-center p-0 ${contentOrder}`}
                   >
                     <span id="case-study-modal-title" className="sr-only">
                       {caseStudy.title}
@@ -204,23 +130,16 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
                     ))}
                   </div>
 
-                  {/* Right: textured background + browser window — match card: overflow trick */}
+                  {/* Right: textured background + image — match card (cover-only or browser window) */}
                   <div
                     className={`relative p-2 md:p-6 w-full min-h-[70vh] md:h-full rounded-lg overflow-hidden bg-cover bg-center ${imageOrder}`}
                     style={{ backgroundImage: `url(${cardProps.imageBackground})`, paddingRight: "-24px" }}
                   >
-                    <div
-                      className="absolute top-2 left-2 right-0 bottom-2 md:top-6 md:left-6 md:right-0 md:bottom-6 bg-background/95 dark:bg-card/90 rounded-lg shadow-lg flex flex-col"
-                      style={{ width: "calc(100% + 48px)", marginRight: "-48px" }}
-                    >
-                      <div className="flex items-center p-4 pb-3 border-b border-border">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
-                          <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
-                          <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
-                        </div>
-                      </div>
-                      <div className="flex-1 relative overflow-hidden rounded-b-lg">
+                    {cardProps.coverImageOnly ? (
+                      <div
+                        className="absolute top-2 left-2 right-0 bottom-2 md:top-6 md:left-6 md:right-0 md:bottom-6 rounded-lg overflow-hidden"
+                        style={{ width: "calc(100% + 48px)", marginRight: "-48px" }}
+                      >
                         <Image
                           src={cardProps.imageScreenshot}
                           alt={cardProps.imageAlt}
@@ -229,10 +148,31 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
                           className="object-cover object-left-top"
                         />
                       </div>
-                    </div>
+                    ) : (
+                      <div
+                        className="absolute top-2 left-2 right-0 bottom-2 md:top-6 md:left-6 md:right-0 md:bottom-6 bg-background/95 dark:bg-card/90 rounded-lg shadow-lg flex flex-col"
+                        style={{ width: "calc(100% + 48px)", marginRight: "-48px" }}
+                      >
+                        <div className="flex items-center p-4 pb-3 border-b border-border">
+                          <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
+                            <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
+                            <div className="w-2 h-2 rounded-full bg-muted-foreground/40" />
+                          </div>
+                        </div>
+                        <div className="flex-1 relative overflow-hidden rounded-b-lg">
+                          <Image
+                            src={cardProps.imageScreenshot}
+                            alt={cardProps.imageAlt}
+                            fill
+                            unoptimized
+                            className="object-cover object-left-top"
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
-              </motion.section>
-              )
+                </section>
             ) : null}
 
             {/* Extended content below hero */}
@@ -245,6 +185,7 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
                     leadingParagraph={i === 0 && !caseStudy.introBlocks ? caseStudy.introBlurb : undefined}
                     introBlocks={i === 0 ? caseStudy.introBlocks : undefined}
                     isFirstSection={i === 0}
+                    scrollRootRef={scrollContainerRef}
                   />
                 ))}
 
@@ -265,7 +206,7 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
         ) : null}
         <Footer />
       </div>
-    </motion.div>
+    </div>
   )
 
   return createPortal(modalContent, document.body)

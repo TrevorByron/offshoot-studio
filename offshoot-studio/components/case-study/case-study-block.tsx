@@ -11,7 +11,6 @@ import {
   revealInitial,
   revealAnimate,
   revealTransition,
-  revealViewport,
   revealInitialReduced,
   revealAnimateReduced,
 } from "@/lib/reveal-config"
@@ -28,6 +27,8 @@ interface CaseStudyBlockProps {
   introBlocks?: CaseStudyIntroBlock[]
   /** When true, the first image container uses the purple background. */
   isFirstSection?: boolean
+  /** Scroll container ref for useInView when inside a modal (so in-view is relative to modal, not window). */
+  scrollRootRef?: React.RefObject<HTMLElement | null>
 }
 
 function IntroContent({ blocks }: { blocks: CaseStudyIntroBlock[] }) {
@@ -52,7 +53,7 @@ function IntroContent({ blocks }: { blocks: CaseStudyIntroBlock[] }) {
               </a>
             ) : (
               <p
-                className={`text-muted-foreground text-sm leading-relaxed ${block.font === "mono" ? "font-geist-mono" : ""}`}
+                className={`text-sm leading-relaxed ${block.font === "mono" ? "font-geist-mono text-foreground" : "text-muted-foreground"}`}
               >
                 {block.text}
               </p>
@@ -84,9 +85,14 @@ function IntroContent({ blocks }: { blocks: CaseStudyIntroBlock[] }) {
   )
 }
 
-export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirstSection }: CaseStudyBlockProps) {
+export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirstSection, scrollRootRef }: CaseStudyBlockProps) {
   const ref = React.useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, amount: revealViewport.amount })
+  // "some" = any part visible — works in modal (small viewport) and on full page; 20% would never fire for tall sections
+  const isInView = useInView(ref, {
+    once: true,
+    amount: "some",
+    root: scrollRootRef ?? undefined,
+  })
   const prefersReducedMotion = useReducedMotion()
 
   const {
@@ -98,6 +104,8 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
     heading,
     embedUrl,
     fullWidth,
+    embedMaxWidth,
+    embedShowOnMobile,
   } = section
 
   const initial = prefersReducedMotion ? revealInitialReduced : revealInitial
@@ -106,13 +114,14 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
 
   const hasText = introBlocks || leadingParagraph || text
 
-  /** Only hide the whole block on mobile when it's an embedded prototype (e.g. try the prototype), not when it's a video (YouTube). */
+  /** Only hide the whole block on mobile when it's an embedded prototype (e.g. try the prototype), not when it's a video (YouTube). Section can set embedShowOnMobile to show anyway. */
   const isEmbeddedPrototype = Boolean(embedUrl && !embedUrl.includes("youtube"))
+  const hideOnMobile = isEmbeddedPrototype && !embedShowOnMobile
 
   return (
     <div
       ref={ref}
-      className={`flex flex-col gap-6 md:gap-8 ${isEmbeddedPrototype ? "hidden md:flex" : ""}`}
+      className={`flex flex-col gap-6 md:gap-8 ${hideOnMobile ? "hidden md:flex" : ""}`}
     >
       {label && (
         <motion.span
@@ -138,7 +147,7 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
 
       {hasText && (
         <motion.div
-          className="space-y-4 max-w-3xl"
+          className="space-y-4"
           initial={isFirstSection ? animate : initial}
           animate={effectiveInView ? animate : initial}
           transition={{ ...revealTransition, delay: STAGGER_DELAY * 2 }}
@@ -169,10 +178,11 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
         {embedUrl ? (
           <CaseStudyEmbedFrame
             embedUrl={embedUrl}
-            className="min-h-[280px]"
+            className="h-fit"
             backgroundImage={browserFrameBackground}
             posterImage={section.embedPosterImage}
             fallbackLabel={section.embedFallbackLabel}
+            maxWidth={embedMaxWidth}
           />
         ) : (
           images.map((src, i) =>

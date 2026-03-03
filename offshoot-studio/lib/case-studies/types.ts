@@ -30,6 +30,10 @@ export interface CaseStudySection {
   wideMedia?: boolean
   /** When true, show only the media column (no text column). Use for full-width embed or image sections. */
   fullWidth?: boolean
+  /** Optional max-width in px for the embed container (e.g. 420 for a phone-style prototype). */
+  embedMaxWidth?: number
+  /** When true and section has embedUrl, show the embed on mobile instead of hiding it (default: hidden on mobile for embedded prototypes). */
+  embedShowOnMobile?: boolean
 }
 
 export interface CaseStudyBanner {

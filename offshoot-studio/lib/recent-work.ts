@@ -51,8 +51,8 @@ export const recentWorkProjects: RecentWorkProject[] = [
     badge: "Rapid Prototype",
     shortDescription: "To-do app concept validation with Robert Hohman (Glassdoor cofounder).",
     description: [
-      "Two-person strike team with Robert Hohman (Glassdoor cofounder) to validate a to-do app concept inspired by Getting Things Done.",
-      "Defined core problems, mapped user journeys and IA, assessed the market for differentiated positioning. 2-week sprint.",
+      "Robert Hohman (co-founder of Glassdoor) had a vision for a productivity app based on GTD principles that transformed his workflow as a CEO—but needed to validate whether it would resonate beyond his own use case. He'd already started building, but the experience felt founder-designed and lacked the strategic foundation to move forward confidently.",
+      "We established a design system, mapped the user journey, and built a polished V1 that gave Robert the clarity he needed.",
     ],
     imageCount: 3,
     imageUrls: ["/case-study-background.png", "/get-shit-done-screenshot.png"],
@@ -66,8 +66,8 @@ export const recentWorkProjects: RecentWorkProject[] = [
     badge: "Rapid Prototype • 11 hours | 2 days",
     shortDescription: "Design and engineering for Open Joy.",
     description: [
-      "Recipe app was losing users before they saw value. Audited onboarding, identified activation killers, built two prototypes in 11 hours: show value first, ask for commitment after.",
-      "Also flagged generic branding and produced cookbook-inspired visual direction.",
+      "Open Joy needed help fast—their onboarding was broken and users were dropping off before experiencing the core product. We agreed to a 2-day strike mission: audit the existing flows, prototype two potential new directions, and provide strategic recommendations they could act on immediately.",
+      "In 11 hours of focused work, we delivered two functional prototypes and branding nudges that gave their team clarity and momentum to move forward.",
     ],
     imageCount: 0,
     imageBackground: "/recibook-background.png",
