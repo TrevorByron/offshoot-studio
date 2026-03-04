@@ -6,7 +6,7 @@ import { SectionWrapper } from "./section-wrapper"
 
 const CAL_EMBED_JS_URL = "https://app.cal.com/embed/embed.js"
 const CAL_ORIGIN = "https://app.cal.com"
-const CAL_LINK = "offshoot-studio/30min"
+const CAL_LINK = "tigerteamstudios/callwithtrevor"
 const CAL_NAMESPACE = "30min-about"
 
 export function AboutCTASection() {
