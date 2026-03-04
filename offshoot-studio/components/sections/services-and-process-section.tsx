@@ -48,7 +48,7 @@ const servicesWithProcess: ServiceWithProcess[] = [
     icon: ZapIcon,
     title: "AI-Powered Rapid Prototyping",
     timeline: "3-6 weeks",
-    pricing: "$8k-$15k",
+    pricing: "Starting at $8k",
     description:
       "Working coded prototypes to validate ideas—with strategic thinking AI can't provide.",
     perfectFor: [
@@ -137,7 +137,7 @@ const servicesWithProcess: ServiceWithProcess[] = [
     icon: SparklesIcon,
     title: "0-to-MVP Design Refinement",
     timeline: "3-8 weeks",
-    pricing: "$10k-$15k",
+    pricing: "Starting at $7k",
     description:
       "MVP to professional product. Closes deals, raises capital.",
     perfectFor: [
