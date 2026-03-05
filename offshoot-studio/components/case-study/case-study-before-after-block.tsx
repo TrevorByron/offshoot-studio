@@ -138,7 +138,7 @@ export function CaseStudyBeforeAfterBlock({
         <div className="relative z-0 flex flex-col items-center gap-2">
           <div
             className="max-w-[380px] w-full flex items-center text-sm text-muted-foreground font-geist-mono whitespace-nowrap"
-            style={{ ["--before-after-gap" as string]: "8px" }}
+            style={{ ["--before-after-gap" as string]: "32px" }}
           >
             <div
               className="overflow-hidden text-right shrink-0"
@@ -148,7 +148,7 @@ export function CaseStudyBeforeAfterBlock({
             >
               <span className="whitespace-nowrap">After</span>
             </div>
-            <div className="shrink-0 w-[8px]" aria-hidden />
+            <div className="shrink-0 w-8" aria-hidden />
             <div
               className="overflow-hidden text-left shrink-0 min-w-0"
               style={{
