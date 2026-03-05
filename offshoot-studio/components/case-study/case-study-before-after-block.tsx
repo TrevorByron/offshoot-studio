@@ -37,6 +37,7 @@ export function CaseStudyBeforeAfterBlock({
   const ref = React.useRef<HTMLDivElement>(null)
   const containerRef = React.useRef<HTMLDivElement>(null)
   const sliderTrackRef = React.useRef<HTMLDivElement>(null)
+  const handleRef = React.useRef<HTMLDivElement>(null)
   const [sliderPosition, setSliderPosition] = React.useState(50)
   const [barLeftPercent, setBarLeftPercent] = React.useState(50)
   const isDraggingRef = React.useRef(false)
@@ -63,7 +64,7 @@ export function CaseStudyBeforeAfterBlock({
   const handlePointerDown = React.useCallback((e: React.PointerEvent) => {
     e.preventDefault()
     isDraggingRef.current = true
-    ;(e.target as HTMLElement).setPointerCapture?.(e.pointerId)
+    handleRef.current?.setPointerCapture?.(e.pointerId)
   }, [])
 
   React.useEffect(() => {
@@ -84,7 +85,7 @@ export function CaseStudyBeforeAfterBlock({
 
     const onPointerUp = (e: PointerEvent) => {
       try {
-        document.releasePointerCapture(e.pointerId)
+        handleRef.current?.releasePointerCapture?.(e.pointerId)
       } catch {
         // ignore
       }
@@ -190,6 +191,7 @@ export function CaseStudyBeforeAfterBlock({
             style={{ left: `${barLeftPercent}%`, transform: "translateX(-50%)" }}
           />
           <div
+            ref={handleRef}
             className="absolute top-1/2 flex h-14 w-14 -translate-y-1/2 items-center justify-center gap-0.5 rounded-full bg-muted shadow-md cursor-ew-resize touch-none pointer-events-auto"
             style={{ left: `${barLeftPercent}%`, transform: "translate(-50%, -50%)" }}
             onPointerDown={handlePointerDown}
