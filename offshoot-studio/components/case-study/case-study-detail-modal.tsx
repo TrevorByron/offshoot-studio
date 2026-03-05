@@ -8,6 +8,9 @@ import { ArrowLeft01Icon } from "@hugeicons/core-free-icons"
 import { CaseStudyBadge } from "@/components/case-study/case-study-badge"
 import { getCaseStudy, getCaseStudyCardProps } from "@/lib/case-studies"
 import { CaseStudyBlock } from "./case-study-block"
+import { CaseStudyBeforeAfterBlock } from "./case-study-before-after-block"
+import { CaseStudyBeforeAfterGroupBlock } from "./case-study-before-after-group-block"
+import { isBeforeAfterSection, isBeforeAfterGroupSection } from "@/lib/case-studies"
 import { CaseStudyQuote } from "./case-study-quote"
 import { Footer } from "@/components/sections/footer"
 
@@ -67,7 +70,7 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm"
+      className="fixed inset-0 z-[9999] bg-background"
       onClick={handleClose}
       role="dialog"
       aria-modal="true"
@@ -75,7 +78,7 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
     >
       <div
         ref={scrollContainerRef}
-        className="dark h-full w-full overflow-y-auto bg-card min-h-screen"
+        className="dark h-full w-full overflow-y-auto bg-background min-h-screen"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button top-left */}
@@ -178,16 +181,30 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
             {/* Extended content below hero */}
             {caseStudy && (
               <div className="mx-auto max-w-7xl px-4 md:px-6 py-14 md:py-18 lg:py-22 space-y-18 lg:space-y-22">
-                {caseStudy.sections.map((section, i) => (
-                  <CaseStudyBlock
-                    key={i}
-                    section={section}
-                    leadingParagraph={i === 0 && !caseStudy.introBlocks ? caseStudy.introBlurb : undefined}
-                    introBlocks={i === 0 ? caseStudy.introBlocks : undefined}
-                    isFirstSection={i === 0}
-                    scrollRootRef={scrollContainerRef}
-                  />
-                ))}
+                {caseStudy.sections.map((section, i) =>
+                  isBeforeAfterGroupSection(section) ? (
+                    <CaseStudyBeforeAfterGroupBlock
+                      key={i}
+                      section={section}
+                      scrollRootRef={scrollContainerRef}
+                    />
+                  ) : isBeforeAfterSection(section) ? (
+                    <CaseStudyBeforeAfterBlock
+                      key={i}
+                      section={section}
+                      scrollRootRef={scrollContainerRef}
+                    />
+                  ) : (
+                    <CaseStudyBlock
+                      key={i}
+                      section={section}
+                      leadingParagraph={i === 0 && !caseStudy.introBlocks ? caseStudy.introBlurb : undefined}
+                      introBlocks={i === 0 ? caseStudy.introBlocks : undefined}
+                      isFirstSection={i === 0}
+                      scrollRootRef={scrollContainerRef}
+                    />
+                  )
+                )}
 
                 {caseStudy.quote && (
                   <div className="flex flex-col items-center gap-6">

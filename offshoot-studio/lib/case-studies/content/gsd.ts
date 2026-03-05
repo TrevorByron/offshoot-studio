@@ -77,5 +77,23 @@ export const gsdCaseStudy: CaseStudyContent = {
       ],
       text: "",
     },
+    {
+      type: "beforeAfter",
+      label: "Login — Before & After",
+      beforeImage: `${BASE}/login-before.png`,
+      afterImage: `${BASE}/login-after.png`,
+    },
+    {
+      type: "beforeAfter",
+      label: "Today's Tasks — Before & After",
+      beforeImage: `${BASE}/today-before.png`,
+      afterImage: `${BASE}/today-after.png`,
+    },
+    {
+      type: "beforeAfter",
+      label: "Menu — Before & After",
+      beforeImage: `${BASE}/menu2-before.png`,
+      afterImage: `${BASE}/menu2-after.png`,
+    },
   ],
 }

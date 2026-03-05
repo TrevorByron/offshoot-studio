@@ -36,6 +36,44 @@ export interface CaseStudySection {
   embedShowOnMobile?: boolean
 }
 
+/** Before/after image slider section (e.g. founder design vs. redesigned). No heading or text. */
+export interface CaseStudyBeforeAfterSection {
+  type: "beforeAfter"
+  /** Optional label shown above the slider (e.g. "Before and After") */
+  label?: string
+  beforeImage: string
+  afterImage: string
+}
+
+/** Group of before/after sliders under one section label (e.g. "Before and After" with Login, Todays Tasks, Menu). */
+export interface CaseStudyBeforeAfterGroupSection {
+  type: "beforeAfterGroup"
+  /** Section label shown once above the group (e.g. "Before and After") */
+  label: string
+  items: Array<{
+    label: string
+    beforeImage: string
+    afterImage: string
+  }>
+}
+
+export type CaseStudySectionItem =
+  | CaseStudySection
+  | CaseStudyBeforeAfterSection
+  | CaseStudyBeforeAfterGroupSection
+
+export function isBeforeAfterSection(
+  section: CaseStudySectionItem
+): section is CaseStudyBeforeAfterSection {
+  return "type" in section && section.type === "beforeAfter"
+}
+
+export function isBeforeAfterGroupSection(
+  section: CaseStudySectionItem
+): section is CaseStudyBeforeAfterGroupSection {
+  return "type" in section && section.type === "beforeAfterGroup"
+}
+
 export interface CaseStudyBanner {
   heading: string
   ctaLabel?: string
@@ -98,7 +136,7 @@ export interface CaseStudyContent {
   introBlurb: string
   /** Optional rich intro for first block (paragraphs + list). When set, first block text column uses this instead of introBlurb + section text. */
   introBlocks?: CaseStudyIntroBlock[]
-  sections: CaseStudySection[]
+  sections: CaseStudySectionItem[]
   banners?: CaseStudyBanner[]
   /** Optional quote/testimonial shown after sections (e.g. client quote). */
   quote?: CaseStudyQuote

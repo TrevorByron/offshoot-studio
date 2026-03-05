@@ -203,7 +203,11 @@ export function CaseStudyCard({
             )}
           </div>
           <div
-            className={`relative p-2 md:p-6 w-full min-h-[70vh] md:h-full rounded-lg overflow-hidden bg-cover bg-center ${imageOrder}`}
+            role={slug && onFooterClick ? "button" : undefined}
+            tabIndex={slug && onFooterClick ? 0 : undefined}
+            onClick={slug && onFooterClick ? (e) => { e.stopPropagation(); onFooterClick() } : undefined}
+            onKeyDown={slug && onFooterClick ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onFooterClick() } } : undefined}
+            className={`relative p-2 md:p-6 w-full min-h-[70vh] md:h-full rounded-lg overflow-hidden bg-cover bg-center ${imageOrder} ${slug && onFooterClick ? "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" : ""}`}
             style={{ backgroundImage: `url(${imageBackground})`, paddingRight: "-24px" }}
           >
             {coverImageOnly ? (

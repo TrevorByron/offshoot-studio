@@ -49,11 +49,11 @@ export function AboutModal({ open, onClose }: AboutModalProps) {
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm"
+      className="fixed inset-0 z-[9999] bg-background"
       onClick={onClose}
     >
       <div
-        className="h-full w-full overflow-y-auto bg-background min-h-screen"
+        className="h-full w-full overflow-y-auto min-h-screen"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}

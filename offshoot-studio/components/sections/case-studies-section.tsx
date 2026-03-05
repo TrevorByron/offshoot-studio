@@ -31,19 +31,7 @@ export function CaseStudiesSection() {
         </div>
 
         {featuredCards.map((card) => (
-          <div
-            key={card.slug}
-            role="button"
-            tabIndex={0}
-            onClick={() => setOpenSlug(card.slug)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault()
-                setOpenSlug(card.slug)
-              }
-            }}
-            className="block w-full text-left rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 cursor-pointer"
-          >
+          <div key={card.slug} className="block w-full text-left rounded-lg">
             <CaseStudyCard
               slug={card.slug}
               title={card.title}
@@ -54,8 +42,8 @@ export function CaseStudiesSection() {
               imagePosition={card.imagePosition}
               imageAlt={card.imageAlt}
               coverImageOnly={card.coverImageOnly}
-              footerLinkHref={`/selected-work?case=${card.slug}&from=home`}
               footerLinkLabel="View more"
+              onFooterClick={() => setOpenSlug(card.slug)}
             />
           </div>
         ))}

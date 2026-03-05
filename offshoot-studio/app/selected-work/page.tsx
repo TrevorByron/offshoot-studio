@@ -93,25 +93,8 @@ function SelectedWorkContent() {
                   <h2 className="font-geist-mono text-[12px] text-left mb-6">
                     {String(index + 1).padStart(2, "0")} {project.title}
                   </h2>
-                  <div className="mb-6">
-                    {caseStudy ? (
-                      <div
-                        role="button"
-                        tabIndex={0}
-                        onClick={() => setOpenSlug(project.caseStudySlug ?? null)}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
-                            e.preventDefault()
-                            setOpenSlug(project.caseStudySlug ?? null)
-                          }
-                        }}
-                        className="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-lg cursor-pointer"
-                      >
-                        {card}
-                      </div>
-                    ) : (
-                      card
-                    )}
+                  <div className="mb-6 block w-full text-left rounded-lg">
+                    {card}
                   </div>
                 </section>
               )

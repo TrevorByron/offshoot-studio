@@ -17,9 +17,11 @@ import { SectionWrapper } from "@/components/sections/section-wrapper"
 import { Footer } from "@/components/sections/footer"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { BackLink } from "@/components/back-link"
-import type { CaseStudyContent } from "@/lib/case-studies"
+import { type CaseStudyContent, isBeforeAfterSection, isBeforeAfterGroupSection } from "@/lib/case-studies"
 import { CaseStudyHeader } from "./case-study-header"
 import { CaseStudyBlock } from "./case-study-block"
+import { CaseStudyBeforeAfterBlock } from "./case-study-before-after-block"
+import { CaseStudyBeforeAfterGroupBlock } from "./case-study-before-after-group-block"
 import { CaseStudyBanner } from "./case-study-banner"
 import { CaseStudyQuote } from "./case-study-quote"
 
@@ -56,12 +58,18 @@ export function CaseStudyPageLayout({ caseStudy }: CaseStudyPageLayoutProps) {
         <div className="mx-auto max-w-7xl space-y-18 lg:space-y-22">
           {sections.map((section, i) => (
             <ScrollReveal key={i} staggerDelay={i * BLOCK_STAGGER} startInView={i === 0}>
-              <CaseStudyBlock
-                section={section}
-                leadingParagraph={i === 0 && !caseStudy.introBlocks ? caseStudy.introBlurb : undefined}
-                introBlocks={i === 0 ? caseStudy.introBlocks : undefined}
-                isFirstSection={i === 0}
-              />
+              {isBeforeAfterGroupSection(section) ? (
+                <CaseStudyBeforeAfterGroupBlock section={section} />
+              ) : isBeforeAfterSection(section) ? (
+                <CaseStudyBeforeAfterBlock section={section} />
+              ) : (
+                <CaseStudyBlock
+                  section={section}
+                  leadingParagraph={i === 0 && !caseStudy.introBlocks ? caseStudy.introBlurb : undefined}
+                  introBlocks={i === 0 ? caseStudy.introBlocks : undefined}
+                  isFirstSection={i === 0}
+                />
+              )}
             </ScrollReveal>
           ))}
         </div>

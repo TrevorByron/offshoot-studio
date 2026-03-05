@@ -56,7 +56,7 @@ export function HeroSection({ onCaseStudyClick }: HeroSectionProps) {
             Product Design Agency
           </span>
           <h1 className="text-[40px] md:text-[56px] font-normal leading-tight tracking-tight mb-10">
-            Your design strike team
+            Your design strike team,
               <br className="hidden md:block" />
               {" "}on demand.
           </h1>
