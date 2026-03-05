@@ -15,6 +15,8 @@ export interface CaseStudySection {
   /** Optional array of hero cards (e.g. first = login, second = cover). Rendered in order above section images. */
   heroImages?: CaseStudyHeroImage[]
   images: string[]
+  /** Image src paths to hide on mobile (e.g. to reduce scroll in image-heavy sections). Shown from md breakpoint up. */
+  imagesHiddenOnMobile?: string[]
   text: string
   /** When set, the section shows a single embedded iframe (e.g. live prototype) instead of images. */
   embedUrl?: string

@@ -75,6 +75,12 @@ export const gsdCaseStudy: CaseStudyContent = {
         `${BASE}/Modal.png`,
         `${BASE}/To dos.png`,
       ],
+      imagesHiddenOnMobile: [
+        `${BASE}/Radio.png`,
+        `${BASE}/Calendar.png`,
+        `${BASE}/Nav-Bar.png`,
+        `${BASE}/To dos.png`,
+      ],
       text: "",
     },
     {

@@ -97,6 +97,7 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
 
   const {
     images,
+    imagesHiddenOnMobile,
     text,
     browserFrame,
     browserFrameBackground,
@@ -185,19 +186,21 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
             maxWidth={embedMaxWidth}
           />
         ) : (
-          images.map((src, i) =>
-            browserFrame ? (
-              <CaseStudyBrowserFrame
-                key={i}
-                src={src}
-                alt=""
-                className="min-h-[280px]"
-                backgroundImage={browserFrameBackground}
-              />
+          images.map((src, i) => {
+            const hideOnMobile = imagesHiddenOnMobile?.includes(src)
+            return browserFrame ? (
+              <div key={i} className={hideOnMobile ? "hidden md:block" : ""}>
+                <CaseStudyBrowserFrame
+                  src={src}
+                  alt=""
+                  className="min-h-[280px]"
+                  backgroundImage={browserFrameBackground}
+                />
+              </div>
             ) : (
               <div
                 key={i}
-                className={`w-full overflow-hidden rounded-[24px] border border-border ${isFirstSection ? "bg-purple" : "bg-muted/30"}`}
+                className={`w-full overflow-hidden rounded-[24px] border border-border ${isFirstSection ? "bg-purple" : "bg-muted/30"} ${hideOnMobile ? "hidden md:block" : ""}`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -207,7 +210,7 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
                 />
               </div>
             )
-          )
+          })
         )}
       </motion.div>
     </div>
