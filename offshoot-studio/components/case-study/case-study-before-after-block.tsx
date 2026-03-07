@@ -24,6 +24,12 @@ const STAGGER_DELAY = 0.12
 /** Aspect ratio for 380px width (height = 380 * 19/9 ≈ 802). Keeps height ratio-correct to 380px. */
 const SLIDER_ASPECT_RATIO = 9 / 19
 
+/** Smoothstep for eased opacity tied to slider position (0–1 in, 0–1 out). */
+function smoothstep(t: number): number {
+  const x = Math.max(0, Math.min(1, t))
+  return x * x * (3 - 2 * x)
+}
+
 interface CaseStudyBeforeAfterBlockProps {
   section: CaseStudyBeforeAfterSection
   /** Scroll container ref for useInView when inside a modal. */
@@ -38,8 +44,8 @@ export function CaseStudyBeforeAfterBlock({
   const containerRef = React.useRef<HTMLDivElement>(null)
   const sliderTrackRef = React.useRef<HTMLDivElement>(null)
   const handleRef = React.useRef<HTMLDivElement>(null)
-  const [sliderPosition, setSliderPosition] = React.useState(50)
-  const [barLeftPercent, setBarLeftPercent] = React.useState(50)
+  const [sliderPosition, setSliderPosition] = React.useState(20)
+  const [barLeftPercent, setBarLeftPercent] = React.useState(20)
   const isDraggingRef = React.useRef(false)
 
   React.useEffect(() => {
@@ -138,21 +144,23 @@ export function CaseStudyBeforeAfterBlock({
         <div className="relative z-0 flex flex-col items-center gap-2">
           <div
             className="max-w-[380px] w-full flex items-center text-sm text-muted-foreground font-geist-mono whitespace-nowrap"
-            style={{ ["--before-after-gap" as string]: "32px" }}
+            style={{ ["--before-after-gap" as string]: "12px" }}
           >
             <div
               className="overflow-hidden text-right shrink-0"
               style={{
                 width: `calc((100% - var(--before-after-gap, 8px)) * ${sliderPosition} / 100)`,
+                opacity: smoothstep(sliderPosition / 100),
               }}
             >
               <span className="whitespace-nowrap">After</span>
             </div>
-            <div className="shrink-0 w-8" aria-hidden />
+            <div className="shrink-0 w-3" aria-hidden />
             <div
               className="overflow-hidden text-left shrink-0 min-w-0"
               style={{
                 width: `calc((100% - var(--before-after-gap, 8px)) * ${100 - sliderPosition} / 100)`,
+                opacity: smoothstep((100 - sliderPosition) / 100),
               }}
             >
               <span className="whitespace-nowrap">Before</span>

@@ -7,7 +7,9 @@ import { ProblemSection } from "@/components/sections/problem-section"
 import { TheWhySection } from "@/components/sections/the-why-section"
 import { ServicesAndProcessSection } from "@/components/sections/services-and-process-section"
 import { WhyOffshootSection } from "@/components/sections/why-offshoot-section"
+import { FAQSection } from "@/components/sections/faq-section"
 import { FinalCTASection } from "@/components/sections/final-cta-section"
+import { WhyNotAISection } from "@/components/sections/why-not-ai-section"
 import { Footer } from "@/components/sections/footer"
 import { CaseStudyDetailModal } from "@/components/case-study/case-study-detail-modal"
 import { AboutModal } from "@/components/about-modal"
@@ -36,7 +38,9 @@ export function HomePageWithModal() {
         <TheWhySection />
         <ServicesAndProcessSection />
         <WhyOffshootSection />
+        <FAQSection />
         <FinalCTASection />
+        <WhyNotAISection />
         <Footer />
       </main>
       <CaseStudyDetailModal
