@@ -11,11 +11,11 @@ const testimonials = [
     avatar: "/anna-grigoryan.png",
   },
   {
-    quote: "They helped us validate our core feature in 4 weeks instead of 3 months. Shipped almost directly to production.",
-    name: "Sarah Chen",
-    title: "VP of Product",
-    company: "TechFlow Inc",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=faces",
+    quote: "Trevor helped design foundational portions of the user experience and help us grow from 0 to $10M ARR. I'd recommend him for any early stage team looking for outstanding design and user experience.",
+    name: "Michael Yang",
+    title: "Founder & CEO",
+    company: "Toro TMS",
+    avatar: "/michael-yang.png",
   },
   {
     quote: "Trevor was my lead design partner on a big bet we made to bring a bidding network to life at Procore. He helped take a big idea to production at an incredibly fast pace. This helped us derisk the bet quickly and provided the validation we needed to double down. The Procore construction network wouldn't be what it is today without him!",
@@ -23,27 +23,6 @@ const testimonials = [
     title: "Head of Product Management",
     company: "Procore",
     avatar: "/tim-hey.png",
-  },
-  {
-    quote: "The strategic thinking they brought was invaluable. We thought we knew what to build, but they helped us see the bigger picture and pivot early. That early alignment saved us months of rework and gave the whole team confidence in the direction.",
-    name: "Emily Watson",
-    title: "Head of Design",
-    company: "CloudSync",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=faces",
-  },
-  {
-    quote: "Best $12k we ever spent. Production-ready in 5 weeks.",
-    name: "James Park",
-    title: "CTO",
-    company: "ScaleUp Labs",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=faces",
-  },
-  {
-    quote: "Their AI-augmented approach meant we could iterate quickly without sacrificing quality. Every decision was thoughtful, every line of code was clean. We went from concept to user testing in half the time we'd budgeted, and the feedback from our beta users was overwhelmingly positive.",
-    name: "Lisa Thompson",
-    title: "Product Lead",
-    company: "InnovateCo",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&crop=faces",
   },
 ]
 
@@ -66,7 +45,7 @@ export function WhyOffshootSection() {
             {testimonials.map((testimonial, index) => (
             <Card
               key={index}
-              className={`flex flex-col bg-card break-inside-avoid mb-3 ${index >= 3 ? "hidden sm:flex" : ""}`}
+              className="flex flex-col bg-card break-inside-avoid mb-3"
             >
               <CardContent className="p-4 flex flex-col flex-1">
                 <p className="text-foreground text-base leading-relaxed mb-4 flex-1">
