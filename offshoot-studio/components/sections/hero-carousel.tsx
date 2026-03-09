@@ -238,7 +238,7 @@ export function HeroCarousel({
         </motion.div>
       </div>
 
-      {/* View all recent work – right-aligned */}
+      {/* View selected work – right-aligned */}
       <div className="w-full flex justify-end px-4 md:px-6 pt-2 pb-2">
         <Link
           href="/selected-work"
@@ -247,7 +247,7 @@ export function HeroCarousel({
             "inline-flex items-center justify-center gap-2 w-full md:w-auto"
           )}
         >
-          View all recent work
+          View selected work
           <HugeiconsIcon icon={ArrowRight01Icon} className="size-4 shrink-0" strokeWidth={2} aria-hidden />
         </Link>
       </div>
