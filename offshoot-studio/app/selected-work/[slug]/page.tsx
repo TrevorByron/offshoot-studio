@@ -22,9 +22,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const project = getProject(slug)
   if (!project) return { title: "Project Not Found" }
   const firstLine = project.description[0]?.slice(0, 160) ?? ""
+  const title = `${project.title} – Tiger Team Studios`
+  const ogImage =
+    project.imageUrls?.[0] ?? project.imageBackground ?? project.imageScreenshot ?? "/og-image.png"
   return {
-    title: `${project.title} – Tiger Team Studios`,
+    title,
     description: firstLine,
+    alternates: {
+      canonical: `/selected-work/${slug}`,
+    },
+    openGraph: {
+      title,
+      description: firstLine,
+      url: `/selected-work/${slug}`,
+      siteName: "Tiger Team Studios",
+      type: "article",
+      images: [{ url: ogImage, width: 1200, height: 630, alt: project.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: firstLine,
+      images: [ogImage],
+    },
   }
 }
 
