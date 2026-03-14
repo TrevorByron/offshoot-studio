@@ -24,6 +24,13 @@ const testimonials = [
     company: "Procore",
     avatar: "/tim-hey.png",
   },
+  {
+    quote: "Trevor excels at taking a spark of an idea and turning it into a vision that stops both teammates and customers in their tracks. He's a design visionary with a rare instinct for what will land emotionally - and team decisions always come substantially easier once he's in the loop. Working with him at Toro TMS was a genuine competitive advantage, and a personal pleasure.",
+    name: "Patrick Wilson",
+    title: "Founding PM",
+    company: "Toro TMS",
+    avatar: "/patrick-wilson.png",
+  },
 ]
 
 export function WhyOffshootSection() {
