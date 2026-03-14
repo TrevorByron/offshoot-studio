@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { CTAModalProvider } from "@/components/cta-modal-provider";
 import { FloatingNav } from "@/components/floating-nav";
 import { PageTransition } from "@/components/page-transition";
@@ -122,6 +123,7 @@ export default function RootLayout({
           {/* Cal.com script is loaded by @calcom/embed-react when Cal component mounts — do not load here to avoid double load / race */}
           <PageTransition>{children}</PageTransition>
           <FloatingNav />
+          <Analytics />
         </CTAModalProvider>
       </body>
     </html>
