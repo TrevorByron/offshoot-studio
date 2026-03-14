@@ -1,0 +1,7 @@
+{
+  "name": "offshoot-studio-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "cd offshoot-studio && npm ci && npm run build"
+  }
+}

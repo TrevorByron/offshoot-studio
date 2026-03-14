@@ -1,0 +1,5 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "cd offshoot-studio && npm ci",
+  "buildCommand": "cd offshoot-studio && npm run build"
+}
