@@ -78,6 +78,7 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
     >
       <div
         ref={scrollContainerRef}
+        data-case-study-scroll
         className="dark h-full w-full overflow-y-auto bg-background min-h-screen"
         onClick={(e) => e.stopPropagation()}
       >

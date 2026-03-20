@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import { BookACallLink } from "@/components/book-a-call-link"
 
 interface FooterProps {
@@ -21,14 +22,23 @@ export function Footer({ variant = "default" }: FooterProps) {
         <div className="w-full">
           <p className="mb-4 font-geist-mono text-[12px] text-left text-zinc-600 dark:text-zinc-600">
             © 2025 Tiger Team Studios
+            {" · "}
+            <Link
+              href="/play"
+              className="hover:text-zinc-900 dark:hover:text-zinc-900 transition-colors"
+            >
+              Play
+            </Link>
           </p>
-          <Image
-            src="/logo-NASA.svg"
-            alt="Tiger Team Studios"
-            width={1200}
-            height={200}
-            className="w-full h-auto object-contain"
-          />
+          <Link href="/" className="block hover:opacity-90 transition-opacity">
+            <Image
+              src="/logo-NASA.svg"
+              alt="Tiger Team Studios"
+              width={1200}
+              height={200}
+              className="w-full h-auto object-contain"
+            />
+          </Link>
         </div>
       </div>
     </footer>

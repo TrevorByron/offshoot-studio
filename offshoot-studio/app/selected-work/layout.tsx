@@ -16,12 +16,14 @@ export const metadata: Metadata = {
     url: `${siteUrl}/selected-work`,
     siteName: "Tiger Team Studios",
     type: "website",
+    images: [{ url: `${siteUrl}/og-image.png`, width: 1200, height: 630, alt: "Tiger Team Studios – Selected Work" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Selected Work – Tiger Team Studios",
     description:
       "Case studies and selected projects from Tiger Team Studios. Strategic design and prototyping for product teams.",
+    images: [`${siteUrl}/og-image.png`],
   },
 }
 

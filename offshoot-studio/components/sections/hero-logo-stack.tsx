@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { motion, useReducedMotion } from "framer-motion"
 import { REVEAL_DURATION, REVEAL_EASE } from "@/lib/reveal-config"
 
@@ -10,8 +12,16 @@ const HERO_OFFSET = 28
 const heroTransition = { duration: REVEAL_DURATION + 0.7, ease: REVEAL_EASE }
 
 export function HeroLogoStack() {
+  const pathname = usePathname()
   const [scrollY, setScrollY] = useState(0)
   const prefersReducedMotion = useReducedMotion()
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: "instant" })
+    }
+  }
 
   useEffect(() => {
     let rafId: number
@@ -42,6 +52,12 @@ export function HeroLogoStack() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...heroTransition, delay: 0 }}
       >
+        <Link
+          href="/"
+          onClick={handleLogoClick}
+          className="absolute inset-0 z-10 pointer-events-auto flex items-center justify-center"
+          aria-label="Tiger Team Studios – Home"
+        />
         {LOGO_PARALLAX_RATES.map((rate, i) => (
           <div
             key={i}

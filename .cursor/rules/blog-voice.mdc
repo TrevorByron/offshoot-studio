@@ -1,0 +1,22 @@
+---
+description: Blog post voice — use agency language, not individual
+globs: "content/blog/**/*.md"
+alwaysApply: false
+---
+
+# Blog Post Voice
+
+Write in **agency voice**, not individual voice. Tiger Team Studios is a studio; the blog speaks for the team.
+
+**Use "we" instead of "I":**
+- "We built..." not "I built..."
+- "We shipped..." not "I shipped..."
+- "We wanted..." not "I wanted..."
+- "We learned..." not "I learned..."
+- "We're still figuring out..." not "I'm still figuring out..."
+
+**Section headings:** Prefer "What We Were Playing With" over "What I Was Playing With". Same for "How We Prompted It", "What We Learned", etc.
+
+**Descriptions and meta:** "How we wired up..." not "How I wired up...". "What we shipped..." not "What I shipped...".
+
+Keep the same conversational, practical tone—just plural.

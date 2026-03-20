@@ -1,0 +1,34 @@
+---
+description: Blog post image sourcing — screenshot actual work, Unsplash fallback, or omit
+globs: "content/blog/**/*.md"
+alwaysApply: false
+---
+
+# Blog Post Images
+
+Images must **support the article**—show the actual feature, component, or page the post describes.
+
+**Priority order:**
+
+1. **Screenshot the actual work** — The feature, component, or page the post is about. E.g., for a before/after sliders post, screenshot the sliders; for a portfolio post, screenshot the home page.
+2. **Unsplash** — If there's no obvious screenshot (generic topic, conceptual post), download a relevant image from Unsplash. Use `?w=1200&h=630&fit=crop`. Save to `public/blog/<slug>.png`.
+3. **Omit** — If neither works, omit the `image` field; the gradient placeholder will be used.
+
+**Screenshot script** (when the work is on the site):
+
+```bash
+node scripts/screenshot-blog.mjs <url> <slug>
+```
+
+For modals or scrollable content, use scroll options:
+
+```bash
+node scripts/screenshot-blog.mjs "http://localhost:3000/selected-work?case=get-shit-done" <slug> \
+  --scroll-container "[data-case-study-scroll]" --scroll-y 1400 --wait 2500
+```
+
+**Unsplash fallback:**
+
+```bash
+curl -sL -o public/blog/<slug>.png "https://images.unsplash.com/photo-<id>?w=1200&h=630&fit=crop"
+```
