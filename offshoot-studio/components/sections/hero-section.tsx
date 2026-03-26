@@ -76,9 +76,9 @@ export function HeroSection({ onCaseStudyClick }: HeroSectionProps) {
               }}
               className="cursor-pointer border-b border-muted-foreground/40 hover:border-foreground/60 transition-colors"
             >
-              Apollo 13 NASA Tiger Team
+              Apollo 13 Tiger Team
             </span>
-            , we parachute in, solve it, and move on.
+            , we handle the mission-critical work your core team doesn't have bandwidth for.
           </p>
           <div className="flex flex-wrap justify-start gap-3 mb-10">
             <BookACallLink
@@ -109,7 +109,7 @@ export function HeroSection({ onCaseStudyClick }: HeroSectionProps) {
             >
               <img
                 src={NASA_TIGER_TEAM_GIF}
-                alt="Apollo 13 NASA Tiger Team"
+                alt="Apollo 13 Tiger Team"
                 className="block w-full h-auto object-cover"
               />
             </div>
