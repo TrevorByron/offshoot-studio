@@ -31,15 +31,20 @@ export interface CarouselScreenshot {
 const DEFAULT_LOGOS: CarouselLogo[] = [
   { src: "/logos/openJoy.png", alt: "OpenJoy" },
   { src: "/logos/Procore.png", alt: "Procore" },
+  { src: "/logos/Alkami.png", alt: "Alkami" },
   { src: "/logos/Iodine.png", alt: "Iodine" },
   { src: "/logos/Transcarent.png", alt: "Transcarent" },
   { src: "/logos/TweakingCat.png", alt: "Tweaking Cat Studios" },
   { src: "/logos/Toro.png", alt: "Toro" },
   { src: "/logos/prc.png", alt: "The Public Run Club" },
+  { src: "/logos/pgy1.png", alt: "Disability Insurance for Physicians" },
 ]
 
 const TOOLTIP_OFFSET = 20
 const DESKTOP_BREAKPOINT = 768
+/** All ticker logos are exported at this size from Figma. */
+const LOGO_WIDTH = 689
+const LOGO_HEIGHT = 354
 
 const DEFAULT_SCREENSHOTS: CarouselScreenshot[] = [
   { src: "/background-images/man-on-rock.png", alt: "Man on rock", coverImage: "/case-study-covers/procore-cover.png", hoverLogo: "/logos/Procore.png", caseStudySlug: "procore" },
@@ -123,10 +128,11 @@ export function HeroCarousel({
               <Image
                 src={logo.src}
                 alt={logo.alt}
-                width={180}
-                height={140}
+                width={LOGO_WIDTH}
+                height={LOGO_HEIGHT}
+                unoptimized
                 className="w-full h-full object-contain object-center"
-                sizes="180px"
+                sizes="(max-width: 767px) 160px, 180px"
               />
             </div>
           ))}

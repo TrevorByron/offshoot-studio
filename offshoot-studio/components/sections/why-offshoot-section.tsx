@@ -31,6 +31,13 @@ const testimonials = [
     company: "Toro TMS",
     avatar: "/patrick-wilson.png",
   },
+  {
+    quote: "Trevor is down to earth and knows how to relate to a business owner that knows absolutely nothing about websites. Working with him is a total pleasure and he turned my stone age website into a very user friendly and quite professional website. Highly recommend him!",
+    name: "Jay Weinberg",
+    title: "CLU · ChFC",
+    company: "",
+    avatar: "/logos/pgy1-logo-alone.png",
+  },
 ]
 
 export function WhyOffshootSection() {
@@ -72,7 +79,9 @@ export function WhyOffshootSection() {
                       {testimonial.name}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {testimonial.title}, {testimonial.company}
+                      {testimonial.company
+                        ? `${testimonial.title}, ${testimonial.company}`
+                        : testimonial.title}
                     </p>
                   </div>
                 </div>
