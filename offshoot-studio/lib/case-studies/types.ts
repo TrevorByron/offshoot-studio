@@ -64,6 +64,11 @@ export interface CaseStudySection {
    * (matches portfolio `cs-showcase--scout` treatment).
    */
   showcaseBleed?: boolean
+  /**
+   * When true, render the first image as a full-bleed opener visual
+   * (no text column — used for the Scout Fuel dashboard hero).
+   */
+  heroBleed?: boolean
 }
 
 /** Before/after image slider section (e.g. founder design vs. redesigned). No heading or text. */

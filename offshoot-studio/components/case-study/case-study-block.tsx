@@ -142,6 +142,7 @@ export function CaseStudyBlock({
     linkHref,
     linkAriaLabel,
     showcaseBleed,
+    heroBleed,
   } = section
 
   const initial = prefersReducedMotion ? revealInitialReduced : revealInitial
@@ -226,23 +227,70 @@ export function CaseStudyBlock({
         transition={{ ...revealTransition, delay: hasText ? STAGGER_DELAY * 3 : STAGGER_DELAY }}
       >
         {embedUrl ? (
-          <CaseStudyEmbedFrame
-            embedUrl={embedUrl}
-            className="h-fit"
-            backgroundImage={browserFrameBackground}
-            posterImage={section.embedPosterImage}
-            fallbackLabel={section.embedFallbackLabel}
-            maxWidth={embedMaxWidth}
-          />
+          browserFrame ? (
+            <CaseStudyEmbedFrame
+              embedUrl={embedUrl}
+              className="h-fit"
+              backgroundImage={browserFrameBackground}
+              posterImage={section.embedPosterImage}
+              fallbackLabel={section.embedFallbackLabel}
+              maxWidth={embedMaxWidth}
+            />
+          ) : (
+            <div
+              className="w-full overflow-hidden rounded-xl border border-white/10 bg-[#111]"
+              style={embedMaxWidth ? { maxWidth: embedMaxWidth } : undefined}
+            >
+              <iframe
+                src={embedUrl}
+                title={section.embedFallbackLabel ?? "Embedded document"}
+                className="w-full h-[min(56vh,480px)] border-0"
+                allowFullScreen
+              />
+            </div>
+          )
         ) : customMedia ? (
-          <CaseStudyBrowserFrame
-            className="min-h-[280px]"
-            backgroundImage={browserFrameBackground}
-            urlLabel={browserFrameUrl}
-            mediaHeightClassName={customMediaHeight}
+          browserFrame ? (
+            <CaseStudyBrowserFrame
+              className="min-h-[280px]"
+              backgroundImage={browserFrameBackground}
+              urlLabel={browserFrameUrl}
+              mediaHeightClassName={customMediaHeight}
+            >
+              <ScoutCaseStudyMedia kind={customMedia} />
+            </CaseStudyBrowserFrame>
+          ) : (
+            <div className={`relative w-full overflow-hidden ${customMediaHeight}`}>
+              <div className="absolute inset-0">
+                <ScoutCaseStudyMedia kind={customMedia} />
+              </div>
+            </div>
+          )
+        ) : heroBleed && images[0] ? (
+          <div
+            className="relative w-screen left-1/2 -translate-x-1/2 py-8 md:py-12 px-4 md:px-8 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${browserFrameBackground ?? "/background-images/rock.png"})`,
+            }}
           >
-            <ScoutCaseStudyMedia kind={customMedia} />
-          </CaseStudyBrowserFrame>
+            <div className="absolute inset-0 bg-black/40" aria-hidden />
+            <div className="relative mx-auto max-w-7xl">
+              <div className="rounded-xl overflow-hidden border border-white/15 bg-[#111] shadow-2xl">
+                <div className="flex items-center gap-3 px-3 py-2.5 border-b border-white/10 bg-[#1a1a1a]">
+                  <div className="flex items-center gap-1.5">
+                    <span className="size-2 rounded-full bg-[#FF5F57]" />
+                    <span className="size-2 rounded-full bg-[#FEBC2E]" />
+                    <span className="size-2 rounded-full bg-[#28C840]" />
+                  </div>
+                  <div className="flex-1 min-w-0 rounded-md bg-black/35 px-2.5 py-1 font-geist-mono text-[11px] text-white/55 truncate">
+                    {browserFrameUrl ?? "scoutfuel.app/dashboard"}
+                  </div>
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={images[0]} alt="" className="w-full h-auto block" />
+              </div>
+            </div>
+          </div>
         ) : showcaseBleed && linkHref && images[0] ? (
           <div
             className="relative w-screen left-1/2 -translate-x-1/2 py-10 md:py-16 px-4 md:px-8 bg-cover bg-center"
@@ -281,16 +329,16 @@ export function CaseStudyBlock({
         ) : (
           images.map((src, i) => {
             const hideImageOnMobile = imagesHiddenOnMobile?.includes(src)
-            const framed = (
-              <CaseStudyBrowserFrame
-                src={src}
-                alt=""
-                className="min-h-[280px]"
-                backgroundImage={browserFrameBackground}
-                urlLabel={browserFrameUrl ?? (linkHref && i === 0 ? "Click to explore" : undefined)}
-              />
-            )
-            if (browserFrame || (linkHref && i === 0)) {
+            if (browserFrame) {
+              const framed = (
+                <CaseStudyBrowserFrame
+                  src={src}
+                  alt=""
+                  className="min-h-[280px]"
+                  backgroundImage={browserFrameBackground}
+                  urlLabel={browserFrameUrl ?? (linkHref && i === 0 ? "Click to explore" : undefined)}
+                />
+              )
               return (
                 <div key={i} className={hideImageOnMobile ? "hidden md:block" : ""}>
                   {linkHref && i === 0 ? (
@@ -309,11 +357,9 @@ export function CaseStudyBlock({
                 </div>
               )
             }
+            // Plain supporting visual — no browser chrome / rock bezel
             return (
-              <div
-                key={i}
-                className={`w-full overflow-hidden rounded-[24px] border border-border ${isFirstSection ? "bg-purple" : "bg-muted/30"} ${hideImageOnMobile ? "hidden md:block" : ""}`}
-              >
+              <div key={i} className={`w-full ${hideImageOnMobile ? "hidden md:block" : ""}`}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={src}
@@ -332,13 +378,15 @@ export function CaseStudyBlock({
     return (
       <div
         ref={ref}
-        className={`grid grid-cols-1 md:grid-cols-[40%_60%] gap-8 md:gap-10 lg:gap-14 items-start border-t border-border/40 dark:border-white/10 pt-14 md:pt-20 ${
+        className={`grid grid-cols-1 md:grid-cols-[40%_60%] gap-8 md:gap-10 lg:gap-14 items-start border-t border-border/40 dark:border-white/10 pt-14 md:pt-20 md:min-h-[90vh] md:pb-16 ${
           hideOnMobile ? "hidden md:grid" : ""
         }`}
       >
-        <div className={textFirst ? "order-1" : "order-1 md:order-2"}>{textColumn}</div>
+        <div className={`md:py-8 ${textFirst ? "order-1" : "order-1 md:order-2"}`}>
+          {textColumn}
+        </div>
         <div
-          className={`min-w-0 md:sticky md:top-16 md:self-start ${
+          className={`min-w-0 md:sticky md:top-20 md:self-start md:py-8 ${
             textFirst ? "order-2" : "order-2 md:order-1"
           }`}
         >

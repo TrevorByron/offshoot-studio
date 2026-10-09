@@ -16,7 +16,6 @@ import { CaseStudyBlock } from "./case-study-block"
 import { CaseStudyBeforeAfterBlock } from "./case-study-before-after-block"
 import { CaseStudyBeforeAfterGroupBlock } from "./case-study-before-after-group-block"
 import { CaseStudySideBySideBlock } from "./case-study-side-by-side-block"
-import { CaseStudyStickyScroll } from "./case-study-sticky-scroll"
 
 function RichText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g)
@@ -107,14 +106,7 @@ function isShowcaseSection(section: CaseStudySection): boolean {
   return Boolean(section.showcaseBleed)
 }
 
-/** Process / contrast row sits outside the sticky scroll band (matches portfolio). */
-function isProcessSection(section: CaseStudySection): boolean {
-  const label = section.label?.toLowerCase() ?? ""
-  const heading = section.heading?.toLowerCase() ?? ""
-  return label.includes("2020") || heading.includes("update in process")
-}
-
-function isStickyScrollPanel(section: CaseStudySectionItem): section is CaseStudySection {
+function isHeroBleedSection(section: CaseStudySectionItem): boolean {
   if (
     isBeforeAfterSection(section) ||
     isBeforeAfterGroupSection(section) ||
@@ -122,20 +114,18 @@ function isStickyScrollPanel(section: CaseStudySectionItem): section is CaseStud
   ) {
     return false
   }
+  return Boolean(section.heroBleed)
+}
+
+function asStandardSection(section: CaseStudySectionItem): CaseStudySection | null {
   if (
-    isShowcaseSection(section) ||
-    isNextStepsSection(section) ||
-    isProcessSection(section)
+    isBeforeAfterSection(section) ||
+    isBeforeAfterGroupSection(section) ||
+    isSideBySideSection(section)
   ) {
-    return false
+    return null
   }
-  return Boolean(
-    section.customMedia ||
-      section.embedUrl ||
-      section.images?.length ||
-      section.bodyBlocks?.length ||
-      section.text
-  )
+  return section
 }
 
 interface CaseStudyImmersiveDarkProps {
@@ -145,10 +135,9 @@ interface CaseStudyImmersiveDarkProps {
 
 /**
  * Portfolio-style immersive layout for Scout Fuel:
- * - Hero intro + first visual (before/after) full width
- * - Process row: text left / media right (sticky within the row)
- * - Sticky scroll band: left panels scroll, right media stays put + crossfades
- * - Last visual (prototype showcase) full width
+ * - Hero intro + full-bleed dashboard opener
+ * - Each narrative section: text left / sticky media right (own section)
+ * - Last visual (prototype showcase) full-bleed
  * - Next steps + quote + tags
  */
 export function CaseStudyImmersiveDark({
@@ -164,12 +153,15 @@ export function CaseStudyImmersiveDark({
     ) {
       return true
     }
+    const std = asStandardSection(section)
+    if (!std) return false
+    if (std.heroBleed) return true
     return Boolean(
-      section.images?.length ||
-        section.embedUrl ||
-        section.customMedia ||
-        section.bodyBlocks?.length ||
-        section.text
+      std.images?.length ||
+        std.embedUrl ||
+        std.customMedia ||
+        std.bodyBlocks?.length ||
+        std.text
     )
   })
 
@@ -186,32 +178,6 @@ export function CaseStudyImmersiveDark({
     nextStepsIndex >= 0
       ? contentSections.filter((_, i) => i !== nextStepsIndex)
       : contentSections
-
-  // Group consecutive sticky-scroll panels into one band (portfolio scout-scroll).
-  type RenderChunk =
-    | { kind: "single"; section: CaseStudySectionItem; index: number }
-    | { kind: "sticky"; panels: CaseStudySection[]; index: number }
-
-  const chunks: RenderChunk[] = []
-  let stickyBuffer: CaseStudySection[] = []
-  let stickyStartIndex = 0
-
-  const flushSticky = () => {
-    if (!stickyBuffer.length) return
-    chunks.push({ kind: "sticky", panels: stickyBuffer, index: stickyStartIndex })
-    stickyBuffer = []
-  }
-
-  sectionsWithoutNextSteps.forEach((section, i) => {
-    if (isStickyScrollPanel(section)) {
-      if (!stickyBuffer.length) stickyStartIndex = i
-      stickyBuffer.push(section)
-      return
-    }
-    flushSticky()
-    chunks.push({ kind: "single", section, index: i })
-  })
-  flushSticky()
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
@@ -246,23 +212,7 @@ export function CaseStudyImmersiveDark({
       </header>
 
       <div className="pb-20 md:pb-28">
-        {chunks.map((chunk) => {
-          if (chunk.kind === "sticky") {
-            return (
-              <div
-                key={`sticky-${chunk.index}`}
-                className="mx-auto max-w-7xl px-4 md:px-6 mt-10 md:mt-16"
-              >
-                <CaseStudyStickyScroll
-                  panels={chunk.panels}
-                  scrollRootRef={scrollRootRef}
-                />
-              </div>
-            )
-          }
-
-          const { section, index: i } = chunk
-
+        {sectionsWithoutNextSteps.map((section, i) => {
           if (isBeforeAfterGroupSection(section)) {
             return (
               <div key={i} className="mx-auto max-w-7xl px-4 md:px-6 mt-10 md:mt-14">
@@ -294,7 +244,25 @@ export function CaseStudyImmersiveDark({
             )
           }
 
-          if (isShowcaseSection(section)) {
+          const std = asStandardSection(section)
+          if (!std) return null
+
+          // Full-bleed dashboard opener (prototype UI treatment)
+          if (isHeroBleedSection(std)) {
+            return (
+              <div key={i} className="mt-2 md:mt-4">
+                <CaseStudyBlock
+                  section={std}
+                  isFirstSection
+                  scrollRootRef={scrollRootRef}
+                  layout="stack"
+                />
+              </div>
+            )
+          }
+
+          // Last visual (prototype showcase): copy + full-bleed media
+          if (isShowcaseSection(std)) {
             return (
               <div
                 key={i}
@@ -303,7 +271,7 @@ export function CaseStudyImmersiveDark({
                 <div className="mx-auto max-w-7xl px-4 md:px-6 mb-8 md:mb-10">
                   <CaseStudyBlock
                     section={{
-                      ...section,
+                      ...std,
                       images: [],
                       showcaseBleed: false,
                       linkHref: undefined,
@@ -315,7 +283,7 @@ export function CaseStudyImmersiveDark({
                 </div>
                 <CaseStudyBlock
                   section={{
-                    ...section,
+                    ...std,
                     label: undefined,
                     heading: undefined,
                     text: "",
@@ -329,11 +297,11 @@ export function CaseStudyImmersiveDark({
             )
           }
 
-          // Process (and any other lone split row): text left, sticky media right
+          // Each narrative section: text left / sticky media right
           return (
             <div key={i} className="mx-auto max-w-7xl px-4 md:px-6">
               <CaseStudyBlock
-                section={section}
+                section={std}
                 isFirstSection={false}
                 scrollRootRef={scrollRootRef}
                 layout="split"

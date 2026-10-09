@@ -95,26 +95,18 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
   ],
   sections: [
     {
-      type: "sideBySide",
-      before: {
-        kicker: "Before",
-        title: "Legacy UI shipped by engineering",
-        image: `${BASE}/hero-before.png`,
-        urlBar: "scoutfuel.app/dashboard",
-      },
-      after: {
-        kicker: "After",
-        title: "Systemized design with clearer hierarchy",
-        image: `${BASE}/hero-after.png`,
-        urlBar: "scoutfuel.app/dashboard",
-      },
+      // Full-bleed opener — redesigned fleet dashboard (no legacy before/after)
+      images: [`${BASE}/hero-after.png`],
+      heroBleed: true,
+      browserFrame: true,
+      browserFrameUrl: "scoutfuel.app/dashboard",
+      browserFrameBackground: "/background-images/rock.png",
+      text: "",
     },
     {
       label: "2020 vs today",
       heading: "An Update in Process",
       images: [`${BASE}/process-contrast.png`],
-      browserFrame: true,
-      browserFrameUrl: "Process — additive vs subtractive",
       bodyBlocks: [
         {
           type: "paragraph",
@@ -149,8 +141,6 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       heading: "AI to understand the problem space",
       images: [],
       customMedia: "scoutClaudeResearch",
-      browserFrame: true,
-      browserFrameUrl: "Research — discovery",
       bodyBlocks: [
         {
           type: "paragraph",
@@ -168,8 +158,6 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       heading: "Vision First",
       images: [],
       customMedia: "scoutClaudeVision",
-      browserFrame: true,
-      browserFrameUrl: "Design vision — narrative",
       bodyBlocks: [
         {
           type: "paragraph",
@@ -186,8 +174,6 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       label: "03 — Define",
       heading: "Building a Design Foundation",
       images: [`${BASE}/tweakcn.png`],
-      browserFrame: true,
-      browserFrameUrl: "www.tweakcn.com",
       bodyBlocks: [
         {
           type: "paragraph",
@@ -209,8 +195,6 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       heading: "Prompting The First Version",
       images: [],
       customMedia: "scoutClaudeScaffold",
-      browserFrame: true,
-      browserFrameUrl: "Ideate — V1 prompt",
       bodyBlocks: [
         {
           type: "paragraph",
@@ -224,8 +208,6 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       heading: "Refining Through Problem Solving Focus",
       images: [],
       customMedia: "scoutRefinement",
-      browserFrame: true,
-      browserFrameUrl: "Refinement — subtractive pass",
       bodyBlocks: [
         {
           type: "paragraph",
@@ -251,7 +233,8 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       heading: "Adding once the shape is in place",
       images: [`${BASE}/panel-gamified.jpg`],
       browserFrame: true,
-      browserFrameUrl: "Gamification",
+      browserFrameUrl: "scoutfuel.app/dashboard",
+      browserFrameBackground: "/background-images/rock.png",
       bodyBlocks: [
         {
           type: "paragraph",
@@ -273,8 +256,6 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       heading: "Leveraging Skills for Documentation",
       embedUrl: NOTION_DOC_EMBED,
       images: [],
-      browserFrame: true,
-      browserFrameUrl: "Notion — documentation",
       wideMedia: true,
       embedShowOnMobile: true,
       bodyBlocks: [
