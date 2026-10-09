@@ -30,8 +30,6 @@ type ServiceWithProcess = {
   tabLabel: string
   icon: typeof ZapIcon | typeof UserGroupIcon | typeof SparklesIcon
   title: string
-  timeline: string
-  pricing: string
   description: string
   perfectFor: string[]
   whatYouGet: string[]
@@ -47,8 +45,6 @@ const servicesWithProcess: ServiceWithProcess[] = [
     tabLabel: "Rapid Prototyping",
     icon: ZapIcon,
     title: "AI-Powered Rapid Prototyping",
-    timeline: "3-6 weeks",
-    pricing: "Starting at $8k",
     description:
       "Working coded prototypes to validate ideas—with strategic thinking AI can't provide.",
     perfectFor: [
@@ -94,8 +90,6 @@ const servicesWithProcess: ServiceWithProcess[] = [
     tabLabel: "Team Expansion",
     icon: UserGroupIcon,
     title: "Team Expansion",
-    timeline: "Month-to-month",
-    pricing: "$12k / month",
     description:
       "Senior design-eng capacity without W2 overhead or hiring delays.",
     perfectFor: [
@@ -136,8 +130,6 @@ const servicesWithProcess: ServiceWithProcess[] = [
     tabLabel: "Design Refinement",
     icon: SparklesIcon,
     title: "0-to-MVP Design Refinement",
-    timeline: "3-8 weeks",
-    pricing: "Starting at $7k",
     description:
       "MVP to professional product. Closes deals, raises capital.",
     perfectFor: [
@@ -339,7 +331,10 @@ export function ServicesAndProcessSection() {
                 : "border border-zinc-200 bg-white"
             )}>
               <CardHeader className="px-0 pt-0 pb-2">
-                <div className="flex items-start justify-between gap-4 mb-3">
+                <div className={cn(
+                  "flex items-start justify-between gap-4 mb-3 pb-4 border-b",
+                  isInverse ? "border-white/10" : "border-zinc-200"
+                )}>
                   <CardTitle className={cn(
                     "text-lg flex items-center gap-2",
                     isInverse ? "text-zinc-50" : "text-zinc-900"
@@ -347,21 +342,6 @@ export function ServicesAndProcessSection() {
                     <HugeiconsIcon icon={activeService.icon} className={cn("size-5", isInverse ? "text-zinc-400" : "text-zinc-600")} strokeWidth={2} />
                     {activeService.title}
                   </CardTitle>
-                </div>
-                <div className={cn(
-                  "flex gap-2 flex-wrap pb-4 border-b",
-                  isInverse ? "border-white/10" : "border-zinc-200"
-                )}>
-                  <Badge variant="outline" className={cn(
-                    isInverse ? "border-zinc-600 text-zinc-300" : "border-zinc-300 text-zinc-700"
-                  )}>
-                    {activeService.pricing}
-                  </Badge>
-                  <Badge variant="outline" className={cn(
-                    isInverse ? "border-zinc-600 text-zinc-300" : "border-zinc-300 text-zinc-700"
-                  )}>
-                    {activeService.timeline}
-                  </Badge>
                 </div>
                 <CardDescription className={cn(
                   "mt-4 text-sm leading-relaxed font-semibold",

@@ -1,7 +1,6 @@
 import { SectionWrapper } from "./section-wrapper"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { Tick02Icon } from "@hugeicons/core-free-icons"
 import Image from "next/image"
@@ -9,8 +8,6 @@ import Image from "next/image"
 const services = [
   {
     title: "Rapid Prototyping (AI-Augmented)",
-    timeline: "3-6 weeks",
-    pricing: "$8k-$15k",
     description: "Test your product ideas before committing your team.",
     perfectFor: [
       "Validating new features or product directions",
@@ -31,8 +28,6 @@ const services = [
   },
   {
     title: "Embedded Design Engineering",
-    timeline: "3+ weeks",
-    pricing: "$8k-$15k per engagement",
     description: "Senior design-eng capacity without W2 overhead.",
     perfectFor: [
       "Critical feature builds that need design + engineering in one",
@@ -53,8 +48,6 @@ const services = [
   },
   {
     title: "0-to-MVP Design Refinement",
-    timeline: "3-8 weeks",
-    pricing: "$10k-$15k",
     description: "You've launched. Now make it professional.",
     perfectFor: [
       "Startups that built a scrappy MVP and now you want to refine it",
@@ -97,10 +90,6 @@ export function ServicesSection() {
               <CardHeader>
                 <div className="flex items-start justify-between gap-4 mb-2">
                   <CardTitle className="text-lg">{service.title}</CardTitle>
-                </div>
-                <div className="flex gap-2 flex-wrap">
-                  <Badge variant="outline">{service.timeline}</Badge>
-                  <Badge variant="outline">{service.pricing}</Badge>
                 </div>
                 <CardDescription className="mt-4">{service.description}</CardDescription>
               </CardHeader>
