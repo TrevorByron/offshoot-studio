@@ -1,7 +1,12 @@
 "use client"
 
 import * as React from "react"
-import type { CaseStudyContent, CaseStudyIntroBlock, CaseStudySection } from "@/lib/case-studies"
+import type {
+  CaseStudyContent,
+  CaseStudyIntroBlock,
+  CaseStudySection,
+  CaseStudySectionItem,
+} from "@/lib/case-studies"
 import {
   isBeforeAfterGroupSection,
   isBeforeAfterSection,
@@ -11,6 +16,7 @@ import { CaseStudyBlock } from "./case-study-block"
 import { CaseStudyBeforeAfterBlock } from "./case-study-before-after-block"
 import { CaseStudyBeforeAfterGroupBlock } from "./case-study-before-after-group-block"
 import { CaseStudySideBySideBlock } from "./case-study-side-by-side-block"
+import { CaseStudyStickyScroll } from "./case-study-sticky-scroll"
 
 function RichText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g)
@@ -101,6 +107,37 @@ function isShowcaseSection(section: CaseStudySection): boolean {
   return Boolean(section.showcaseBleed)
 }
 
+/** Process / contrast row sits outside the sticky scroll band (matches portfolio). */
+function isProcessSection(section: CaseStudySection): boolean {
+  const label = section.label?.toLowerCase() ?? ""
+  const heading = section.heading?.toLowerCase() ?? ""
+  return label.includes("2020") || heading.includes("update in process")
+}
+
+function isStickyScrollPanel(section: CaseStudySectionItem): section is CaseStudySection {
+  if (
+    isBeforeAfterSection(section) ||
+    isBeforeAfterGroupSection(section) ||
+    isSideBySideSection(section)
+  ) {
+    return false
+  }
+  if (
+    isShowcaseSection(section) ||
+    isNextStepsSection(section) ||
+    isProcessSection(section)
+  ) {
+    return false
+  }
+  return Boolean(
+    section.customMedia ||
+      section.embedUrl ||
+      section.images?.length ||
+      section.bodyBlocks?.length ||
+      section.text
+  )
+}
+
 interface CaseStudyImmersiveDarkProps {
   caseStudy: CaseStudyContent
   scrollRootRef: React.RefObject<HTMLElement | null>
@@ -109,7 +146,8 @@ interface CaseStudyImmersiveDarkProps {
 /**
  * Portfolio-style immersive layout for Scout Fuel:
  * - Hero intro + first visual (before/after) full width
- * - Middle narrative: text left / supporting media right
+ * - Process row: text left / media right (sticky within the row)
+ * - Sticky scroll band: left panels scroll, right media stays put + crossfades
  * - Last visual (prototype showcase) full width
  * - Next steps + quote + tags
  */
@@ -149,6 +187,32 @@ export function CaseStudyImmersiveDark({
       ? contentSections.filter((_, i) => i !== nextStepsIndex)
       : contentSections
 
+  // Group consecutive sticky-scroll panels into one band (portfolio scout-scroll).
+  type RenderChunk =
+    | { kind: "single"; section: CaseStudySectionItem; index: number }
+    | { kind: "sticky"; panels: CaseStudySection[]; index: number }
+
+  const chunks: RenderChunk[] = []
+  let stickyBuffer: CaseStudySection[] = []
+  let stickyStartIndex = 0
+
+  const flushSticky = () => {
+    if (!stickyBuffer.length) return
+    chunks.push({ kind: "sticky", panels: stickyBuffer, index: stickyStartIndex })
+    stickyBuffer = []
+  }
+
+  sectionsWithoutNextSteps.forEach((section, i) => {
+    if (isStickyScrollPanel(section)) {
+      if (!stickyBuffer.length) stickyStartIndex = i
+      stickyBuffer.push(section)
+      return
+    }
+    flushSticky()
+    chunks.push({ kind: "single", section, index: i })
+  })
+  flushSticky()
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       <header className="mx-auto max-w-7xl px-4 md:px-6 pt-6 md:pt-10 pb-10 md:pb-12">
@@ -182,7 +246,23 @@ export function CaseStudyImmersiveDark({
       </header>
 
       <div className="pb-20 md:pb-28">
-        {sectionsWithoutNextSteps.map((section, i) => {
+        {chunks.map((chunk) => {
+          if (chunk.kind === "sticky") {
+            return (
+              <div
+                key={`sticky-${chunk.index}`}
+                className="mx-auto max-w-7xl px-4 md:px-6 mt-10 md:mt-16"
+              >
+                <CaseStudyStickyScroll
+                  panels={chunk.panels}
+                  scrollRootRef={scrollRootRef}
+                />
+              </div>
+            )
+          }
+
+          const { section, index: i } = chunk
+
           if (isBeforeAfterGroupSection(section)) {
             return (
               <div key={i} className="mx-auto max-w-7xl px-4 md:px-6 mt-10 md:mt-14">
@@ -204,7 +284,6 @@ export function CaseStudyImmersiveDark({
             )
           }
           if (isSideBySideSection(section)) {
-            // First visual — full-bleed before/after (not a text/media split)
             return (
               <div key={i} className="mt-4 md:mt-6">
                 <CaseStudySideBySideBlock
@@ -215,7 +294,6 @@ export function CaseStudyImmersiveDark({
             )
           }
 
-          // Last visual (prototype showcase): copy + full-bleed media, not split.
           if (isShowcaseSection(section)) {
             return (
               <div
@@ -251,7 +329,7 @@ export function CaseStudyImmersiveDark({
             )
           }
 
-          // Middle narrative: text left / supporting visual right
+          // Process (and any other lone split row): text left, sticky media right
           return (
             <div key={i} className="mx-auto max-w-7xl px-4 md:px-6">
               <CaseStudyBlock

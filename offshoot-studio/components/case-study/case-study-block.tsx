@@ -332,12 +332,16 @@ export function CaseStudyBlock({
     return (
       <div
         ref={ref}
-        className={`grid grid-cols-1 md:grid-cols-[40%_60%] gap-8 md:gap-10 lg:gap-14 items-center border-t border-border/40 dark:border-white/10 pt-14 md:pt-20 ${
+        className={`grid grid-cols-1 md:grid-cols-[40%_60%] gap-8 md:gap-10 lg:gap-14 items-start border-t border-border/40 dark:border-white/10 pt-14 md:pt-20 ${
           hideOnMobile ? "hidden md:grid" : ""
         }`}
       >
         <div className={textFirst ? "order-1" : "order-1 md:order-2"}>{textColumn}</div>
-        <div className={`min-w-0 ${textFirst ? "order-2" : "order-2 md:order-1"}`}>
+        <div
+          className={`min-w-0 md:sticky md:top-16 md:self-start ${
+            textFirst ? "order-2" : "order-2 md:order-1"
+          }`}
+        >
           {mediaColumn}
         </div>
       </div>
