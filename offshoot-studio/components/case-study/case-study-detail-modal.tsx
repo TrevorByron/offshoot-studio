@@ -12,6 +12,7 @@ import { CaseStudyBeforeAfterBlock } from "./case-study-before-after-block"
 import { CaseStudyBeforeAfterGroupBlock } from "./case-study-before-after-group-block"
 import { isBeforeAfterSection, isBeforeAfterGroupSection } from "@/lib/case-studies"
 import { CaseStudyQuote } from "./case-study-quote"
+import { CaseStudyImmersiveDark } from "./case-study-immersive-dark"
 import { Footer } from "@/components/sections/footer"
 
 interface CaseStudyDetailModalProps {
@@ -68,9 +69,11 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
   const contentOrder = isImageLeft ? "order-2 md:order-2" : "order-1 md:order-1"
   const imageOrder = isImageLeft ? "order-1 md:order-1" : "order-2 md:order-2"
 
+  const isImmersiveDark = caseStudy?.presentation === "immersiveDark"
+
   const modalContent = (
     <div
-      className="fixed inset-0 z-[9999] bg-background"
+      className={`fixed inset-0 z-[9999] ${isImmersiveDark ? "bg-[#0a0a0a]" : "bg-background"}`}
       onClick={handleClose}
       role="dialog"
       aria-modal="true"
@@ -80,7 +83,7 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
         ref={scrollContainerRef}
         data-case-study-scroll
         className={`dark h-full w-full overflow-y-auto min-h-screen ${
-          caseStudy?.presentation === "immersiveDark" ? "bg-[#0a0a0a]" : "bg-background"
+          isImmersiveDark ? "bg-[#0a0a0a]" : "bg-background"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
@@ -91,7 +94,11 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
               ref={closeRef}
               type="button"
               onClick={handleClose}
-              className="flex items-center gap-2 px-3 py-2 rounded-md bg-background border border-border text-foreground shadow-sm hover:bg-muted transition-colors text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+              className={`flex items-center gap-2 px-3 py-2 rounded-md border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                isImmersiveDark
+                  ? "bg-[#141414] border-white/15 text-white hover:bg-[#1c1c1c] focus-visible:ring-offset-[#0a0a0a]"
+                  : "bg-background border-border text-foreground shadow-sm hover:bg-muted focus-visible:ring-offset-card"
+              }`}
               aria-label={backLabel}
               title={backLabel}
             >
@@ -101,25 +108,19 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
           </div>
         </div>
 
-        {caseStudy && cardProps ? (
-          <div
-            className={`min-h-screen text-foreground ${
-              caseStudy.presentation === "immersiveDark"
-                ? "bg-[#0a0a0a]"
-                : "bg-card"
-            }`}
-          >
+        {caseStudy && isImmersiveDark ? (
+          <CaseStudyImmersiveDark
+            caseStudy={caseStudy}
+            scrollRootRef={scrollContainerRef}
+          />
+        ) : caseStudy && cardProps ? (
+          <div className="min-h-screen bg-card text-foreground">
             {slug ? (
               <section
                 className={`relative w-full min-h-[70vh] md:min-h-[80vh] flex flex-col md:grid ${gridCols} gap-8 md:gap-12 md:items-stretch p-6 max-w-7xl mx-auto`}
               >
-                  {/* Left: same sizing as case-study card — title, badge, description */}
                   <div
-                    className={`max-w-3xl flex flex-col justify-center p-0 ${contentOrder} ${
-                      caseStudy.presentation === "immersiveDark"
-                        ? "bg-transparent"
-                        : "bg-muted/30 md:bg-muted/20 dark:bg-transparent"
-                    }`}
+                    className={`max-w-3xl bg-muted/30 md:bg-muted/20 dark:bg-transparent flex flex-col justify-center p-0 ${contentOrder}`}
                   >
                     <span id="case-study-modal-title" className="sr-only">
                       {caseStudy.title}
@@ -146,7 +147,6 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
                     ))}
                   </div>
 
-                  {/* Right: textured background + image — match card (cover-only or browser window) */}
                   <div
                     className={`relative p-2 md:p-6 w-full min-h-[70vh] md:h-full rounded-lg overflow-hidden bg-cover bg-center ${imageOrder}`}
                     style={{ backgroundImage: `url(${cardProps.imageBackground})`, paddingRight: "-24px" }}
@@ -191,7 +191,6 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
                 </section>
             ) : null}
 
-            {/* Extended content below hero */}
             {caseStudy && (
               <div className="mx-auto max-w-7xl px-4 md:px-6 py-14 md:py-18 lg:py-22 space-y-18 lg:space-y-22">
                 {caseStudy.sections.map((section, i) =>
@@ -244,12 +243,11 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
                     ))}
                   </div>
                 )}
-
               </div>
             )}
           </div>
         ) : null}
-        <Footer />
+        {!isImmersiveDark && <Footer />}
       </div>
     </div>
   )
