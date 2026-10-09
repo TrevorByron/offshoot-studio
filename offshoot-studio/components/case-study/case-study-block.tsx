@@ -30,6 +30,12 @@ interface CaseStudyBlockProps {
   isFirstSection?: boolean
   /** Scroll container ref for useInView when inside a modal (so in-view is relative to modal, not window). */
   scrollRootRef?: React.RefObject<HTMLElement | null>
+  /**
+   * `stack` (default): label → heading → text → media vertically.
+   * `split`: portfolio-style text left / supporting media right (stacks on mobile).
+   * `splitFlip`: media left / text right.
+   */
+  layout?: "stack" | "split" | "splitFlip"
 }
 
 /** Render text with **bold** markers as <strong>. */
@@ -101,7 +107,14 @@ function IntroContent({ blocks }: { blocks: CaseStudyIntroBlock[] }) {
   )
 }
 
-export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirstSection, scrollRootRef }: CaseStudyBlockProps) {
+export function CaseStudyBlock({
+  section,
+  leadingParagraph,
+  introBlocks,
+  isFirstSection,
+  scrollRootRef,
+  layout = "stack",
+}: CaseStudyBlockProps) {
   const ref = React.useRef<HTMLDivElement>(null)
   // "some" = any part visible — works in modal (small viewport) and on full page; 20% would never fire for tall sections
   const isInView = useInView(ref, {
@@ -137,16 +150,14 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
 
   const hasSectionBody = Boolean(bodyBlocks?.length || text)
   const hasText = introBlocks || leadingParagraph || hasSectionBody
+  const isSplit = layout === "split" || layout === "splitFlip"
 
   /** Only hide the whole block on mobile when it's an embedded prototype (e.g. try the prototype), not when it's a video (YouTube). Section can set embedShowOnMobile to show anyway. */
   const isEmbeddedPrototype = Boolean(embedUrl && !embedUrl.includes("youtube"))
   const hideOnMobile = isEmbeddedPrototype && !embedShowOnMobile
 
-  return (
-    <div
-      ref={ref}
-      className={`flex flex-col gap-6 md:gap-8 ${hideOnMobile ? "hidden md:flex" : ""}`}
-    >
+  const textColumn = (
+    <div className={`flex flex-col gap-4 ${isSplit ? "md:pr-8 lg:pr-12" : "gap-6 md:gap-8"}`}>
       {label && (
         <motion.span
           className="font-geist-mono text-[12px] text-foreground uppercase tracking-wide"
@@ -171,7 +182,7 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
 
       {hasText && (
         <motion.div
-          className="space-y-4"
+          className="space-y-4 max-w-xl"
           initial={isFirstSection ? animate : initial}
           animate={effectiveInView ? animate : initial}
           transition={{ ...revealTransition, delay: STAGGER_DELAY * 2 }}
@@ -200,9 +211,16 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
           )}
         </motion.div>
       )}
+    </div>
+  )
 
+  const customMediaHeight = isSplit
+    ? "h-[min(56vh,480px)]"
+    : "h-[min(72vh,620px)]"
+
+  const mediaColumn = (
       <motion.div
-        className={`flex flex-col gap-4 w-full ${fullWidth ? "max-w-full" : ""}`}
+        className={`flex flex-col gap-4 w-full min-w-0 ${fullWidth ? "max-w-full" : ""}`}
         initial={isFirstSection ? animate : initial}
         animate={effectiveInView ? animate : initial}
         transition={{ ...revealTransition, delay: hasText ? STAGGER_DELAY * 3 : STAGGER_DELAY }}
@@ -221,7 +239,7 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
             className="min-h-[280px]"
             backgroundImage={browserFrameBackground}
             urlLabel={browserFrameUrl}
-            mediaHeightClassName="h-[min(72vh,620px)]"
+            mediaHeightClassName={customMediaHeight}
           >
             <ScoutCaseStudyMedia kind={customMedia} />
           </CaseStudyBrowserFrame>
@@ -307,6 +325,32 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
           })
         )}
       </motion.div>
+  )
+
+  if (isSplit) {
+    const textFirst = layout === "split"
+    return (
+      <div
+        ref={ref}
+        className={`grid grid-cols-1 md:grid-cols-[40%_60%] gap-8 md:gap-10 lg:gap-14 items-center border-t border-border/40 dark:border-white/10 pt-14 md:pt-20 ${
+          hideOnMobile ? "hidden md:grid" : ""
+        }`}
+      >
+        <div className={textFirst ? "order-1" : "order-1 md:order-2"}>{textColumn}</div>
+        <div className={`min-w-0 ${textFirst ? "order-2" : "order-2 md:order-1"}`}>
+          {mediaColumn}
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div
+      ref={ref}
+      className={`flex flex-col gap-6 md:gap-8 ${hideOnMobile ? "hidden md:flex" : ""}`}
+    >
+      {textColumn}
+      {mediaColumn}
     </div>
   )
 }

@@ -97,21 +97,26 @@ function isNextStepsSection(section: CaseStudySection): boolean {
   return label.includes("going forward") || heading.includes("next steps")
 }
 
+function isShowcaseSection(section: CaseStudySection): boolean {
+  return Boolean(section.showcaseBleed)
+}
+
 interface CaseStudyImmersiveDarkProps {
   caseStudy: CaseStudyContent
   scrollRootRef: React.RefObject<HTMLElement | null>
 }
 
 /**
- * Portfolio-style immersive layout for Scout Fuel and similar case studies.
- * Breaks from the default card-template modal: stacked hero, continuous dark canvas,
- * no light footer chrome.
+ * Portfolio-style immersive layout for Scout Fuel:
+ * - Hero intro + first visual (before/after) full width
+ * - Middle narrative: text left / supporting media right
+ * - Last visual (prototype showcase) full width
+ * - Next steps + quote + tags
  */
 export function CaseStudyImmersiveDark({
   caseStudy,
   scrollRootRef,
 }: CaseStudyImmersiveDarkProps) {
-  // Skip the first empty "Overview" shell section when intro is rendered in the hero.
   const contentSections = caseStudy.sections.filter((section, i) => {
     if (i !== 0) return true
     if (
@@ -176,96 +181,151 @@ export function CaseStudyImmersiveDark({
         )}
       </header>
 
-      <div className="mx-auto max-w-7xl px-4 md:px-6 pb-20 md:pb-28 space-y-20 md:space-y-28">
-        {sectionsWithoutNextSteps.map((section, i) =>
-          isBeforeAfterGroupSection(section) ? (
-            <CaseStudyBeforeAfterGroupBlock
-              key={i}
-              section={section}
-              scrollRootRef={scrollRootRef}
-            />
-          ) : isBeforeAfterSection(section) ? (
-            <CaseStudyBeforeAfterBlock
-              key={i}
-              section={section}
-              scrollRootRef={scrollRootRef}
-            />
-          ) : isSideBySideSection(section) ? (
-            <CaseStudySideBySideBlock
-              key={i}
-              section={section}
-              scrollRootRef={scrollRootRef}
-            />
-          ) : (
-            <CaseStudyBlock
-              key={i}
-              section={section}
-              isFirstSection={i === 0}
-              scrollRootRef={scrollRootRef}
-            />
-          )
-        )}
-
-        {(nextStepsSection || caseStudy.quote) && (
-          <section className="grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-10 md:gap-14 items-start border-t border-white/10 pt-14 md:pt-20">
-            {nextStepsSection ? (
-              <div className="space-y-4">
-                {nextStepsSection.label && (
-                  <p className="font-geist-mono text-[12px] uppercase tracking-wide text-white/50">
-                    {nextStepsSection.label}
-                  </p>
-                )}
-                {nextStepsSection.heading && (
-                  <h2 className="text-2xl md:text-3xl font-normal tracking-tight text-white">
-                    {nextStepsSection.heading}
-                  </h2>
-                )}
-                <div className="space-y-4">
-                  {(nextStepsSection.bodyBlocks ?? []).map((block, i) =>
-                    block.type === "paragraph" ? (
-                      <p key={i} className="text-[15px] leading-relaxed text-white/70">
-                        <RichText text={block.text} />
-                      </p>
-                    ) : null
-                  )}
-                  {!nextStepsSection.bodyBlocks?.length && nextStepsSection.text ? (
-                    <p className="text-[15px] leading-relaxed text-white/70">
-                      <RichText text={nextStepsSection.text} />
-                    </p>
-                  ) : null}
-                </div>
+      <div className="pb-20 md:pb-28">
+        {sectionsWithoutNextSteps.map((section, i) => {
+          if (isBeforeAfterGroupSection(section)) {
+            return (
+              <div key={i} className="mx-auto max-w-7xl px-4 md:px-6 mt-10 md:mt-14">
+                <CaseStudyBeforeAfterGroupBlock
+                  section={section}
+                  scrollRootRef={scrollRootRef}
+                />
               </div>
-            ) : (
-              <div />
-            )}
+            )
+          }
+          if (isBeforeAfterSection(section)) {
+            return (
+              <div key={i} className="mx-auto max-w-7xl px-4 md:px-6 mt-10 md:mt-14">
+                <CaseStudyBeforeAfterBlock
+                  section={section}
+                  scrollRootRef={scrollRootRef}
+                />
+              </div>
+            )
+          }
+          if (isSideBySideSection(section)) {
+            // First visual — full-bleed before/after (not a text/media split)
+            return (
+              <div key={i} className="mt-4 md:mt-6">
+                <CaseStudySideBySideBlock
+                  section={section}
+                  scrollRootRef={scrollRootRef}
+                />
+              </div>
+            )
+          }
 
-            {caseStudy.quote ? (
-              <figure className="rounded-2xl border border-white/10 bg-white px-6 py-8 md:px-8 md:py-10 text-[#26251e]">
-                <blockquote className="text-xl md:text-2xl leading-snug tracking-tight">
-                  &ldquo;{caseStudy.quote.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-5 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-[#26251e]/55">
-                  {caseStudy.quote.name}
-                  {caseStudy.quote.title ? ` · ${caseStudy.quote.title}` : ""}
-                  {caseStudy.quote.company ? ` · ${caseStudy.quote.company}` : ""}
-                </figcaption>
-              </figure>
-            ) : null}
-          </section>
-        )}
-
-        {caseStudy.tags && caseStudy.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 pt-2 border-t border-white/10">
-            {caseStudy.tags.map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 font-geist-mono text-[11px] text-white/65"
+          // Last visual (prototype showcase): copy + full-bleed media, not split.
+          if (isShowcaseSection(section)) {
+            return (
+              <div
+                key={i}
+                className="mt-16 md:mt-24 border-t border-white/10 pt-14 md:pt-20"
               >
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
+                <div className="mx-auto max-w-7xl px-4 md:px-6 mb-8 md:mb-10">
+                  <CaseStudyBlock
+                    section={{
+                      ...section,
+                      images: [],
+                      showcaseBleed: false,
+                      linkHref: undefined,
+                    }}
+                    isFirstSection={false}
+                    scrollRootRef={scrollRootRef}
+                    layout="stack"
+                  />
+                </div>
+                <CaseStudyBlock
+                  section={{
+                    ...section,
+                    label: undefined,
+                    heading: undefined,
+                    text: "",
+                    bodyBlocks: undefined,
+                  }}
+                  isFirstSection={false}
+                  scrollRootRef={scrollRootRef}
+                  layout="stack"
+                />
+              </div>
+            )
+          }
+
+          // Middle narrative: text left / supporting visual right
+          return (
+            <div key={i} className="mx-auto max-w-7xl px-4 md:px-6">
+              <CaseStudyBlock
+                section={section}
+                isFirstSection={false}
+                scrollRootRef={scrollRootRef}
+                layout="split"
+              />
+            </div>
+          )
+        })}
+
+        <div className="mx-auto max-w-7xl px-4 md:px-6 mt-16 md:mt-24 space-y-14 md:space-y-16">
+          {(nextStepsSection || caseStudy.quote) && (
+            <section className="grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-10 md:gap-14 items-start border-t border-white/10 pt-14 md:pt-20">
+              {nextStepsSection ? (
+                <div className="space-y-4">
+                  {nextStepsSection.label && (
+                    <p className="font-geist-mono text-[12px] uppercase tracking-wide text-white/50">
+                      {nextStepsSection.label}
+                    </p>
+                  )}
+                  {nextStepsSection.heading && (
+                    <h2 className="text-2xl md:text-3xl font-normal tracking-tight text-white">
+                      {nextStepsSection.heading}
+                    </h2>
+                  )}
+                  <div className="space-y-4">
+                    {(nextStepsSection.bodyBlocks ?? []).map((block, i) =>
+                      block.type === "paragraph" ? (
+                        <p key={i} className="text-[15px] leading-relaxed text-white/70">
+                          <RichText text={block.text} />
+                        </p>
+                      ) : null
+                    )}
+                    {!nextStepsSection.bodyBlocks?.length && nextStepsSection.text ? (
+                      <p className="text-[15px] leading-relaxed text-white/70">
+                        <RichText text={nextStepsSection.text} />
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+              ) : (
+                <div />
+              )}
+
+              {caseStudy.quote ? (
+                <figure className="rounded-2xl border border-white/10 bg-white px-6 py-8 md:px-8 md:py-10 text-[#26251e]">
+                  <blockquote className="text-xl md:text-2xl leading-snug tracking-tight">
+                    &ldquo;{caseStudy.quote.quote}&rdquo;
+                  </blockquote>
+                  <figcaption className="mt-5 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-[#26251e]/55">
+                    {caseStudy.quote.name}
+                    {caseStudy.quote.title ? ` · ${caseStudy.quote.title}` : ""}
+                    {caseStudy.quote.company ? ` · ${caseStudy.quote.company}` : ""}
+                  </figcaption>
+                </figure>
+              ) : null}
+            </section>
+          )}
+
+          {caseStudy.tags && caseStudy.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 pt-2 border-t border-white/10">
+              {caseStudy.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 font-geist-mono text-[11px] text-white/65"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
