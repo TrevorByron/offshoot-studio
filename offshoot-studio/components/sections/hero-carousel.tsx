@@ -48,8 +48,8 @@ const LOGO_HEIGHT = 354
 
 const DEFAULT_SCREENSHOTS: CarouselScreenshot[] = [
   { src: "/background-images/man-on-rock.png", alt: "Man on rock", coverImage: "/case-study-covers/procore-cover.png", hoverLogo: "/logos/Procore.png", caseStudySlug: "procore" },
-  { src: "/background-images/rock.png", alt: "Rock", coverImage: "/case-study-covers/gsd-cover.png", hoverLogo: "/logos/TweakingCat.png", caseStudySlug: "gsd" },
-  { src: "/background-images/two-on-rock.png", alt: "Two on rock", coverImage: "/case-study-covers/toro-cover.png", hoverLogo: "/logos/Toro.png" },
+  { src: "/background-images/rock.png", alt: "Rock", coverImage: "/case-study-covers/scout-fuel-cover.png", caseStudySlug: "scout-fuel" },
+  { src: "/background-images/two-on-rock.png", alt: "Two on rock", coverImage: "/case-study-covers/gsd-cover.png", hoverLogo: "/logos/TweakingCat.png", caseStudySlug: "gsd" },
 ]
 
 interface HeroCarouselProps {

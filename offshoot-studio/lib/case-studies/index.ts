@@ -3,15 +3,22 @@ import { isBeforeAfterSection, isBeforeAfterGroupSection } from "./types"
 import { gsdCaseStudy, GSD_SLUG } from "./content/gsd"
 import { procoreCaseStudy, PROCORE_SLUG } from "./content/procore"
 import { recibookCaseStudy, RECIBOOK_SLUG } from "./content/recibook"
+import { scoutFuelCaseStudy, SCOUT_FUEL_SLUG } from "./content/scout-fuel"
 
 const caseStudies: Record<string, CaseStudyContent> = {
   [GSD_SLUG]: gsdCaseStudy,
   [PROCORE_SLUG]: procoreCaseStudy,
   [RECIBOOK_SLUG]: recibookCaseStudy,
+  [SCOUT_FUEL_SLUG]: scoutFuelCaseStudy,
 }
 
 /** Slugs of case studies to show on the homepage Work section. Add new slugs here when you add a case study. */
-export const FEATURED_CASE_STUDY_SLUGS: string[] = [PROCORE_SLUG, GSD_SLUG, RECIBOOK_SLUG]
+export const FEATURED_CASE_STUDY_SLUGS: string[] = [
+  PROCORE_SLUG,
+  SCOUT_FUEL_SLUG,
+  GSD_SLUG,
+  RECIBOOK_SLUG,
+]
 
 export type {
   CaseStudyContent,

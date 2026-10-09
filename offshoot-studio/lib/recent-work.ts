@@ -60,6 +60,25 @@ export const recentWorkProjects: RecentWorkProject[] = [
     // Card content comes from case study (gsd.ts cardPreview)
   },
   {
+    slug: "scout-fuel",
+    title: "Scout Fuel — Product Design",
+    subtitle: "Fleet fuel dashboard — redesign & coded prototype",
+    badge: "Rapid Prototype • 60 hours",
+    shortDescription: "AI-augmented product redesign for Scout Fuel.",
+    description: [
+      "Scout Fuel helps trucking companies optimize fuel spend—but their UI wasn't scaling, and customers weren't forming a habit around the product. Founders new to development needed a modern foundation and a clearer experience.",
+      "In 60 hours we rebuilt the design system in code, reframed the product as a system of intelligence, and shipped a coded prototype they could keep building on.",
+    ],
+    imageCount: 0,
+    imageBackground: "/background-images/rock.png",
+    imageScreenshot: "/case-study-covers/scout-fuel-cover.png",
+    imageAlt: "Scout Fuel redesigned dashboard",
+    imagePosition: "right",
+    footerLinkHref: "https://scout-fuel-redesign.vercel.app/",
+    footerLinkLabel: "Explore prototype",
+    caseStudySlug: "scout-fuel",
+  },
+  {
     slug: "open-joy",
     title: "Recibook – Onboarding Audit & Redesign",
     subtitle: "Recibook - Onboarding",
