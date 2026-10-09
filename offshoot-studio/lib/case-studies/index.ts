@@ -32,6 +32,7 @@ export type {
   CaseStudyTag,
   CaseStudyIntroBlock,
   CaseStudyCardPreview,
+  CaseStudyCustomMedia,
 } from "./types"
 export { CASE_STUDY_TAG_OPTIONS, isBeforeAfterSection, isBeforeAfterGroupSection } from "./types"
 

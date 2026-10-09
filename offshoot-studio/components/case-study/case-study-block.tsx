@@ -16,6 +16,7 @@ import {
 } from "@/lib/reveal-config"
 import { CaseStudyBrowserFrame } from "./case-study-browser-frame"
 import { CaseStudyEmbedFrame } from "./case-study-embed-frame"
+import { ScoutCaseStudyMedia } from "./scout/scout-case-study-media"
 
 const STAGGER_DELAY = 0.12
 
@@ -29,6 +30,21 @@ interface CaseStudyBlockProps {
   isFirstSection?: boolean
   /** Scroll container ref for useInView when inside a modal (so in-view is relative to modal, not window). */
   scrollRootRef?: React.RefObject<HTMLElement | null>
+}
+
+/** Render text with **bold** markers as <strong>. */
+function RichText({ text }: { text: string }) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g)
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (part.startsWith("**") && part.endsWith("**")) {
+          return <strong key={i}>{part.slice(2, -2)}</strong>
+        }
+        return <React.Fragment key={i}>{part}</React.Fragment>
+      })}
+    </>
+  )
 }
 
 function IntroContent({ blocks }: { blocks: CaseStudyIntroBlock[] }) {
@@ -49,13 +65,13 @@ function IntroContent({ blocks }: { blocks: CaseStudyIntroBlock[] }) {
                 rel="noopener noreferrer"
                 className={`text-muted-foreground text-sm leading-relaxed hover:text-foreground underline underline-offset-2 transition-colors ${block.font === "mono" ? "font-geist-mono" : ""}`}
               >
-                {block.text}
+                <RichText text={block.text} />
               </a>
             ) : (
               <p
                 className={`text-sm leading-relaxed ${block.font === "mono" ? "font-geist-mono text-foreground" : "text-muted-foreground"}`}
               >
-                {block.text}
+                <RichText text={block.text} />
               </p>
             )}
           </div>
@@ -73,7 +89,7 @@ function IntroContent({ blocks }: { blocks: CaseStudyIntroBlock[] }) {
                       {rest}
                     </>
                   ) : (
-                    item
+                    <RichText text={item} />
                   )}
                 </li>
               )
@@ -99,21 +115,27 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
     images,
     imagesHiddenOnMobile,
     text,
+    bodyBlocks,
     browserFrame,
     browserFrameBackground,
+    browserFrameUrl,
+    customMedia,
     label,
     heading,
     embedUrl,
     fullWidth,
     embedMaxWidth,
     embedShowOnMobile,
+    linkHref,
+    linkAriaLabel,
   } = section
 
   const initial = prefersReducedMotion ? revealInitialReduced : revealInitial
   const animate = prefersReducedMotion ? revealAnimateReduced : revealAnimate
   const effectiveInView = isFirstSection || isInView
 
-  const hasText = introBlocks || leadingParagraph || text
+  const hasSectionBody = Boolean(bodyBlocks?.length || text)
+  const hasText = introBlocks || leadingParagraph || hasSectionBody
 
   /** Only hide the whole block on mobile when it's an embedded prototype (e.g. try the prototype), not when it's a video (YouTube). Section can set embedShowOnMobile to show anyway. */
   const isEmbeddedPrototype = Boolean(embedUrl && !embedUrl.includes("youtube"))
@@ -159,11 +181,19 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
             <>
               {leadingParagraph && (
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  {leadingParagraph}
+                  <RichText text={leadingParagraph} />
                 </p>
               )}
-              {text ? (
-                <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">{text}</p>
+              {bodyBlocks?.length ? (
+                <IntroContent blocks={bodyBlocks} />
+              ) : text ? (
+                <div className="space-y-4">
+                  {text.split(/\n\n+/).map((para, i) => (
+                    <p key={i} className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">
+                      <RichText text={para} />
+                    </p>
+                  ))}
+                </div>
               ) : null}
             </>
           )}
@@ -185,22 +215,50 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
             fallbackLabel={section.embedFallbackLabel}
             maxWidth={embedMaxWidth}
           />
+        ) : customMedia ? (
+          <CaseStudyBrowserFrame
+            className="min-h-[280px]"
+            backgroundImage={browserFrameBackground}
+            urlLabel={browserFrameUrl}
+            mediaHeightClassName="h-[min(72vh,620px)]"
+          >
+            <ScoutCaseStudyMedia kind={customMedia} />
+          </CaseStudyBrowserFrame>
         ) : (
           images.map((src, i) => {
-            const hideOnMobile = imagesHiddenOnMobile?.includes(src)
-            return browserFrame ? (
-              <div key={i} className={hideOnMobile ? "hidden md:block" : ""}>
-                <CaseStudyBrowserFrame
-                  src={src}
-                  alt=""
-                  className="min-h-[280px]"
-                  backgroundImage={browserFrameBackground}
-                />
-              </div>
-            ) : (
+            const hideImageOnMobile = imagesHiddenOnMobile?.includes(src)
+            const framed = (
+              <CaseStudyBrowserFrame
+                src={src}
+                alt=""
+                className="min-h-[280px]"
+                backgroundImage={browserFrameBackground}
+                urlLabel={browserFrameUrl ?? (linkHref && i === 0 ? "Click to explore" : undefined)}
+              />
+            )
+            if (browserFrame || (linkHref && i === 0)) {
+              return (
+                <div key={i} className={hideImageOnMobile ? "hidden md:block" : ""}>
+                  {linkHref && i === 0 ? (
+                    <a
+                      href={linkHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={linkAriaLabel ?? "Open live prototype"}
+                      className="block rounded-lg transition-opacity hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    >
+                      {framed}
+                    </a>
+                  ) : (
+                    framed
+                  )}
+                </div>
+              )
+            }
+            return (
               <div
                 key={i}
-                className={`w-full overflow-hidden rounded-[24px] border border-border ${isFirstSection ? "bg-purple" : "bg-muted/30"} ${hideOnMobile ? "hidden md:block" : ""}`}
+                className={`w-full overflow-hidden rounded-[24px] border border-border ${isFirstSection ? "bg-purple" : "bg-muted/30"} ${hideImageOnMobile ? "hidden md:block" : ""}`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img

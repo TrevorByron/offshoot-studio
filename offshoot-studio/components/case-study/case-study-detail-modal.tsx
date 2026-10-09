@@ -79,7 +79,9 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
       <div
         ref={scrollContainerRef}
         data-case-study-scroll
-        className="dark h-full w-full overflow-y-auto bg-background min-h-screen"
+        className={`dark h-full w-full overflow-y-auto min-h-screen ${
+          caseStudy?.presentation === "immersiveDark" ? "bg-[#0a0a0a]" : "bg-background"
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button top-left */}
@@ -100,14 +102,24 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
         </div>
 
         {caseStudy && cardProps ? (
-          <div className="min-h-screen bg-card text-foreground">
+          <div
+            className={`min-h-screen text-foreground ${
+              caseStudy.presentation === "immersiveDark"
+                ? "bg-[#0a0a0a]"
+                : "bg-card"
+            }`}
+          >
             {slug ? (
               <section
                 className={`relative w-full min-h-[70vh] md:min-h-[80vh] flex flex-col md:grid ${gridCols} gap-8 md:gap-12 md:items-stretch p-6 max-w-7xl mx-auto`}
               >
                   {/* Left: same sizing as case-study card — title, badge, description */}
                   <div
-                    className={`max-w-3xl bg-muted/30 md:bg-muted/20 dark:bg-transparent flex flex-col justify-center p-0 ${contentOrder}`}
+                    className={`max-w-3xl flex flex-col justify-center p-0 ${contentOrder} ${
+                      caseStudy.presentation === "immersiveDark"
+                        ? "bg-transparent"
+                        : "bg-muted/30 md:bg-muted/20 dark:bg-transparent"
+                    }`}
                   >
                     <span id="case-study-modal-title" className="sr-only">
                       {caseStudy.title}
@@ -209,12 +221,27 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
 
                 {caseStudy.quote && (
                   <div className="flex flex-col items-center gap-6">
-                    <div className="w-full md:w-[116px] shrink-0 self-start">
-                      <span className="font-geist-mono text-[12px] text-left text-foreground">
-                        Testimonials:
-                      </span>
-                    </div>
+                    {(caseStudy.quoteLabel ?? "Testimonials:") !== "" && (
+                      <div className="w-full md:w-[116px] shrink-0 self-start">
+                        <span className="font-geist-mono text-[12px] text-left text-foreground">
+                          {caseStudy.quoteLabel ?? "Testimonials:"}
+                        </span>
+                      </div>
+                    )}
                     <CaseStudyQuote quote={caseStudy.quote} />
+                  </div>
+                )}
+
+                {caseStudy.tags && caseStudy.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 pt-4">
+                    {caseStudy.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center rounded-full border border-border/60 bg-muted/20 px-3 py-1 font-geist-mono text-[11px] text-muted-foreground"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 )}
 

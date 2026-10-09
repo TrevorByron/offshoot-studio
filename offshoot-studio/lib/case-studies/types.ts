@@ -5,6 +5,13 @@ export interface CaseStudyHeroImage {
   inner: string
 }
 
+/** Interactive media keyed for Scout Fuel (and future case studies with coded demos). */
+export type CaseStudyCustomMedia =
+  | "scoutClaudeResearch"
+  | "scoutClaudeVision"
+  | "scoutClaudeScaffold"
+  | "scoutRefinement"
+
 export interface CaseStudySection {
   /** Optional label shown above the section (e.g. "Discovery:", "Build:") */
   label?: string
@@ -18,12 +25,21 @@ export interface CaseStudySection {
   /** Image src paths to hide on mobile (e.g. to reduce scroll in image-heavy sections). Shown from md breakpoint up. */
   imagesHiddenOnMobile?: string[]
   text: string
+  /**
+   * Multi-paragraph body for the section. When set, rendered instead of `text`.
+   * Supports **bold** markers inside paragraph text.
+   */
+  bodyBlocks?: CaseStudyIntroBlock[]
   /** When set, the section shows a single embedded iframe (e.g. live prototype) instead of images. */
   embedUrl?: string
   /** Optional poster image for YouTube embed fallback when iframe is blocked (e.g. /case-study-covers/procore-cover.png). */
   embedPosterImage?: string
   /** Label for the embed fallback link (e.g. "Play on YouTube"). Default in component. */
   embedFallbackLabel?: string
+  /** Optional coded interactive media (e.g. Claude chat mockup) rendered in a browser frame. */
+  customMedia?: CaseStudyCustomMedia
+  /** Optional chrome URL bar label when customMedia/browserFrame is shown. */
+  browserFrameUrl?: string
   /** When true, section images are wrapped in a browser-window style frame (dark bezel, title bar with dots, rounded corners). */
   browserFrame?: boolean
   /** Background image for the browser frame bezel (e.g. /background-images/rock.png). Used when browserFrame is true. */
@@ -36,6 +52,13 @@ export interface CaseStudySection {
   embedMaxWidth?: number
   /** When true and section has embedUrl, show the embed on mobile instead of hiding it (default: hidden on mobile for embedded prototypes). */
   embedShowOnMobile?: boolean
+  /**
+   * When set with images (and no embed/customMedia), the first image becomes a
+   * clickable browser-framed link — same pattern as the portfolio Scout Fuel prototype showcase.
+   */
+  linkHref?: string
+  /** Accessible label for the linkHref showcase. */
+  linkAriaLabel?: string
 }
 
 /** Before/after image slider section (e.g. founder design vs. redesigned). No heading or text. */
@@ -142,6 +165,15 @@ export interface CaseStudyContent {
   banners?: CaseStudyBanner[]
   /** Optional quote/testimonial shown after sections (e.g. client quote). */
   quote?: CaseStudyQuote
+  /** Label above the quote block. Defaults to "Testimonials:". Pass empty string to hide. */
+  quoteLabel?: string
+  /** Optional tag chips shown at the end of the case study (portfolio-style footer tags). */
+  tags?: string[]
+  /**
+   * Presentation variant for the detail modal.
+   * `immersiveDark` uses a full dark canvas closer to the portfolio review Scout Fuel page.
+   */
+  presentation?: "default" | "immersiveDark"
   /** For generateMetadata */
   metaDescription?: string
   /** Optional: props for the listing card on recent-work / case-studies section. Omit to derive from introBlurb and first section images. */
