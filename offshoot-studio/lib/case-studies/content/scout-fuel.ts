@@ -95,8 +95,8 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
   ],
   sections: [
     {
-      // Full-bleed opener — redesigned fleet dashboard (no legacy before/after)
-      images: [`${BASE}/hero-after.png`],
+      // Full-bleed opener — fleet efficiency dashboard (no legacy before/after)
+      images: [`${BASE}/panel-gamified.jpg`],
       heroBleed: true,
       browserFrame: true,
       browserFrameUrl: "scoutfuel.app/dashboard",
