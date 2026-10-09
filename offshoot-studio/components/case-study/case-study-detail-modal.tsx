@@ -10,9 +10,14 @@ import { getCaseStudy, getCaseStudyCardProps } from "@/lib/case-studies"
 import { CaseStudyBlock } from "./case-study-block"
 import { CaseStudyBeforeAfterBlock } from "./case-study-before-after-block"
 import { CaseStudyBeforeAfterGroupBlock } from "./case-study-before-after-group-block"
-import { isBeforeAfterSection, isBeforeAfterGroupSection } from "@/lib/case-studies"
+import {
+  isBeforeAfterSection,
+  isBeforeAfterGroupSection,
+  isSideBySideSection,
+} from "@/lib/case-studies"
 import { CaseStudyQuote } from "./case-study-quote"
 import { CaseStudyImmersiveDark } from "./case-study-immersive-dark"
+import { CaseStudySideBySideBlock } from "./case-study-side-by-side-block"
 import { Footer } from "@/components/sections/footer"
 
 interface CaseStudyDetailModalProps {
@@ -202,6 +207,12 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
                     />
                   ) : isBeforeAfterSection(section) ? (
                     <CaseStudyBeforeAfterBlock
+                      key={i}
+                      section={section}
+                      scrollRootRef={scrollContainerRef}
+                    />
+                  ) : isSideBySideSection(section) ? (
+                    <CaseStudySideBySideBlock
                       key={i}
                       section={section}
                       scrollRootRef={scrollContainerRef}

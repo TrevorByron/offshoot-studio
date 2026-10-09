@@ -59,6 +59,11 @@ export interface CaseStudySection {
   linkHref?: string
   /** Accessible label for the linkHref showcase. */
   linkAriaLabel?: string
+  /**
+   * When true with linkHref, render as a full-bleed rock-background showcase band
+   * (matches portfolio `cs-showcase--scout` treatment).
+   */
+  showcaseBleed?: boolean
 }
 
 /** Before/after image slider section (e.g. founder design vs. redesigned). No heading or text. */
@@ -82,10 +87,31 @@ export interface CaseStudyBeforeAfterGroupSection {
   }>
 }
 
+/**
+ * Side-by-side before/after browser shots (portfolio Scout Fuel hero compare).
+ * Distinct from the interactive before/after slider.
+ */
+export interface CaseStudySideBySideSection {
+  type: "sideBySide"
+  before: {
+    kicker: string
+    title: string
+    image: string
+    urlBar?: string
+  }
+  after: {
+    kicker: string
+    title: string
+    image: string
+    urlBar?: string
+  }
+}
+
 export type CaseStudySectionItem =
   | CaseStudySection
   | CaseStudyBeforeAfterSection
   | CaseStudyBeforeAfterGroupSection
+  | CaseStudySideBySideSection
 
 export function isBeforeAfterSection(
   section: CaseStudySectionItem
@@ -97,6 +123,12 @@ export function isBeforeAfterGroupSection(
   section: CaseStudySectionItem
 ): section is CaseStudyBeforeAfterGroupSection {
   return "type" in section && section.type === "beforeAfterGroup"
+}
+
+export function isSideBySideSection(
+  section: CaseStudySectionItem
+): section is CaseStudySideBySideSection {
+  return "type" in section && section.type === "sideBySide"
 }
 
 export interface CaseStudyBanner {

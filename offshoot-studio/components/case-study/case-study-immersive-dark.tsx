@@ -1,15 +1,16 @@
 "use client"
 
 import * as React from "react"
-import type { CaseStudyContent, CaseStudyIntroBlock } from "@/lib/case-studies"
+import type { CaseStudyContent, CaseStudyIntroBlock, CaseStudySection } from "@/lib/case-studies"
 import {
   isBeforeAfterGroupSection,
   isBeforeAfterSection,
+  isSideBySideSection,
 } from "@/lib/case-studies"
 import { CaseStudyBlock } from "./case-study-block"
 import { CaseStudyBeforeAfterBlock } from "./case-study-before-after-block"
 import { CaseStudyBeforeAfterGroupBlock } from "./case-study-before-after-group-block"
-import { CaseStudyBanner } from "./case-study-banner"
+import { CaseStudySideBySideBlock } from "./case-study-side-by-side-block"
 
 function RichText({ text }: { text: string }) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g)
@@ -90,6 +91,12 @@ function IntroBlocks({ blocks }: { blocks: CaseStudyIntroBlock[] }) {
   )
 }
 
+function isNextStepsSection(section: CaseStudySection): boolean {
+  const label = section.label?.toLowerCase() ?? ""
+  const heading = section.heading?.toLowerCase() ?? ""
+  return label.includes("going forward") || heading.includes("next steps")
+}
+
 interface CaseStudyImmersiveDarkProps {
   caseStudy: CaseStudyContent
   scrollRootRef: React.RefObject<HTMLElement | null>
@@ -107,7 +114,13 @@ export function CaseStudyImmersiveDark({
   // Skip the first empty "Overview" shell section when intro is rendered in the hero.
   const contentSections = caseStudy.sections.filter((section, i) => {
     if (i !== 0) return true
-    if (isBeforeAfterSection(section) || isBeforeAfterGroupSection(section)) return true
+    if (
+      isBeforeAfterSection(section) ||
+      isBeforeAfterGroupSection(section) ||
+      isSideBySideSection(section)
+    ) {
+      return true
+    }
     return Boolean(
       section.images?.length ||
         section.embedUrl ||
@@ -117,11 +130,25 @@ export function CaseStudyImmersiveDark({
     )
   })
 
+  const nextStepsIndex = contentSections.findIndex(
+    (s) =>
+      !isBeforeAfterSection(s) &&
+      !isBeforeAfterGroupSection(s) &&
+      !isSideBySideSection(s) &&
+      isNextStepsSection(s)
+  )
+  const nextStepsSection =
+    nextStepsIndex >= 0 ? (contentSections[nextStepsIndex] as CaseStudySection) : null
+  const sectionsWithoutNextSteps =
+    nextStepsIndex >= 0
+      ? contentSections.filter((_, i) => i !== nextStepsIndex)
+      : contentSections
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
-      <header className="mx-auto max-w-7xl px-4 md:px-6 pt-6 md:pt-10 pb-12 md:pb-16">
+      <header className="mx-auto max-w-7xl px-4 md:px-6 pt-6 md:pt-10 pb-10 md:pb-12">
         <p className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white/45 mb-4">
-          Case Study — {caseStudy.title.replace(/\s*—\s*/, " · ")}
+          Case Study 02 — Scout Fuel
         </p>
         <h1
           id="case-study-modal-title"
@@ -131,7 +158,9 @@ export function CaseStudyImmersiveDark({
             <>
               {caseStudy.title.split("—")[0].trim()}
               <br />
-              <span className="text-white/90">{caseStudy.title.split("—").slice(1).join("—").trim()}</span>
+              <span className="text-white/90">
+                {caseStudy.title.split("—").slice(1).join("—").trim()}
+              </span>
             </>
           ) : (
             caseStudy.title
@@ -148,7 +177,7 @@ export function CaseStudyImmersiveDark({
       </header>
 
       <div className="mx-auto max-w-7xl px-4 md:px-6 pb-20 md:pb-28 space-y-20 md:space-y-28">
-        {contentSections.map((section, i) =>
+        {sectionsWithoutNextSteps.map((section, i) =>
           isBeforeAfterGroupSection(section) ? (
             <CaseStudyBeforeAfterGroupBlock
               key={i}
@@ -157,6 +186,12 @@ export function CaseStudyImmersiveDark({
             />
           ) : isBeforeAfterSection(section) ? (
             <CaseStudyBeforeAfterBlock
+              key={i}
+              section={section}
+              scrollRootRef={scrollRootRef}
+            />
+          ) : isSideBySideSection(section) ? (
+            <CaseStudySideBySideBlock
               key={i}
               section={section}
               scrollRootRef={scrollRootRef}
@@ -171,17 +206,52 @@ export function CaseStudyImmersiveDark({
           )
         )}
 
-        {caseStudy.quote && (
-          <figure className="mx-auto max-w-xl rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-8 md:px-8 md:py-10">
-            <blockquote className="text-xl md:text-2xl leading-snug tracking-tight text-white/95">
-              &ldquo;{caseStudy.quote.quote}&rdquo;
-            </blockquote>
-            <figcaption className="mt-5 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white/45">
-              {caseStudy.quote.name}
-              {caseStudy.quote.title ? ` · ${caseStudy.quote.title}` : ""}
-              {caseStudy.quote.company ? ` · ${caseStudy.quote.company}` : ""}
-            </figcaption>
-          </figure>
+        {(nextStepsSection || caseStudy.quote) && (
+          <section className="grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-10 md:gap-14 items-start border-t border-white/10 pt-14 md:pt-20">
+            {nextStepsSection ? (
+              <div className="space-y-4">
+                {nextStepsSection.label && (
+                  <p className="font-geist-mono text-[12px] uppercase tracking-wide text-white/50">
+                    {nextStepsSection.label}
+                  </p>
+                )}
+                {nextStepsSection.heading && (
+                  <h2 className="text-2xl md:text-3xl font-normal tracking-tight text-white">
+                    {nextStepsSection.heading}
+                  </h2>
+                )}
+                <div className="space-y-4">
+                  {(nextStepsSection.bodyBlocks ?? []).map((block, i) =>
+                    block.type === "paragraph" ? (
+                      <p key={i} className="text-[15px] leading-relaxed text-white/70">
+                        <RichText text={block.text} />
+                      </p>
+                    ) : null
+                  )}
+                  {!nextStepsSection.bodyBlocks?.length && nextStepsSection.text ? (
+                    <p className="text-[15px] leading-relaxed text-white/70">
+                      <RichText text={nextStepsSection.text} />
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+            ) : (
+              <div />
+            )}
+
+            {caseStudy.quote ? (
+              <figure className="rounded-2xl border border-white/10 bg-white px-6 py-8 md:px-8 md:py-10 text-[#26251e]">
+                <blockquote className="text-xl md:text-2xl leading-snug tracking-tight">
+                  &ldquo;{caseStudy.quote.quote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-5 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-[#26251e]/55">
+                  {caseStudy.quote.name}
+                  {caseStudy.quote.title ? ` · ${caseStudy.quote.title}` : ""}
+                  {caseStudy.quote.company ? ` · ${caseStudy.quote.company}` : ""}
+                </figcaption>
+              </figure>
+            ) : null}
+          </section>
         )}
 
         {caseStudy.tags && caseStudy.tags.length > 0 && (
@@ -197,12 +267,6 @@ export function CaseStudyImmersiveDark({
           </div>
         )}
       </div>
-
-      {caseStudy.banners?.map((banner, i) => (
-        <div key={i} className="border-t border-white/10 bg-[#0a0a0a]">
-          <CaseStudyBanner banner={banner} />
-        </div>
-      ))}
     </div>
   )
 }

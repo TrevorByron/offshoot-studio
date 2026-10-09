@@ -1,5 +1,9 @@
 import type { CaseStudyContent, CaseStudySection } from "./types"
-import { isBeforeAfterSection, isBeforeAfterGroupSection } from "./types"
+import {
+  isBeforeAfterSection,
+  isBeforeAfterGroupSection,
+  isSideBySideSection,
+} from "./types"
 import { gsdCaseStudy, GSD_SLUG } from "./content/gsd"
 import { procoreCaseStudy, PROCORE_SLUG } from "./content/procore"
 import { recibookCaseStudy, RECIBOOK_SLUG } from "./content/recibook"
@@ -26,6 +30,7 @@ export type {
   CaseStudySectionItem,
   CaseStudyBeforeAfterSection,
   CaseStudyBeforeAfterGroupSection,
+  CaseStudySideBySideSection,
   CaseStudyHeroImage,
   CaseStudyBanner,
   CaseStudyQuote,
@@ -34,7 +39,12 @@ export type {
   CaseStudyCardPreview,
   CaseStudyCustomMedia,
 } from "./types"
-export { CASE_STUDY_TAG_OPTIONS, isBeforeAfterSection, isBeforeAfterGroupSection } from "./types"
+export {
+  CASE_STUDY_TAG_OPTIONS,
+  isBeforeAfterSection,
+  isBeforeAfterGroupSection,
+  isSideBySideSection,
+} from "./types"
 
 export function getCaseStudy(slug: string): CaseStudyContent | undefined {
   return caseStudies[slug]
@@ -74,7 +84,9 @@ export function getCaseStudyCardProps(caseStudy: CaseStudyContent): {
   }
   const firstBlockSection = caseStudy.sections.find(
     (s): s is CaseStudySection =>
-      !isBeforeAfterSection(s) && !isBeforeAfterGroupSection(s)
+      !isBeforeAfterSection(s) &&
+      !isBeforeAfterGroupSection(s) &&
+      !isSideBySideSection(s)
   )
   const firstSection = firstBlockSection
   const hero = firstSection?.heroImages?.[0] ?? firstSection?.heroImage

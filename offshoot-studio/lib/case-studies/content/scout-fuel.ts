@@ -7,8 +7,6 @@ export const SCOUT_FUEL_SLUG = "scout-fuel"
 const PROTOTYPE_URL = "https://scout-fuel-redesign.vercel.app/"
 const NOTION_DOC_EMBED =
   "https://north-element-ae1.notion.site/ebd//32cda057146d804f8d4bdbfc91e510ec"
-const NOTION_DOC_URL =
-  "https://north-element-ae1.notion.site/32cda057146d804f8d4bdbfc91e510ec"
 
 /**
  * Scout Fuel case study — story and visuals ported from
@@ -69,12 +67,6 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       label: "Tools",
       text: "Claude · Tweak CN · Cursor",
     },
-    {
-      type: "paragraph",
-      text: "Explore the live prototype →",
-      font: "mono",
-      href: PROTOTYPE_URL,
-    },
   ],
   metaDescription:
     "Case study: Scout Fuel product design — AI-assisted discovery, narrative vision, shadcn design system, subtractive refinement, and a coded fleet fuel dashboard prototype in 60 hours.",
@@ -101,25 +93,21 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
     "Living documentation",
     "B2B SaaS",
   ],
-  banners: [
-    {
-      heading: "View the living work log",
-      ctaLabel: "Open Notion documentation",
-      ctaHref: NOTION_DOC_URL,
-    },
-  ],
   sections: [
     {
-      label: "Case Study 02 — Scout Fuel",
-      heading: "Product Design",
-      images: [],
-      text: "",
-    },
-    {
-      type: "beforeAfter",
-      label: "Before — Legacy UI shipped by engineering  ·  After — Systemized design with clearer hierarchy",
-      beforeImage: `${BASE}/hero-before.png`,
-      afterImage: `${BASE}/hero-after.png`,
+      type: "sideBySide",
+      before: {
+        kicker: "Before",
+        title: "Legacy UI shipped by engineering",
+        image: `${BASE}/hero-before.png`,
+        urlBar: "scoutfuel.app/dashboard",
+      },
+      after: {
+        kicker: "After",
+        title: "Systemized design with clearer hierarchy",
+        image: `${BASE}/hero-after.png`,
+        urlBar: "scoutfuel.app/dashboard",
+      },
     },
     {
       label: "2020 vs today",
@@ -313,9 +301,9 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       label: "08 — Prototype",
       heading: "Front End Prototype",
       images: [`${BASE}/showcase-final.png`],
-      browserFrame: true,
       browserFrameUrl: "Click to explore",
       fullWidth: true,
+      showcaseBleed: true,
       linkHref: PROTOTYPE_URL,
       linkAriaLabel: "Open live Scout Fuel redesign demo",
       bodyBlocks: [

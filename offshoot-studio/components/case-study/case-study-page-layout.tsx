@@ -17,11 +17,17 @@ import { SectionWrapper } from "@/components/sections/section-wrapper"
 import { Footer } from "@/components/sections/footer"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { BackLink } from "@/components/back-link"
-import { type CaseStudyContent, isBeforeAfterSection, isBeforeAfterGroupSection } from "@/lib/case-studies"
+import {
+  type CaseStudyContent,
+  isBeforeAfterSection,
+  isBeforeAfterGroupSection,
+  isSideBySideSection,
+} from "@/lib/case-studies"
 import { CaseStudyHeader } from "./case-study-header"
 import { CaseStudyBlock } from "./case-study-block"
 import { CaseStudyBeforeAfterBlock } from "./case-study-before-after-block"
 import { CaseStudyBeforeAfterGroupBlock } from "./case-study-before-after-group-block"
+import { CaseStudySideBySideBlock } from "./case-study-side-by-side-block"
 import { CaseStudyBanner } from "./case-study-banner"
 import { CaseStudyQuote } from "./case-study-quote"
 
@@ -62,6 +68,8 @@ export function CaseStudyPageLayout({ caseStudy }: CaseStudyPageLayoutProps) {
                 <CaseStudyBeforeAfterGroupBlock section={section} />
               ) : isBeforeAfterSection(section) ? (
                 <CaseStudyBeforeAfterBlock section={section} />
+              ) : isSideBySideSection(section) ? (
+                <CaseStudySideBySideBlock section={section} />
               ) : (
                 <CaseStudyBlock
                   section={section}

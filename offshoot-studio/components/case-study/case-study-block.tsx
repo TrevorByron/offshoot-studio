@@ -128,6 +128,7 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
     embedShowOnMobile,
     linkHref,
     linkAriaLabel,
+    showcaseBleed,
   } = section
 
   const initial = prefersReducedMotion ? revealInitialReduced : revealInitial
@@ -224,6 +225,41 @@ export function CaseStudyBlock({ section, leadingParagraph, introBlocks, isFirst
           >
             <ScoutCaseStudyMedia kind={customMedia} />
           </CaseStudyBrowserFrame>
+        ) : showcaseBleed && linkHref && images[0] ? (
+          <div
+            className="relative w-screen left-1/2 -translate-x-1/2 py-10 md:py-16 px-4 md:px-8 bg-cover bg-center"
+            style={{ backgroundImage: "url(/background-images/rock.png)" }}
+          >
+            <div className="absolute inset-0 bg-black/45" aria-hidden />
+            <div className="relative mx-auto max-w-7xl">
+              <a
+                href={linkHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={linkAriaLabel ?? "Open live Scout Fuel redesign demo"}
+                className="block rounded-xl transition-transform hover:scale-[1.005] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              >
+                <div className="rounded-xl overflow-hidden border border-white/15 bg-[#111] shadow-2xl">
+                  <div className="flex items-center gap-3 px-3 py-2.5 border-b border-white/10 bg-[#1a1a1a]">
+                    <div className="flex items-center gap-1.5">
+                      <span className="size-2 rounded-full bg-[#FF5F57]" />
+                      <span className="size-2 rounded-full bg-[#FEBC2E]" />
+                      <span className="size-2 rounded-full bg-[#28C840]" />
+                    </div>
+                    <div className="flex-1 min-w-0 rounded-md bg-black/35 px-2.5 py-1 font-geist-mono text-[11px] text-white/55 truncate">
+                      {browserFrameUrl ?? "Click to explore"}
+                    </div>
+                  </div>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={images[0]}
+                    alt=""
+                    className="w-full h-auto block"
+                  />
+                </div>
+              </a>
+            </div>
+          </div>
         ) : (
           images.map((src, i) => {
             const hideImageOnMobile = imagesHiddenOnMobile?.includes(src)
