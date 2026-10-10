@@ -212,7 +212,12 @@ function KeyedMedia({ section, index }: { section: CaseStudySection; index: numb
           {section.customMedia ? (
             <ScoutCaseStudyMedia kind={section.customMedia} />
           ) : section.embedUrl ? (
-            <iframe src={section.embedUrl} title={section.heading ?? "Embedded document"} allowFullScreen />
+            <iframe
+              src={section.embedUrl}
+              title={section.heading ?? "Embedded document"}
+              loading="lazy"
+              allowFullScreen
+            />
           ) : section.images?.[0] ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={section.images[0]} alt="" />
@@ -387,9 +392,17 @@ export function CaseStudyImmersiveDark({
                 data-img={index}
                 data-caption={PANEL_CHROME[index]?.caption ?? section.heading ?? ""}
               >
-                {section.label && <p className="ss-num">{section.label}</p>}
-                {section.heading && <h3 className="ss-title">{section.heading}</h3>}
-                <PanelBody section={section} />
+                <div className="ss-panel-copy">
+                  {section.label && <p className="ss-num">{section.label}</p>}
+                  {section.heading && <h3 className="ss-title">{section.heading}</h3>}
+                  <PanelBody section={section} />
+                </div>
+                <div className="ss-inline-stage">
+                  <KeyedMedia section={section} index={index} />
+                  {PANEL_CHROME[index]?.caption && (
+                    <p className="ss-inline-caption">{PANEL_CHROME[index].caption}</p>
+                  )}
+                </div>
               </div>
             ))}
           </div>

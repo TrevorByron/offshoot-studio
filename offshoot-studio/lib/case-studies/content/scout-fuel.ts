@@ -19,7 +19,7 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
   cardPreview: {
     description: [
       "Scout Fuel is a fuel optimization tool for trucking companies. The founders have built a UI that is not scaling, and though their customers see value in the concept of fuel optimization, the product has yet to gain traction.",
-      "My goal was to create a design foundation they could continue to build on, and redesign the experience from a system of record into a system of intelligence that drove action and fuel savings.",
+      "Our goal was to create a design foundation they could continue to build on, and redesign the experience from a system of record into a system of intelligence that drove action and fuel savings.",
     ],
     imageBackground: "/background-images/rock.png",
     imageScreenshot: "/case-study-covers/scout-fuel-cover.png",
@@ -36,11 +36,11 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
     },
     {
       type: "paragraph",
-      text: "The founders came to me asking for support. They are new to development, not fully sure of what they needed, but wanted to make sure what they were building felt modern and well thought out.",
+      text: "The founders came to us asking for support. They are new to development, not fully sure of what they needed, but wanted to make sure what they were building felt modern and well thought out.",
     },
     {
       type: "paragraph",
-      text: "My goal was to create, first, a design foundation from which they could continue to build the product, and second, redesign their customers' experience so it was more than a system of record, but instead a system of intelligence that drove action and ultimately increased customers' fuel savings.",
+      text: "Our goal was to create, first, a design foundation from which they could continue to build the product, and second, redesign their customers' experience so it was more than a system of record, but instead a system of intelligence that drove action and ultimately increased customers' fuel savings.",
     },
     {
       type: "paragraph",
@@ -75,7 +75,7 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
   quote: {
     quote:
       "It's not the big that beat the small. It's the fast that beat the slow.",
-    name: "Posted in the kitchen at my first job, iodine software",
+    name: "Posted in the kitchen at a first job, Iodine Software",
   },
   tags: [
     "Agentic workflow",
@@ -110,11 +110,11 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       bodyBlocks: [
         {
           type: "paragraph",
-          text: "On the Procore Construction Network (case study 03), I followed a very traditional arc: discovery, then **low-fidelity flows** that slowly, slowly became high-fidelity mocks. A huge share of calendar time lived in those early bands — sketching, grayscale, Figma hygiene — because that was how we de-risked structure before we invested in polish.",
+          text: "On the Procore Construction Network (case study 03), we followed a very traditional arc: discovery, then **low-fidelity flows** that slowly, slowly became high-fidelity mocks. A huge share of calendar time lived in those early bands — sketching, grayscale, Figma hygiene — because that was how we de-risked structure before we invested in polish.",
         },
         {
           type: "paragraph",
-          text: "In today's process, I believe design is about **steeping and soaking** in the problem and the problem space — so that **solutioning** can feel almost instinctual, with tools like **Claude** and **Cursor** handling so much of the generative work.",
+          text: "In today's process, we believe design is about **steeping and soaking** in the problem and the problem space — so that **solutioning** can feel almost instinctual, with tools like **Claude** and **Cursor** handling so much of the generative work.",
         },
         {
           type: "paragraph",
@@ -126,7 +126,7 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
         },
         {
           type: "paragraph",
-          text: "I leveraged this in a recent project for Scout Fuel. The results and timeline astounded me.",
+          text: "We leveraged this in a recent project for Scout Fuel. The results and timeline astounded us.",
         },
       ],
       imageCaption:
@@ -141,11 +141,11 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       bodyBlocks: [
         {
           type: "paragraph",
-          text: "For this project, I knew it was going to be a challenge to get on the phone with customers of Scout Fuel, so I leaned into AI to help get situated in the needs of the users I was designing for.",
+          text: "For this project, we knew it was going to be a challenge to get on the phone with customers of Scout Fuel, so we leaned into AI to help get situated in the needs of the users we were designing for.",
         },
         {
           type: "paragraph",
-          text: "My prompt was to get Claude to tell me the story of a Fuel Manager at a trucking company to help me understand their jobs-to-be-done and general challenges.",
+          text: "Our prompt was to get Claude to tell us the story of a Fuel Manager at a trucking company to help us understand their jobs-to-be-done and general challenges.",
         },
       ],
       text: "",
@@ -158,11 +158,11 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       bodyBlocks: [
         {
           type: "paragraph",
-          text: "I then prompted a narrative vision of what an ideal product might unlock for a Fuel Manager. I did this in narrative form, as I have found that stories are often the best way to communicate and to capture the end result.",
+          text: "We then prompted a narrative vision of what an ideal product might unlock for a Fuel Manager. We did this in narrative form, as we have found that stories are often the best way to communicate and to capture the end result.",
         },
         {
           type: "paragraph",
-          text: "From here, I set out to design and build a product that was supportive of this vision.",
+          text: "From here, we set out to design and build a product that was supportive of this vision.",
         },
       ],
       text: "",
@@ -174,15 +174,15 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       bodyBlocks: [
         {
           type: "paragraph",
-          text: "Because my goal was to build a front-end prototype they could continue building on, I jumped straight into code and used the Shadcn component system as the base of the prototype.",
+          text: "Because our goal was to build a front-end prototype they could continue building on, we jumped straight into code and used the Shadcn component system as the base of the prototype.",
         },
         {
           type: "paragraph",
-          text: "Shadcn gave me modern componentry, and then I used Tweak CN to customize three unique style directions for Scout Fuel to review and provide feedback on. That gave us a solid design foundation to start building out the actual experience.",
+          text: "Shadcn gave us modern componentry, and then we used Tweak CN to customize three unique style directions for Scout Fuel to review and provide feedback on. That gave us a solid design foundation to start building out the actual experience.",
         },
         {
           type: "paragraph",
-          text: "I also used Tailwind for layout and styling, so the stack stayed squarely in today's React ecosystem: composable UI primitives, utility-first CSS, and a codebase pattern product engineering already knows how to run with.",
+          text: "We also used Tailwind for layout and styling, so the stack stayed squarely in today's React ecosystem: composable UI primitives, utility-first CSS, and a codebase pattern product engineering already knows how to run with.",
         },
       ],
       text: "",
@@ -195,7 +195,7 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       bodyBlocks: [
         {
           type: "paragraph",
-          text: "With a clear vision set and the scaffolding of the design foundation in place, I used Claude to shape the first one-shot prompt and get a V1 on the canvas. From there, I moved into Cursor as my primary environment for both development and design, and the work of refining kicked in.",
+          text: "With a clear vision set and the scaffolding of the design foundation in place, we used Claude to shape the first one-shot prompt and get a V1 on the canvas. From there, we moved into Cursor as our primary environment for both development and design, and the work of refining kicked in.",
         },
       ],
       text: "",
@@ -212,11 +212,11 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
         },
         {
           type: "paragraph",
-          text: "I start by moving things around, merging repeated blocks, and removing anything that doesn't carry real signal. It's less about polishing and more about reshaping the structure so the core workflow reads quickly.",
+          text: "We start by moving things around, merging repeated blocks, and removing anything that doesn't carry real signal. It's less about polishing and more about reshaping the structure so the core workflow reads quickly.",
         },
         {
           type: "paragraph",
-          text: "That phase feels more like carving than layering. Each pass strips away noise so the product gets closer to the rough shape I have in mind.",
+          text: "That phase feels more like carving than layering. Each pass strips away noise so the product gets closer to the rough shape we have in mind.",
         },
         {
           type: "paragraph",
@@ -235,15 +235,15 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       bodyBlocks: [
         {
           type: "paragraph",
-          text: "After the refinement phase removed distractions and clarified the core shape of the product, I started adding new features for all user problems that seemed poorly addressed.",
+          text: "After the refinement phase removed distractions and clarified the core shape of the product, we started adding new features for all user problems that seemed poorly addressed.",
         },
         {
           type: "paragraph",
-          text: "In this case I focused on simplifying the ability to see, at a glance, how your fleet was doing holistically and which of your drivers might need additional coaching.",
+          text: "In this case we focused on simplifying the ability to see, at a glance, how your fleet was doing holistically and which of your drivers might need additional coaching.",
         },
         {
           type: "paragraph",
-          text: "I introduced a dynamic **efficiency score** based on each trucking company's purchase history; the score moved up or down with fleet driver execution and became a prominent dashboard signal for quickly identifying which drivers needed attention. The goal was to bring a grounded sense of **gamification** into the workflow.",
+          text: "We introduced a dynamic **efficiency score** based on each trucking company's purchase history; the score moved up or down with fleet driver execution and became a prominent dashboard signal for quickly identifying which drivers needed attention. The goal was to bring a grounded sense of **gamification** into the workflow.",
         },
       ],
       text: "",
@@ -258,19 +258,19 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       bodyBlocks: [
         {
           type: "paragraph",
-          text: "I will admit that documentation is not something that really gets me excited and is often an area where I'll drag my feet.",
+          text: "Documentation is not the part of the work that gets us most excited, and it is often where we drag our feet.",
         },
         {
           type: "paragraph",
-          text: "This is changing dramatically as I've started leveraging new workflows into my process.",
+          text: "This is changing dramatically as we have started folding new workflows into our process.",
         },
         {
           type: "paragraph",
-          text: 'In the repo I added a **Cursor skill** that summarizes every pull request and appends to that Notion doc. I told the agent to write in **customer-facing language** — what value landed for Scout Fuel, not just commit noise — and to **capture screenshots** of the work so the log stayed visual, not abstract.',
+          text: 'In the repo we added a **Cursor skill** that summarizes every pull request and appends to that Notion doc. We told the agent to write in **customer-facing language** — what value landed for Scout Fuel, not just commit noise — and to **capture screenshots** of the work so the log stayed visual, not abstract.',
         },
         {
           type: "paragraph",
-          text: 'After each session building the prototype, I would type **"summarize"** and let the skill run. It turned into one of the highest-leverage habits of the sprint: a lightweight audit trail that made it much easier to communicate design decisions back to stakeholders without rebuilding context from memory.',
+          text: 'After each session building the prototype, we would type **"summarize"** and let the skill run. It turned into one of the highest-leverage habits of the sprint: a lightweight audit trail that made it much easier to communicate design decisions back to stakeholders without rebuilding context from memory.',
         },
       ],
       text: "",

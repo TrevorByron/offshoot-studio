@@ -94,8 +94,10 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
       >
         {/* Close button top-left */}
         <div
-          className={`z-20 flex justify-start p-4 bg-transparent pointer-events-none ${
-            isImmersiveDark ? "fixed top-0 left-0" : "sticky top-0"
+          className={`z-20 flex justify-start pointer-events-none ${
+            isImmersiveDark
+              ? "fixed inset-x-0 top-0 p-4 max-[860px]:border-b max-[860px]:border-[rgba(38,37,30,0.08)] max-[860px]:bg-[#f7f7f4]/95 max-[860px]:pt-[max(0.75rem,env(safe-area-inset-top))] max-[860px]:backdrop-blur-md"
+              : "sticky top-0 bg-transparent p-4"
           }`}
         >
           <div className="pointer-events-auto">
@@ -105,14 +107,14 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
               onClick={handleClose}
               className={`flex items-center gap-2 px-3 py-2 rounded-md border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                 isImmersiveDark
-                  ? "bg-[#f7f7f4] border-[rgba(38,37,30,0.15)] text-[#26251e] hover:bg-white focus-visible:ring-offset-[#f7f7f4]"
+                  ? "bg-[#f7f7f4]/95 backdrop-blur-sm border-[rgba(38,37,30,0.15)] text-[#26251e] shadow-sm hover:bg-white focus-visible:ring-offset-[#f7f7f4] max-[860px]:px-2.5"
                   : "bg-background border-border text-foreground shadow-sm hover:bg-muted focus-visible:ring-offset-card"
               }`}
               aria-label={backLabel}
               title={backLabel}
             >
               <HugeiconsIcon icon={ArrowLeft01Icon} className="size-5 shrink-0" strokeWidth={2} aria-hidden />
-              <span>{backLabel}</span>
+              <span className={isImmersiveDark ? "max-[860px]:sr-only" : undefined}>{backLabel}</span>
             </button>
           </div>
         </div>
