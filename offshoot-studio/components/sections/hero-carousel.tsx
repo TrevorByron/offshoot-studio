@@ -13,6 +13,10 @@ import { cn } from "@/lib/utils"
 export interface CarouselLogo {
   src: string
   alt: string
+  /** Displayed width. Use the file's native pixels so a small mark stays sharp. */
+  width?: number
+  height?: number
+  className?: string
 }
 
 export interface CarouselScreenshot {
@@ -20,6 +24,11 @@ export interface CarouselScreenshot {
   alt: string
   /** Optional image to fill the inner content area (e.g. case study cover). */
   coverImage?: string
+  /**
+   * Draw the black rounded frame in CSS. Other covers have this stroke baked into
+   * the image (3px border, 21px radius on a 1920px-wide asset).
+   */
+  coverFrame?: boolean
   /** Optional logo shown in cursor-following tooltip on hover. */
   hoverLogo?: string
   /** Optional case study slug; when set, the card links to /selected-work?case=[slug]. */
@@ -31,6 +40,13 @@ export interface CarouselScreenshot {
 const DEFAULT_LOGOS: CarouselLogo[] = [
   { src: "/logos/openJoy.png", alt: "OpenJoy" },
   { src: "/logos/Procore.png", alt: "Procore" },
+  {
+    src: "/logos/Scout.png",
+    alt: "Scout",
+    width: 139,
+    height: 79,
+    className: "h-auto w-[70px] max-h-full md:w-[110px]",
+  },
   { src: "/logos/Alkami.png", alt: "Alkami" },
   { src: "/logos/Iodine.png", alt: "Iodine" },
   { src: "/logos/Transcarent.png", alt: "Transcarent" },
@@ -48,7 +64,7 @@ const LOGO_HEIGHT = 354
 
 const DEFAULT_SCREENSHOTS: CarouselScreenshot[] = [
   { src: "/background-images/man-on-rock.png", alt: "Man on rock", coverImage: "/case-study-covers/procore-cover.png", hoverLogo: "/logos/Procore.png", caseStudySlug: "procore" },
-  { src: "/background-images/rock.png", alt: "Rock", coverImage: "/case-study-covers/scout-fuel-cover.png", caseStudySlug: "scout-fuel" },
+  { src: "/background-images/rock.png", alt: "Rock", coverImage: "/case-study-covers/scout-fuel-cover.png", coverFrame: true, hoverLogo: "/logos/Scout.png", caseStudySlug: "scout-fuel" },
   { src: "/background-images/two-on-rock.png", alt: "Two on rock", coverImage: "/case-study-covers/gsd-cover.png", hoverLogo: "/logos/TweakingCat.png", caseStudySlug: "gsd" },
 ]
 
@@ -128,10 +144,10 @@ export function HeroCarousel({
               <Image
                 src={logo.src}
                 alt={logo.alt}
-                width={LOGO_WIDTH}
-                height={LOGO_HEIGHT}
+                width={logo.width ?? LOGO_WIDTH}
+                height={logo.height ?? LOGO_HEIGHT}
                 unoptimized
-                className="w-full h-full object-contain object-center"
+                className={logo.className ?? "w-full h-full object-contain object-center"}
                 sizes="(max-width: 767px) 160px, 180px"
               />
             </div>
@@ -172,22 +188,42 @@ export function HeroCarousel({
                   className="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-300 pointer-events-none rounded-lg"
                   aria-hidden
                 />
-                <div
-                  className={cn(
-                    "relative z-10 w-full flex-1 min-h-0 rounded-lg overflow-hidden transition-transform duration-300 ease-out origin-center group-hover:scale-[1.02]",
-                    !shot.coverImage && "bg-muted"
-                  )}
-                  style={
-                    shot.coverImage
-                      ? {
-                          backgroundImage: `url(${shot.coverImage})`,
-                          backgroundSize: "contain",
-                          backgroundPosition: "center",
-                          backgroundRepeat: "no-repeat",
-                        }
-                      : undefined
-                  }
-                />
+                {shot.coverImage && shot.coverFrame ? (
+                  <div className="relative z-10 flex h-full w-full min-h-0 flex-1 items-center justify-center">
+                    <div
+                      className="h-full max-w-full origin-center transition-transform duration-300 ease-out group-hover:scale-[1.02] [container-type:inline-size]"
+                      style={{ aspectRatio: "3360 / 2080" }}
+                    >
+                      {/* Frame matches the Procore cover: 3px stroke and 21px radius at 1920px wide. */}
+                      <img
+                        src={shot.coverImage}
+                        alt=""
+                        className="block h-full w-full border-solid border-black object-cover"
+                        style={{
+                          borderWidth: "0.15625cqw",
+                          borderRadius: "1.09375cqw",
+                        }}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className={cn(
+                      "relative z-10 w-full flex-1 min-h-0 rounded-lg overflow-hidden transition-transform duration-300 ease-out origin-center group-hover:scale-[1.02]",
+                      !shot.coverImage && "bg-muted"
+                    )}
+                    style={
+                      shot.coverImage
+                        ? {
+                            backgroundImage: `url(${shot.coverImage})`,
+                            backgroundSize: "contain",
+                            backgroundPosition: "center",
+                            backgroundRepeat: "no-repeat",
+                          }
+                        : undefined
+                    }
+                  />
+                )}
               </>
             )
             if (shot.caseStudySlug) {
@@ -262,7 +298,7 @@ export function HeroCarousel({
         hoveredLogo &&
         createPortal(
           <div
-            className="fixed left-0 top-0 z-[9999] pointer-events-none rounded-lg border border-border/50 shadow-lg overflow-hidden bg-background/95 backdrop-blur-sm p-3 max-w-[200px]"
+            className="fixed left-0 top-0 z-[9999] pointer-events-none w-max rounded-lg border border-border/50 shadow-lg overflow-hidden bg-background/95 backdrop-blur-sm p-2.5"
             style={{
               transform: `translate(${mousePosition.x + TOOLTIP_OFFSET}px, ${mousePosition.y + TOOLTIP_OFFSET}px)`,
             }}
@@ -270,7 +306,7 @@ export function HeroCarousel({
             <img
               src={hoveredLogo}
               alt=""
-              className="block w-full h-auto max-h-[40px] object-contain"
+              className="block h-10 w-auto max-w-[11rem] object-contain"
             />
           </div>,
           document.body

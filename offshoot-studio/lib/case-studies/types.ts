@@ -69,6 +69,8 @@ export interface CaseStudySection {
    * (no text column — used for the Scout Fuel dashboard hero).
    */
   heroBleed?: boolean
+  /** Caption rendered directly under this section's image, not in the text column. */
+  imageCaption?: string
 }
 
 /** Before/after image slider section (e.g. founder design vs. redesigned). No heading or text. */

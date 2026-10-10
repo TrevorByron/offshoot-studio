@@ -25,6 +25,40 @@ export interface RecentWorkProject {
 
 export const recentWorkProjects: RecentWorkProject[] = [
   {
+    slug: "scout-fuel",
+    title: "Scout Fuel — Product Design",
+    subtitle: "Fleet fuel dashboard — redesign & coded prototype",
+    badge: "Rapid Prototype • 60 hours",
+    shortDescription: "AI-augmented product redesign for Scout Fuel.",
+    description: [
+      "Scout Fuel helps trucking companies optimize fuel spend—but their UI wasn't scaling, and customers weren't forming a habit around the product. Founders new to development needed a modern foundation and a clearer experience.",
+      "In 60 hours we rebuilt the design system in code, reframed the product as a system of intelligence, and shipped a coded prototype they could keep building on.",
+    ],
+    imageCount: 0,
+    imageBackground: "/background-images/rock.png",
+    imageScreenshot: "/case-study-covers/scout-fuel-cover.png",
+    imageAlt: "Scout Fuel redesigned dashboard",
+    imagePosition: "right",
+    footerLinkHref: "https://scout-fuel-redesign.vercel.app/",
+    footerLinkLabel: "Explore prototype",
+    caseStudySlug: "scout-fuel",
+  },
+  {
+    slug: "get-shit-done",
+    title: "Get Sh*t Done",
+    subtitle: "To do app - Validation",
+    badge: "Rapid Prototype",
+    shortDescription: "To-do app concept validation with Robert Hohman (Glassdoor cofounder).",
+    description: [
+      "Robert Hohman (co-founder of Glassdoor) had a vision for a productivity app based on GTD principles that transformed his workflow as a CEO—but needed to validate whether it would resonate beyond his own use case. He'd already started building, but the experience felt founder-designed and lacked the strategic foundation to move forward confidently.",
+      "We established a design system, mapped the user journey, and built a polished V1 that gave Robert the clarity he needed.",
+    ],
+    imageCount: 3,
+    imageUrls: ["/case-study-background.png", "/get-shit-done-screenshot.png"],
+    caseStudySlug: "gsd",
+    // Card content comes from case study (gsd.ts cardPreview)
+  },
+  {
     slug: "procore",
     title: "Procore Construction Network",
     subtitle: "Construction Network - Prototype and Validation",
@@ -43,40 +77,6 @@ export const recentWorkProjects: RecentWorkProject[] = [
     footerLinkHref: "https://trevorborden.github.io/GCN-prototype/index.html",
     footerLinkLabel: "See Prototype",
     caseStudySlug: "procore",
-  },
-  {
-    slug: "get-shit-done",
-    title: "Get Sh*t Done",
-    subtitle: "To do app - Validation",
-    badge: "Rapid Prototype",
-    shortDescription: "To-do app concept validation with Robert Hohman (Glassdoor cofounder).",
-    description: [
-      "Robert Hohman (co-founder of Glassdoor) had a vision for a productivity app based on GTD principles that transformed his workflow as a CEO—but needed to validate whether it would resonate beyond his own use case. He'd already started building, but the experience felt founder-designed and lacked the strategic foundation to move forward confidently.",
-      "We established a design system, mapped the user journey, and built a polished V1 that gave Robert the clarity he needed.",
-    ],
-    imageCount: 3,
-    imageUrls: ["/case-study-background.png", "/get-shit-done-screenshot.png"],
-    caseStudySlug: "gsd",
-    // Card content comes from case study (gsd.ts cardPreview)
-  },
-  {
-    slug: "scout-fuel",
-    title: "Scout Fuel — Product Design",
-    subtitle: "Fleet fuel dashboard — redesign & coded prototype",
-    badge: "Rapid Prototype • 60 hours",
-    shortDescription: "AI-augmented product redesign for Scout Fuel.",
-    description: [
-      "Scout Fuel helps trucking companies optimize fuel spend—but their UI wasn't scaling, and customers weren't forming a habit around the product. Founders new to development needed a modern foundation and a clearer experience.",
-      "In 60 hours we rebuilt the design system in code, reframed the product as a system of intelligence, and shipped a coded prototype they could keep building on.",
-    ],
-    imageCount: 0,
-    imageBackground: "/background-images/rock.png",
-    imageScreenshot: "/case-study-covers/scout-fuel-cover.png",
-    imageAlt: "Scout Fuel redesigned dashboard",
-    imagePosition: "right",
-    footerLinkHref: "https://scout-fuel-redesign.vercel.app/",
-    footerLinkLabel: "Explore prototype",
-    caseStudySlug: "scout-fuel",
   },
   {
     slug: "open-joy",

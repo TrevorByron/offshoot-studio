@@ -294,11 +294,14 @@ export default function ScoutClaudeChatMockup({
     // Prefer the case-study modal scroll container when present; otherwise viewport.
     const scrollRoot =
       (root.closest('[data-case-study-scroll]') as Element | null) ?? null;
+    const slide = root.closest('.ss-img');
+    if (slide && slide.getAttribute('data-index') !== String(activationIndex)) return undefined;
 
     const isMockupReady = () =>
       isFullyInViewport(root) || visibleRatioRef.current >= 0.55;
 
     const maybeStart = () => {
+      if (slide && !slide.classList.contains('active')) return;
       if (!isMockupReady()) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         runReducedMotion();
@@ -306,6 +309,13 @@ export default function ScoutClaudeChatMockup({
       }
       runSequence();
     };
+
+    const mo = slide
+      ? new MutationObserver(() => {
+          requestAnimationFrame(maybeStart);
+        })
+      : null;
+    mo?.observe(slide!, { attributes: true, attributeFilter: ['class'] });
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -333,6 +343,7 @@ export default function ScoutClaudeChatMockup({
     return () => {
       window.clearTimeout(tReassertA);
       window.clearTimeout(tReassertB);
+      mo?.disconnect();
       io.disconnect();
       scrollTarget.removeEventListener('scroll', onScrollOrResize);
       window.removeEventListener('resize', onScrollOrResize);

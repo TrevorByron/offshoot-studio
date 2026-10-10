@@ -78,7 +78,7 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
 
   const modalContent = (
     <div
-      className={`fixed inset-0 z-[9999] ${isImmersiveDark ? "bg-[#0a0a0a]" : "bg-background"}`}
+      className={`fixed inset-0 z-[9999] ${isImmersiveDark ? "bg-[#f7f7f4]" : "bg-background"}`}
       onClick={handleClose}
       role="dialog"
       aria-modal="true"
@@ -87,13 +87,17 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
       <div
         ref={scrollContainerRef}
         data-case-study-scroll
-        className={`dark h-full w-full overflow-y-auto min-h-screen ${
-          isImmersiveDark ? "bg-[#0a0a0a]" : "bg-background"
+        className={`h-full w-full overflow-y-auto min-h-screen ${
+          isImmersiveDark ? "bg-[#f7f7f4]" : "dark bg-background"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button top-left */}
-        <div className="sticky top-0 z-20 flex justify-start p-4 bg-transparent pointer-events-none">
+        <div
+          className={`z-20 flex justify-start p-4 bg-transparent pointer-events-none ${
+            isImmersiveDark ? "fixed top-0 left-0" : "sticky top-0"
+          }`}
+        >
           <div className="pointer-events-auto">
             <button
               ref={closeRef}
@@ -101,7 +105,7 @@ export function CaseStudyDetailModal({ open, onClose, slug, backLabel = DEFAULT_
               onClick={handleClose}
               className={`flex items-center gap-2 px-3 py-2 rounded-md border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                 isImmersiveDark
-                  ? "bg-[#141414] border-white/15 text-white hover:bg-[#1c1c1c] focus-visible:ring-offset-[#0a0a0a]"
+                  ? "bg-[#f7f7f4] border-[rgba(38,37,30,0.15)] text-[#26251e] hover:bg-white focus-visible:ring-offset-[#f7f7f4]"
                   : "bg-background border-border text-foreground shadow-sm hover:bg-muted focus-visible:ring-offset-card"
               }`}
               aria-label={backLabel}

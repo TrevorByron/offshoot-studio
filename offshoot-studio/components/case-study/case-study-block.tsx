@@ -36,6 +36,8 @@ interface CaseStudyBlockProps {
    * `splitFlip`: media left / text right.
    */
   layout?: "stack" | "split" | "splitFlip"
+  /** Section fills the viewport: center the split and keep media inside the screen. */
+  viewportFill?: boolean
 }
 
 /** Render text with **bold** markers as <strong>. */
@@ -114,6 +116,7 @@ export function CaseStudyBlock({
   isFirstSection,
   scrollRootRef,
   layout = "stack",
+  viewportFill = false,
 }: CaseStudyBlockProps) {
   const ref = React.useRef<HTMLDivElement>(null)
   // "some" = any part visible — works in modal (small viewport) and on full page; 20% would never fire for tall sections
@@ -143,6 +146,7 @@ export function CaseStudyBlock({
     linkAriaLabel,
     showcaseBleed,
     heroBleed,
+    imageCaption,
   } = section
 
   const initial = prefersReducedMotion ? revealInitialReduced : revealInitial
@@ -158,7 +162,15 @@ export function CaseStudyBlock({
   const hideOnMobile = isEmbeddedPrototype && !embedShowOnMobile
 
   const textColumn = (
-    <div className={`flex flex-col gap-4 ${isSplit ? "md:pr-8 lg:pr-12" : "gap-6 md:gap-8"}`}>
+    <div
+      className={`flex flex-col gap-4 ${
+        layout === "split"
+          ? "md:pr-8 lg:pr-12"
+          : layout === "splitFlip"
+            ? "md:pl-8 lg:pl-12"
+            : "gap-6 md:gap-8"
+      }`}
+    >
       {label && (
         <motion.span
           className="font-geist-mono text-[12px] text-foreground uppercase tracking-wide"
@@ -226,6 +238,7 @@ export function CaseStudyBlock({
         animate={effectiveInView ? animate : initial}
         transition={{ ...revealTransition, delay: hasText ? STAGGER_DELAY * 3 : STAGGER_DELAY }}
       >
+        <div className={`flex flex-col gap-[40px] ${isSplit ? "brightness-[0.94]" : ""}`}>
         {embedUrl ? (
           browserFrame ? (
             <CaseStudyEmbedFrame
@@ -260,7 +273,13 @@ export function CaseStudyBlock({
               <ScoutCaseStudyMedia kind={customMedia} />
             </CaseStudyBrowserFrame>
           ) : (
-            <div className={`relative w-full overflow-hidden ${customMediaHeight}`}>
+            <div
+              className={`relative w-full overflow-hidden rounded-xl ${customMediaHeight} ${
+                customMedia === "scoutClaudeResearch" || customMedia === "scoutClaudeScaffold"
+                  ? "border border-white/35"
+                  : ""
+              }`}
+            >
               <div className="absolute inset-0">
                 <ScoutCaseStudyMedia kind={customMedia} />
               </div>
@@ -268,7 +287,9 @@ export function CaseStudyBlock({
           )
         ) : heroBleed && images[0] ? (
           <div
-            className="relative w-screen left-1/2 -translate-x-1/2 py-8 md:py-12 px-4 md:px-8 bg-cover bg-center"
+            className={`relative w-screen left-1/2 -translate-x-1/2 px-4 md:px-8 bg-cover bg-center ${
+              viewportFill ? "py-0" : "py-8 md:py-12"
+            }`}
             style={{
               backgroundImage: `url(${browserFrameBackground ?? "/background-images/rock.png"})`,
             }}
@@ -287,13 +308,21 @@ export function CaseStudyBlock({
                   </div>
                 </div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={images[0]} alt="" className="w-full h-auto block" />
+                <img
+                  src={images[0]}
+                  alt=""
+                  className={`w-full h-auto block ${
+                    viewportFill ? "max-h-[calc(100dvh-14rem)] object-contain object-top" : ""
+                  }`}
+                />
               </div>
             </div>
           </div>
         ) : showcaseBleed && linkHref && images[0] ? (
           <div
-            className="relative w-screen left-1/2 -translate-x-1/2 py-10 md:py-16 px-4 md:px-8 bg-cover bg-center"
+            className={`relative w-screen left-1/2 -translate-x-1/2 px-4 md:px-8 bg-cover bg-center ${
+              viewportFill ? "py-0" : "py-10 md:py-16"
+            }`}
             style={{ backgroundImage: "url(/background-images/rock.png)" }}
           >
             <div className="absolute inset-0 bg-black/45" aria-hidden />
@@ -320,7 +349,9 @@ export function CaseStudyBlock({
                   <img
                     src={images[0]}
                     alt=""
-                    className="w-full h-auto block"
+                    className={`w-full h-auto block ${
+                      viewportFill ? "max-h-[calc(100dvh-18rem)] object-contain object-top" : ""
+                    }`}
                   />
                 </div>
               </a>
@@ -359,17 +390,26 @@ export function CaseStudyBlock({
             }
             // Plain supporting visual — no browser chrome / rock bezel
             return (
-              <div key={i} className={`w-full ${hideImageOnMobile ? "hidden md:block" : ""}`}>
+              <div
+                key={i}
+                className={`w-full overflow-hidden rounded-xl ${hideImageOnMobile ? "hidden md:block" : ""}`}
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={src}
                   alt=""
-                  className="w-full h-auto block"
+                  className={`w-full h-auto block ${viewportFill ? "max-h-[68vh] object-contain object-top" : ""}`}
                 />
               </div>
             )
           })
         )}
+        </div>
+        {imageCaption ? (
+          <p className="font-geist-mono text-sm leading-relaxed text-foreground">
+            {imageCaption}
+          </p>
+        ) : null}
       </motion.div>
   )
 
@@ -378,19 +418,28 @@ export function CaseStudyBlock({
     return (
       <div
         ref={ref}
-        className={`grid grid-cols-1 md:grid-cols-[40%_60%] gap-8 md:gap-10 lg:gap-14 items-start border-t border-border/40 dark:border-white/10 pt-14 md:pt-20 md:min-h-[90vh] md:pb-16 ${
+        className={`grid grid-cols-1 ${
+          textFirst
+            ? "md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
+            : "md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]"
+        } gap-8 md:gap-10 lg:gap-14 ${
+          viewportFill
+            ? "items-center"
+            : "items-start border-t border-border/40 dark:border-white/10 pt-14 md:pt-20 md:pb-16"
+        } ${
           hideOnMobile ? "hidden md:grid" : ""
         }`}
       >
-        <div className={`md:py-8 ${textFirst ? "order-1" : "order-1 md:order-2"}`}>
+        <div className={`min-w-0 self-start md:py-8 ${textFirst ? "order-1" : "order-1 md:order-2"}`}>
           {textColumn}
         </div>
         <div
-          className={`min-w-0 md:sticky md:top-20 md:self-start md:py-8 ${
+          className={`min-w-0 self-start md:self-stretch md:flex md:items-center ${
             textFirst ? "order-2" : "order-2 md:order-1"
           }`}
         >
-          {mediaColumn}
+          {/* Static position is centered with the text; sticky takes over once it hits the top. */}
+          <div className="w-full md:sticky md:top-24">{mediaColumn}</div>
         </div>
       </div>
     )

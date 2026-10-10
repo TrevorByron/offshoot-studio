@@ -96,7 +96,7 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
   sections: [
     {
       // Full-bleed opener — fleet efficiency dashboard (no legacy before/after)
-      images: [`${BASE}/panel-gamified.jpg`],
+      images: [`${BASE}/dashboard-opener.png`],
       heroBleed: true,
       browserFrame: true,
       browserFrameUrl: "scoutfuel.app/dashboard",
@@ -110,7 +110,7 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
       bodyBlocks: [
         {
           type: "paragraph",
-          text: "On the Procore Construction Network (case study 01), I followed a very traditional arc: discovery, then **low-fidelity flows** that slowly, slowly became high-fidelity mocks. A huge share of calendar time lived in those early bands — sketching, grayscale, Figma hygiene — because that was how we de-risked structure before we invested in polish.",
+          text: "On the Procore Construction Network (case study 03), I followed a very traditional arc: discovery, then **low-fidelity flows** that slowly, slowly became high-fidelity mocks. A huge share of calendar time lived in those early bands — sketching, grayscale, Figma hygiene — because that was how we de-risked structure before we invested in polish.",
         },
         {
           type: "paragraph",
@@ -128,12 +128,9 @@ export const scoutFuelCaseStudy: CaseStudyContent = {
           type: "paragraph",
           text: "I leveraged this in a recent project for Scout Fuel. The results and timeline astounded me.",
         },
-        {
-          type: "paragraph",
-          font: "mono",
-          text: '"If you like the design, take a line out. If you still like it, take another line out." — Gorden Wagener, head of design at Mercedes',
-        },
       ],
+      imageCaption:
+        '"If you like the design, take a line out. If you still like it, take another line out." — Gorden Wagener, head of design at Mercedes',
       text: "",
     },
     {
