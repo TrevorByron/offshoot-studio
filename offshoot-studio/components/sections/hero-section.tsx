@@ -6,7 +6,8 @@ import { motion, useReducedMotion } from "framer-motion"
 import { BookACallLink } from "@/components/book-a-call-link"
 import { buttonVariants } from "@/components/ui/button"
 import { SectionWrapper } from "./section-wrapper"
-import { HeroCarousel } from "./hero-carousel"
+import { HeroLogoTicker } from "./hero-logo-ticker"
+import { HeroScreenshotMarquee } from "./hero-screenshot-marquee"
 import { HeroLogoStack } from "./hero-logo-stack"
 import { cn } from "@/lib/utils"
 import { REVEAL_DURATION, REVEAL_EASE } from "@/lib/reveal-config"
@@ -116,17 +117,17 @@ export function HeroSection({ onCaseStudyClick }: HeroSectionProps) {
           ),
           document.body
         )}
-      {/* Full-bleed carousel – animate in from bottom */}
-      <div
-        className="w-screen relative left-1/2 -translate-x-1/2 mt-8"
-        aria-label="Clients and recent work"
-      >
+      {/* Full-bleed media – logo ticker and screenshots are fully isolated */}
+      <div className="w-screen relative left-1/2 -translate-x-1/2 mt-8">
         <motion.div
           initial={carouselInitial}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...heroTransition, delay: 0.4 }}
         >
-          <HeroCarousel onCaseStudyClick={onCaseStudyClick} />
+          {/* Continuous logo row only — no dots / jump controls */}
+          <HeroLogoTicker />
+          {/* Screenshot marquee + jump dots — cannot affect the logo ticker */}
+          <HeroScreenshotMarquee onCaseStudyClick={onCaseStudyClick} />
         </motion.div>
       </div>
     </SectionWrapper>
