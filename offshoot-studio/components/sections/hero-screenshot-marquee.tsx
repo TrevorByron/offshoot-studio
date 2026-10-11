@@ -45,9 +45,10 @@ const SCREENSHOT_PX_PER_SEC = 23.4
 const SCREENSHOT_PX_PER_SEC_MOBILE = SCREENSHOT_PX_PER_SEC * 3
 
 const DEFAULT_SCREENSHOTS: CarouselScreenshot[] = [
-  { src: "/background-images/man-on-rock.png", alt: "Man on rock", coverImage: "/case-study-covers/procore-cover.png", hoverLogo: "/logos/Procore.png", caseStudySlug: "procore" },
-  { src: "/background-images/rock.png", alt: "Rock", coverImage: "/case-study-covers/scout-fuel-cover.png", coverFrame: true, hoverLogo: "/logos/Scout.png", caseStudySlug: "scout-fuel" },
-  { src: "/background-images/two-on-rock.png", alt: "Two on rock", coverImage: "/case-study-covers/gsd-cover.png", hoverLogo: "/logos/TweakingCat.png", caseStudySlug: "gsd" },
+  { src: "/background-images/rock.png", alt: "Scout Fuel", coverImage: "/case-study-covers/scout-fuel-cover.png", coverFrame: true, hoverLogo: "/logos/Scout.png", caseStudySlug: "scout-fuel" },
+  { src: "/background-images/two-on-rock.png", alt: "Toro", coverImage: "/case-study-covers/toro-cover.png", hoverLogo: "/logos/Toro.png" },
+  { src: "/background-images/man-on-rock.png", alt: "Procore", coverImage: "/case-study-covers/procore-cover.png", hoverLogo: "/logos/Procore.png", caseStudySlug: "procore" },
+  { src: "/background-images/two-on-rock.png", alt: "Get Sh*t Done", coverImage: "/case-study-covers/gsd-cover.png", hoverLogo: "/logos/TweakingCat.png", caseStudySlug: "gsd" },
 ]
 
 interface HeroScreenshotMarqueeProps {
@@ -381,7 +382,7 @@ export function HeroScreenshotMarquee({
               const selected = i === activeScreenshot
               return (
                 <button
-                  key={`${shot.src}-dot`}
+                  key={`${shot.coverImage ?? shot.alt}-dot`}
                   type="button"
                   role="tab"
                   aria-selected={selected}
