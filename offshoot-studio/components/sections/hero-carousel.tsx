@@ -3,8 +3,14 @@
 import { createPortal } from "react-dom"
 import Image from "next/image"
 import Link from "next/link"
-import { type ReactNode, useCallback, useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import {
+  type ReactNode,
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+} from "react"
+import { motion, useReducedMotion } from "framer-motion"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons"
 import { buttonVariants } from "@/components/ui/button"
@@ -61,6 +67,8 @@ const DESKTOP_BREAKPOINT = 768
 /** All ticker logos are exported at this size from Figma. */
 const LOGO_WIDTH = 689
 const LOGO_HEIGHT = 354
+const SCREENSHOT_AUTOPLAY_DESKTOP_MS = 5500
+const SCREENSHOT_AUTOPLAY_MOBILE_MS = 4000
 
 const DEFAULT_SCREENSHOTS: CarouselScreenshot[] = [
   { src: "/background-images/man-on-rock.png", alt: "Man on rock", coverImage: "/case-study-covers/procore-cover.png", hoverLogo: "/logos/Procore.png", caseStudySlug: "procore" },
@@ -75,25 +83,143 @@ interface HeroCarouselProps {
   onCaseStudyClick?: (slug: string) => void
 }
 
+function ScreenshotCard({
+  shot,
+  onCaseStudyClick,
+  onMouseEnter,
+  onMouseMove,
+  onMouseLeave,
+}: {
+  shot: CarouselScreenshot
+  onCaseStudyClick?: (slug: string) => void
+  onMouseEnter?: () => void
+  onMouseMove?: (e: React.MouseEvent) => void
+  onMouseLeave?: () => void
+}) {
+  const cardClassName = cn(
+    "group relative flex-shrink-0 w-[80vh] h-[50vh] md:w-[78vw] md:h-auto md:aspect-[16/10] max-w-[1200px] rounded-lg border border-border overflow-hidden flex flex-col p-6 md:p-[60px]",
+    shot.caseStudySlug ? "cursor-pointer" : shot.hoverLogo && "cursor-default"
+  )
+  const cardStyle = {
+    backgroundImage: `url(${shot.src})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }
+  const cardContent = (
+    <>
+      <div
+        className="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-300 pointer-events-none rounded-lg"
+        aria-hidden
+      />
+      {shot.coverImage && shot.coverFrame ? (
+        <div className="relative z-10 flex h-full w-full min-h-0 flex-1 items-center justify-center">
+          <div
+            className="h-full max-w-full origin-center transition-transform duration-300 ease-out group-hover:scale-[1.02] [container-type:inline-size]"
+            style={{ aspectRatio: "3360 / 2080" }}
+          >
+            {/* Frame matches the Procore cover: 3px stroke and 21px radius at 1920px wide. */}
+            <img
+              src={shot.coverImage}
+              alt=""
+              className="block h-full w-full border-solid border-black object-cover"
+              style={{
+                borderWidth: "0.15625cqw",
+                borderRadius: "1.09375cqw",
+              }}
+            />
+          </div>
+        </div>
+      ) : (
+        <div
+          className={cn(
+            "relative z-10 w-full flex-1 min-h-0 rounded-lg overflow-hidden transition-transform duration-300 ease-out origin-center group-hover:scale-[1.02]",
+            !shot.coverImage && "bg-muted"
+          )}
+          style={
+            shot.coverImage
+              ? {
+                  backgroundImage: `url(${shot.coverImage})`,
+                  backgroundSize: "contain",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }
+              : undefined
+          }
+        />
+      )}
+    </>
+  )
+
+  if (shot.caseStudySlug) {
+    if (onCaseStudyClick) {
+      return (
+        <button
+          type="button"
+          onClick={() => onCaseStudyClick(shot.caseStudySlug!)}
+          className={cardClassName}
+          style={cardStyle}
+          aria-label={shot.alt}
+          onMouseEnter={onMouseEnter}
+          onMouseMove={onMouseMove}
+          onMouseLeave={onMouseLeave}
+        >
+          {cardContent}
+        </button>
+      )
+    }
+    return (
+      <Link
+        href={`/selected-work?case=${shot.caseStudySlug}&from=home`}
+        className={cardClassName}
+        style={cardStyle}
+        role="img"
+        aria-label={shot.alt}
+        onMouseEnter={onMouseEnter}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+      >
+        {cardContent}
+      </Link>
+    )
+  }
+
+  return (
+    <div
+      className={cardClassName}
+      style={cardStyle}
+      role="img"
+      aria-label={shot.alt}
+      onMouseEnter={onMouseEnter}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+    >
+      {cardContent}
+    </div>
+  )
+}
+
 export function HeroCarousel({
   logos = DEFAULT_LOGOS,
   screenshots = DEFAULT_SCREENSHOTS,
   onCaseStudyClick,
 }: HeroCarouselProps) {
-  // Triple the lists so the loop is long and feels unending; animate by one segment for seamless repeat
+  // Logo ticker only: triple the list so the loop is long and feels unending.
   const logoList = [...logos, ...logos, ...logos]
-  const screenshotList = [...screenshots, ...screenshots, ...screenshots]
-
-  // Same duration would make the wider strip move more pixels/sec. Scale screenshot duration by approximate segment-width ratio so both strips have the same perceived (pixel) speed.
-  const logoSegmentWidth = logos.length * 170 + (logos.length - 1) * 14 // ~170px per logo, 14px gap
-  const screenshotSegmentWidth = screenshots.length * 1000 + (screenshots.length - 1) * 8 // ~1000px per card (85vw-ish), 8px gap
   const baseDuration = 78
-  const screenshotDurationBase = baseDuration * (screenshotSegmentWidth / logoSegmentWidth)
 
+  const prefersReducedMotion = useReducedMotion()
   const [isMobile, setIsMobile] = useState(false)
   const [hoveredLogo, setHoveredLogo] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isDesktop, setIsDesktop] = useState(true)
+
+  // Screenshot carousel (independent of logo ticker): indexed snap + dots
+  const [activeScreenshot, setActiveScreenshot] = useState(0)
+  const [screenshotPaused, setScreenshotPaused] = useState(false)
+  const [autoplayEpoch, setAutoplayEpoch] = useState(0)
+  const [trackX, setTrackX] = useState(0)
+  const screenshotViewportRef = useRef<HTMLDivElement>(null)
+  const screenshotTrackRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)")
@@ -111,20 +237,70 @@ export function HeroCarousel({
     return () => mq.removeEventListener("change", update)
   }, [])
 
+  const updateTrackX = useCallback(() => {
+    const viewport = screenshotViewportRef.current
+    const track = screenshotTrackRef.current
+    if (!viewport || !track) return
+    const card = track.children[activeScreenshot] as HTMLElement | undefined
+    if (!card) return
+    const viewportCenter = viewport.clientWidth / 2
+    const cardCenter = card.offsetLeft + card.offsetWidth / 2
+    setTrackX(viewportCenter - cardCenter)
+  }, [activeScreenshot])
+
+  useEffect(() => {
+    updateTrackX()
+    const viewport = screenshotViewportRef.current
+    if (!viewport) return
+    const observer = new ResizeObserver(() => updateTrackX())
+    observer.observe(viewport)
+    const track = screenshotTrackRef.current
+    if (track) observer.observe(track)
+    window.addEventListener("resize", updateTrackX)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener("resize", updateTrackX)
+    }
+  }, [updateTrackX, screenshots.length])
+
+  useEffect(() => {
+    if (
+      prefersReducedMotion ||
+      screenshotPaused ||
+      screenshots.length <= 1
+    ) {
+      return
+    }
+    const ms = isMobile ? SCREENSHOT_AUTOPLAY_MOBILE_MS : SCREENSHOT_AUTOPLAY_DESKTOP_MS
+    const id = window.setInterval(() => {
+      setActiveScreenshot((prev) => (prev + 1) % screenshots.length)
+    }, ms)
+    return () => window.clearInterval(id)
+  }, [
+    prefersReducedMotion,
+    screenshotPaused,
+    screenshots.length,
+    isMobile,
+    autoplayEpoch,
+  ])
+
+  const goToScreenshot = useCallback((index: number) => {
+    setActiveScreenshot(index)
+    setAutoplayEpoch((epoch) => epoch + 1)
+  }, [])
+
   const handleCardMouseMove = useCallback((e: React.MouseEvent) => {
     setMousePosition({ x: e.clientX, y: e.clientY })
   }, [])
 
-  // Faster scroll on mobile (~3x vs desktop)
-  const screenshotDuration = isMobile ? screenshotDurationBase / 3 : screenshotDurationBase
-
   return (
     <div className="w-full">
-      {/* Part 1: Logo strip – continuous horizontal scroll, runs off edges */}
+      {/* Part 1: Logo strip – continuous horizontal scroll, runs off edges.
+          Kept fully independent from the screenshot carousel (no dots / snap). */}
       <div className="w-full overflow-hidden bg-muted/50 pt-0 pb-0">
         <motion.div
           className="flex items-center gap-0 md:gap-16 w-max"
-          animate={{ x: [0, "-33.333%"] }}
+          animate={prefersReducedMotion ? undefined : { x: [0, "-33.333%"] }}
           transition={{
             x: {
               repeat: Infinity,
@@ -155,129 +331,76 @@ export function HeroCarousel({
         </motion.div>
       </div>
 
-      {/* Part 2: Screenshot strip – continuous horizontal scroll, runs off edges */}
-      <div className="w-full overflow-hidden bg-background pt-0 pb-8 md:pb-12">
-        <motion.div
-          key={isMobile ? "mobile" : "desktop"}
-          className="flex items-center gap-6 md:gap-8 w-max min-h-[50vh] md:min-h-[280px]"
-          animate={{ x: [0, "-33.333%"] }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: "loop",
-              repeatDelay: 0,
-              duration: screenshotDuration,
-              ease: "linear",
-            },
-          }}
-          style={{ willChange: "transform" }}
+      {/* Part 2: Screenshot strip – snap carousel with clickable dots (logo ticker unaffected) */}
+      <div
+        className="w-full bg-background pt-0 pb-6 md:pb-10"
+        onMouseEnter={() => setScreenshotPaused(true)}
+        onMouseLeave={() => setScreenshotPaused(false)}
+      >
+        <div
+          ref={screenshotViewportRef}
+          className="relative w-full overflow-hidden min-h-[50vh] md:min-h-[280px]"
+          aria-roledescription="carousel"
+          aria-label="Case study screenshots"
         >
-          {screenshotList.map((shot, i) => {
-            const cardClassName = cn(
-              "group relative flex-shrink-0 w-[80vh] h-[50vh] md:w-[78vw] md:h-auto md:aspect-[16/10] max-w-[1200px] rounded-lg border border-border overflow-hidden flex flex-col p-6 md:p-[60px]",
-              shot.caseStudySlug ? "cursor-pointer" : shot.hoverLogo && "cursor-default"
-            )
-            const cardStyle = {
-              backgroundImage: `url(${shot.src})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+          <motion.div
+            ref={screenshotTrackRef}
+            className="flex items-center gap-6 md:gap-8 w-max"
+            initial={false}
+            animate={{ x: trackX }}
+            transition={
+              prefersReducedMotion
+                ? { duration: 0 }
+                : { type: "spring", stiffness: 280, damping: 32, mass: 0.9 }
             }
-            const cardContent = (
-              <>
-                <div
-                  className="absolute inset-0 bg-black/30 group-hover:bg-black/60 transition-colors duration-300 pointer-events-none rounded-lg"
-                  aria-hidden
-                />
-                {shot.coverImage && shot.coverFrame ? (
-                  <div className="relative z-10 flex h-full w-full min-h-0 flex-1 items-center justify-center">
-                    <div
-                      className="h-full max-w-full origin-center transition-transform duration-300 ease-out group-hover:scale-[1.02] [container-type:inline-size]"
-                      style={{ aspectRatio: "3360 / 2080" }}
-                    >
-                      {/* Frame matches the Procore cover: 3px stroke and 21px radius at 1920px wide. */}
-                      <img
-                        src={shot.coverImage}
-                        alt=""
-                        className="block h-full w-full border-solid border-black object-cover"
-                        style={{
-                          borderWidth: "0.15625cqw",
-                          borderRadius: "1.09375cqw",
-                        }}
-                      />
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                    className={cn(
-                      "relative z-10 w-full flex-1 min-h-0 rounded-lg overflow-hidden transition-transform duration-300 ease-out origin-center group-hover:scale-[1.02]",
-                      !shot.coverImage && "bg-muted"
-                    )}
-                    style={
-                      shot.coverImage
-                        ? {
-                            backgroundImage: `url(${shot.coverImage})`,
-                            backgroundSize: "contain",
-                            backgroundPosition: "center",
-                            backgroundRepeat: "no-repeat",
-                          }
-                        : undefined
-                    }
-                  />
-                )}
-              </>
-            )
-            if (shot.caseStudySlug) {
-              if (onCaseStudyClick) {
-                return (
-                  <button
-                    type="button"
-                    key={`${shot.src}-${i}`}
-                    onClick={() => onCaseStudyClick(shot.caseStudySlug!)}
-                    className={cardClassName}
-                    style={cardStyle}
-                    aria-label={shot.alt}
-                    onMouseEnter={() => shot.hoverLogo && setHoveredLogo(shot.hoverLogo)}
-                    onMouseMove={handleCardMouseMove}
-                    onMouseLeave={() => setHoveredLogo(null)}
-                  >
-                    {cardContent}
-                  </button>
-                )
-              }
-              return (
-                <Link
-                  key={`${shot.src}-${i}`}
-                  href={`/selected-work?case=${shot.caseStudySlug}&from=home`}
-                  className={cardClassName}
-                  style={cardStyle}
-                  role="img"
-                  aria-label={shot.alt}
-                  onMouseEnter={() => shot.hoverLogo && setHoveredLogo(shot.hoverLogo)}
-                  onMouseMove={handleCardMouseMove}
-                  onMouseLeave={() => setHoveredLogo(null)}
-                >
-                  {cardContent}
-                </Link>
-              )
-            }
-            return (
-              <div
+            style={{ willChange: "transform" }}
+          >
+            {screenshots.map((shot, i) => (
+              <ScreenshotCard
                 key={`${shot.src}-${i}`}
-                className={cardClassName}
-                style={cardStyle}
-                role="img"
-                aria-label={shot.alt}
-                {...(shot.hoverLogo && {
-                  onMouseEnter: () => setHoveredLogo(shot.hoverLogo!),
-                  onMouseMove: handleCardMouseMove,
-                  onMouseLeave: () => setHoveredLogo(null),
-                })}
-              >
-                {cardContent}
-              </div>
-            )
-          })}
-        </motion.div>
+                shot={shot}
+                onCaseStudyClick={onCaseStudyClick}
+                onMouseEnter={
+                  shot.hoverLogo
+                    ? () => setHoveredLogo(shot.hoverLogo!)
+                    : undefined
+                }
+                onMouseMove={shot.hoverLogo ? handleCardMouseMove : undefined}
+                onMouseLeave={
+                  shot.hoverLogo ? () => setHoveredLogo(null) : undefined
+                }
+              />
+            ))}
+          </motion.div>
+        </div>
+
+        {screenshots.length > 1 && (
+          <div
+            className="flex items-center justify-center gap-2.5 pt-5"
+            role="tablist"
+            aria-label="Screenshot slides"
+          >
+            {screenshots.map((shot, i) => {
+              const selected = i === activeScreenshot
+              return (
+                <button
+                  key={`${shot.src}-dot`}
+                  type="button"
+                  role="tab"
+                  aria-selected={selected}
+                  aria-label={`Show ${shot.alt}`}
+                  onClick={() => goToScreenshot(i)}
+                  className={cn(
+                    "size-2.5 rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                    selected
+                      ? "bg-foreground"
+                      : "bg-foreground/25 hover:bg-foreground/45"
+                  )}
+                />
+              )
+            })}
+          </div>
+        )}
       </div>
 
       {/* View selected work – right-aligned */}
